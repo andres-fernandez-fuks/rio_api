@@ -5,6 +5,7 @@ services:
 
 variables:
   REGISTRY_URL: registry.gitlab.com/fiuba-memo2/ejemplos
+  APP_NAME: rio-api
   POSTGRES_DB: db_test
   POSTGRES_USER: webapi
   POSTGRES_PASSWORD: Passw0rd!

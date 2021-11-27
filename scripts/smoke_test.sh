@@ -5,6 +5,7 @@ TARGET_HOST=$1
 VERSION=$2
 
 TARGET_URL="http://$TARGET_HOST/health/version"
+echo $TARGET_URL
 
 i="0"
 

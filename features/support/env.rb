@@ -63,3 +63,7 @@ end
 After do |_scenario|
   Faraday.post(reset_url)
 end
+
+def crear_usuario_url
+  "#{BASE_URL}/usuarios"
+end

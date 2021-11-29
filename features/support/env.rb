@@ -69,5 +69,5 @@ def crear_usuario_url
 end
 
 def consultar_usuario_url
-  "#{BASE_URL}/usuarios"
+  "#{BASE_URL}/usuarios/yo"
 end

@@ -1,6 +1,6 @@
 require 'byebug'
 Dado('que no hay ningun usuario registrado') do
-  repo = Persistence::Repositories::RepositorioUsuario.new
+  repo = Persistence::Repositories::RepositorioUsuarios.new
   repo.delete_all
 end
 

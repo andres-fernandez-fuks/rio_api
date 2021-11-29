@@ -1,8 +1,13 @@
 module Persistence
   module Repositories
-    class RepositorioUsuario < AbstractRepository
+    class RepositorioUsuarios < AbstractRepository
       self.table_name = :usuarios
       self.model_class = 'Usuario'
+
+      def buscar_por_id_telegram(id_telegram)
+        row = dataset.first(id_telegram: id_telegram)
+        load_object(row) unless row.nil?
+      end
 
       protected
 

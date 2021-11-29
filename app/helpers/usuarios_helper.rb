@@ -4,7 +4,7 @@ module WebTemplate
   class App
     module UsuarioHelper
       def repo_usuario
-        Persistence::Repositories::RepositorioUsuario.new
+        Persistence::Repositories::RepositorioUsuarios.new
       end
 
       def params_ususario

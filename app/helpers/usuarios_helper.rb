@@ -7,13 +7,19 @@ module WebTemplate
         Persistence::Repositories::RepositorioUsuarios.new
       end
 
-      def params_ususario
+      def params_usuario
         @body ||= request.body.read
         JSON.parse(@body).symbolize_keys
       end
 
       def usuario_a_json(usuario)
         atributos_usuario(usuario).to_json
+      end
+
+      def error_usuario_no_encontrado
+        {
+          "error": 'Usuario no registrado'
+        }.to_json
       end
 
       private

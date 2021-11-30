@@ -3,8 +3,7 @@ Dado('que mi id_telegram es {string}') do |id_telegram|
 end
 
 Dado('que no estoy registrado como usuario') do
-  repo = Persistence::Repositories::RepositorioUsuarios.new
-  repo.delete_all
+  Faraday.post(reset_url)
 end
 
 Cuando('consulto si soy un usuario registrado') do

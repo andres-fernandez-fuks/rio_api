@@ -1,7 +1,7 @@
 class Version
-  MAYOR = 0
-  MINOR = 0
-  PATCH = 8
+  MAYOR = 0 #Iteracion
+  MINOR = 1 #Historia de usuario
+  PATCH = 0
 
   def self.current
     "#{MAYOR}.#{MINOR}.#{PATCH}"

@@ -1,7 +1,6 @@
 require 'byebug'
 Dado('que no hay ningun usuario registrado') do
-  repo = Persistence::Repositories::RepositorioUsuarios.new
-  repo.delete_all
+  Faraday.post(reset_url)
 end
 
 Cuando('registro un usuario con nombre {string}, mail {string} y id_telegram {string}') do |nombre, mail, id_telegram|

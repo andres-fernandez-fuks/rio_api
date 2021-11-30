@@ -13,6 +13,7 @@ end
 
 Entonces('recibo un error de usuario no registrado') do
   expect(@response.status).to be 404
+  expect(JSON(@response.body)['error']).to eq 'Usuario no registrado'
 end
 
 Dado('que estoy registrado como usuario') do

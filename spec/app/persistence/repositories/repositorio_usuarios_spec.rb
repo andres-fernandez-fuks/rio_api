@@ -7,7 +7,7 @@ describe Persistence::Repositories::RepositorioUsuarios do
   end
   context 'Consulta de usuario' do
       it 'cuando se consulta por un usuario no registrado se devuelve vacío' do
-        expect(repositorio.buscar_por_id_telegram('123')).to be nil
+        expect(repositorio.buscar_por_id_telegram('INVALIDO')).to be nil
       end
 
       it 'cuando se consulta por un usuario registrado se devuelven los datos correctos' do

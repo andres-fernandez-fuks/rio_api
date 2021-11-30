@@ -8,5 +8,7 @@ RSpec.configure do |config|
     Persistence::Repositories::TaskRepository.new.delete_all
     Persistence::Repositories::TagRepository.new.delete_all
     Persistence::Repositories::UserRepository.new.delete_all
+    Persistence::Repositories::RepositorioPublicaciones.new.delete_all
+    Persistence::Repositories::RepositorioUsuarios.new.delete_all
   end
 end

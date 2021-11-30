@@ -12,7 +12,7 @@ module Persistence
       protected
 
       def load_object(a_record)
-        Object.const_get(self.class.model_class).new(a_record[:nombre], a_record[:mail], a_record[:id_telegram])
+        Object.const_get(self.class.model_class).new(a_record[:nombre], a_record[:mail], a_record[:id_telegram], a_record[:id])
       end
 
       def changeset(usuario)

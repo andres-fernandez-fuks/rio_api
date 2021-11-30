@@ -8,4 +8,8 @@ class Usuario
     @id_telegram = id_telegram
     @id = id
   end
+
+  def ==(other)
+    @nombre == other.nombre and @mail == other.mail and @id_telegram == other.id_telegram and @id == other.id
+  end
 end

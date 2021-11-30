@@ -8,7 +8,7 @@ Dado('que no estoy registrado como usuario') do
 end
 
 Cuando('consulto si soy un usuario registrado') do
-  header = {'HTTP_ID_TELEGRAM' => @id_telegram}
+  header = {'ID_TELEGRAM' => @id_telegram}
   @response = Faraday.get(consultar_usuario_url, nil, header)
 end
 

@@ -7,7 +7,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
   end
 
   get :show, :map => '/usuarios/yo' do
-    id_telegram = request.get_header('HTTP_ID_TELEGRAM')
+    id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
     unless id_telegram
       status 400
       return

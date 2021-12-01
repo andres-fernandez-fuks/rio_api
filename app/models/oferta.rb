@@ -1,11 +1,11 @@
 class Oferta
-  attr_reader :precio, :oferente, :id_publicacion, :updated_on, :created_on
+  attr_reader :precio, :oferente, :publicacion, :updated_on, :created_on
   attr_accessor :id
 
-  def initialize(precio, oferente, id_publicacion, id = nil)
+  def initialize(precio, oferente, publicacion, id = nil)
     @id = id
     @precio = precio
     @oferente = oferente
-    @id_publicacion = id_publicacion
+    @publicacion = publicacion
   end
 end

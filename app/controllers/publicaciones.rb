@@ -6,11 +6,13 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       return
     end
 
-    publicacion.fue_publicada
-    usuario = Usuario.new(params_usuario[:nombre], params_usuario[:mail], params_usuario[:id_telegram])
-    nuevo_usuario = repo_usuario.save(usuario)
-    status 201
-    usuario_a_json nuevo_usuario
+    publicacion.activar
+    if repo_publicaciones.save(publicacion)
+      status 200
+      publicacion_activada(publicacion)
+    else
+      status 500
+    end
   end
 
   post :create, :map => '/publicaciones' do

@@ -19,4 +19,14 @@ describe Persistence::Repositories::RepositorioPublicaciones do
       expect(publicacion.usuario).to eq usuario
       end
   end
+
+  it 'consultar una publicacion de un usuario con una publicación debería traer los datos correctos' do
+    repositorio.save(publicacion).id
+    publicaciones = repositorio.buscar_por_usuario(usuario.id)
+    expect(publicaciones.length).to eq 1
+    publicacion = publicaciones[0]
+    expect(publicacion.precio).to eq 30303
+    expect(publicacion.usuario).to eq usuario
+  end
 end
+

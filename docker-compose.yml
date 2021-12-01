@@ -31,3 +31,8 @@ services:
     depends_on:
       - test_db
       - dev_db
+
+networks:
+  default:
+    external:
+      name: network-api

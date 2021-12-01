@@ -17,7 +17,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     if repo_publicaciones.save(publicacion)
       status 200
       publicacion_activada(publicacion)
-      # debería mandar un mensaje/mail al usuario informando
+      # deberia mandar un mensaje/mail al usuario informando
     else
       status 500
     end
@@ -33,6 +33,24 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     rescue StandardError => e
       status 400
       {error: e.message}.to_json
+    end
+  end
+
+  get :show, :map => '/publicaciones/yo' do
+    id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
+    unless id_telegram
+      status 400
+      return
+    end
+
+    usuario = RepositorioUsuarios.new.buscar_por_id_telegram(id_telegram)
+    # publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
+    if usuario
+      status 200
+      usuario_a_json usuario
+    else
+      status 404
+      error_usuario_no_encontrado
     end
   end
 end

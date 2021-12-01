@@ -4,6 +4,10 @@ module Persistence
       self.table_name = :publicaciones
       self.model_class = 'Publicacion'
 
+      def buscar_activas
+        load_collection dataset.where(Sequel.ilike(:estado, 'activo'))
+      end
+
       protected
 
       def load_object(a_record)

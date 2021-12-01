@@ -19,4 +19,11 @@ describe Persistence::Repositories::RepositorioPublicaciones do
       expect(publicacion.usuario).to eq usuario
       end
   end
+
+  context 'Listar publicaciones activas' do
+    it 'Si no existe ninguna, listar publicaciones activas devuelve vacío' do
+      repositorio.delete_all
+      expect(repositorio.buscar_activas.length).to eq 0
+    end
+  end
 end

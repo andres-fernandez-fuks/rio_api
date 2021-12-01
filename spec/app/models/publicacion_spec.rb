@@ -1,9 +1,5 @@
 require 'spec_helper'
 
-ESTADO_REVISION = 0
-ESTADO_ACTIVO = 1
-ESTADO_VENDIDO = 2
-
 describe Publicacion do
   context 'Creación de una publicacion' do
     let(:precio) {300000}
@@ -17,13 +13,13 @@ describe Publicacion do
 
     it 'el estado de una publicación recién creada es ESTADO_REVISION' do
       publicacion = described_class.new(precio, usuario)
-      expect(publicacion.estado).to eq ESTADO_REVISION
+      expect(publicacion.estado).to eq EstadoRevision.new
     end
 
     it 'cuando se activa, su estado pasa a ser ESTADO_ACTIVO' do
       publicacion = described_class.new(precio, usuario)
       publicacion.activar
-      expect(publicacion.estado).to eq ESTADO_ACTIVO
+      expect(publicacion.estado).to eq EstadoActivo.new
     end
 
     it 'cuando se activa, el precio del auto pasa a ser el indicado' do

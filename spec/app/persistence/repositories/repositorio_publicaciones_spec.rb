@@ -18,14 +18,14 @@ describe Persistence::Repositories::RepositorioPublicaciones do
       publicacion = repositorio.find(id)
       expect(publicacion.precio).to eq 30303
       expect(publicacion.usuario).to eq usuario
-      expect(publicacion.estado).to eq ESTADO_REVISION
+      expect(publicacion.estado).to eq EstadoRevision.new
     end
 
     it 'guardar una publicacion activa se guarda con el estado correcto' do
       publicacion.activar
       id = repositorio.save(publicacion).id
       publicacion = repositorio.find(id)
-      expect(publicacion.estado).to eq ESTADO_ACTIVO
+      expect(publicacion.estado).to eq EstadoActivo.new
     end
   end
 

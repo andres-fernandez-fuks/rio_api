@@ -5,7 +5,6 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 404
       return
     end
-
     publicacion.activar
     if repo_publicaciones.save(publicacion)
       status 200
@@ -40,5 +39,11 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
     status 200
     listar_publicaciones(publicaciones_de_usuario)
+  end
+
+  get :show, :map => '/publicaciones' do
+    publicaciones = repo_publicaciones.buscar_activas
+    status 200
+    listar_publicaciones(publicaciones)
   end
 end

@@ -8,8 +8,7 @@ Dado('que hay un auto ingresado para cotizar por el usuario con id {string}') do
 end
 
 Dado('que recibo un informe de cotizacion para el auto publicado') do
-  header = {'ID_TELEGRAM' => @id_telegram}
-  @response = Faraday.post(informe_de_cotizacion_url(@id_publicacion), nil, header)
+  @response = Faraday.post(informe_de_cotizacion_url(@id_publicacion), nil)
 end
 
 Entonces('la cotización del auto publicado es 700000') do

@@ -25,5 +25,11 @@ describe Publicacion do
       publicacion.activar
       expect(publicacion.estado).to eq ESTADO_ACTIVO
     end
+
+    it 'cuando se activa, el precio del auto pasa a ser el indicado' do
+      publicacion = described_class.new(precio, usuario)
+      publicacion.activar
+      expect(publicacion.precio).to eq 70000
+    end
   end
 end

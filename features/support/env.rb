@@ -75,3 +75,7 @@ end
 def crear_publicacion_url
   "#{BASE_URL}/publicaciones"
 end
+
+def listar_publicaciones_url
+  "#{BASE_URL}/publicaciones"
+end

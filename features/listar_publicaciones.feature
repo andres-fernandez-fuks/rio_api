@@ -1,5 +1,5 @@
 #language:es
-
+@local
 Característica: listar publicaciones
   Antecedentes:
     Dado que estoy registrado como usuario

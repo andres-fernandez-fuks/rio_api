@@ -43,14 +43,9 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       return
     end
 
-    usuario = RepositorioUsuarios.new.buscar_por_id_telegram(id_telegram)
-    # publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
-    if usuario
-      status 200
-      usuario_a_json usuario
-    else
-      status 404
-      error_usuario_no_encontrado
-    end
+    usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
+    publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
+    status 200
+    listar_publicaciones(publicaciones_de_usuario)
   end
 end

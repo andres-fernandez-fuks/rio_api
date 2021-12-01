@@ -12,7 +12,8 @@ module Persistence
 
       def load_object(a_record)
         Object.const_get(self.class.model_class).new(a_record[:precio],
-                                                     RepositorioUsuarios.new.find(a_record[:usuario]))
+                                                     RepositorioUsuarios.new.find(a_record[:usuario]),
+                                                     a_record[:id])
       end
 
       def changeset(publicacion)

@@ -21,7 +21,20 @@ module WebTemplate
           id: publicacion.id,
           precio: publicacion.precio,
           estado: publicacion.estado
-        }
+        }.to_json
+      end
+
+      def listar_publicaciones(publicaciones)
+        body = []
+        publicaciones.each do |publicacion|
+          info_publicacion =
+            {
+              id: publicacion.id,
+              precio: publicacion.precio
+            }
+          body.append(info_publicacion)
+        end
+        body.to_json
       end
 
       def error_publicacion_no_encontrado

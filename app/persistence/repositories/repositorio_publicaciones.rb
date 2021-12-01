@@ -8,6 +8,10 @@ module Persistence
         load_collection dataset.where(Sequel.ilike(:estado, 'activo'))
       end
 
+      def buscar_por_usuario(id_usuario)
+        load_collection dataset.where(usuario: id_usuario)
+      end
+
       protected
 
       def load_object(a_record)

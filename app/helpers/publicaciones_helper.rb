@@ -16,6 +16,14 @@ module WebTemplate
         atributos_publicacion(publicacion).to_json
       end
 
+      def publicacion_activada(publicacion)
+        {
+          id: publicacion.id,
+          precio: publicacion.precio,
+          estado: publicacion.estado
+        }
+      end
+
       def error_publicacion_no_encontrado
         {
           "error": 'publicacion no encontrada'

@@ -1,41 +1,42 @@
+# Helper methods defined here can be accessed in any controller or view in the application
+
 module WebTemplate
   class App
     module PublicacionHelper
-      def repo_publicacion
+      def repo_publicaciones
         Persistence::Repositories::RepositorioPublicaciones.new
       end
 
-      def params_usuario
+      def params_publicacion
         @body ||= request.body.read
         JSON.parse(@body).symbolize_keys
       end
 
-      def usuario_a_json(usuario)
-        atributos_usuario(usuario).to_json
+      def publicacion_a_json(publicacion)
+        atributos_publicacion(publicacion).to_json
       end
 
-      def error_usuario_no_encontrado
+      def error_publicacion_no_encontrado
         {
-          "error": 'Usuario no registrado'
+          "error": 'publicacion no encontrada'
         }.to_json
       end
 
       private
 
-      def atributos_usuario(usuario)
+      def atributos_publicacion(publicacion)
         {
-          id: usuario.id,
-          nombre: usuario.nombre,
-          mail: usuario.mail,
-          id_telegram: usuario.id_telegram
+          id: publicacion.id,
+          precio: publicacion.precio,
+          id_telegram: publicacion.usuario.id_telegram
         }
       end
 
-      def usuario_mapper
-        Persistence::Mappers::UsuarioMapper.new
+      def publicacion_mapper
+        Persistence::Mappers::PublicacionMapper.new
       end
     end
 
-    helpers UsuarioHelper
+    helpers PublicacionHelper
   end
 end

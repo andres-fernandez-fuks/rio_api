@@ -12,4 +12,12 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     status 201
     usuario_a_json nuevo_usuario
   end
+
+  post :create, :map => '/publicaciones' do
+    usuario = repo_usuario.buscar_por_id_telegram(params_publicacion[:id_telegram])
+    publicacion = Publicacion.new(params_publicacion[:precio], usuario)
+    nueva_publicacion = repo_publicaciones.save(publicacion)
+    status 201
+    publicacion_a_json nueva_publicacion
+  end
 end

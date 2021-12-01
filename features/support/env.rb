@@ -71,3 +71,7 @@ end
 def consultar_usuario_url
   "#{BASE_URL}/usuarios/yo"
 end
+
+def crear_publicacion_url
+  "#{BASE_URL}/publicaciones"
+end

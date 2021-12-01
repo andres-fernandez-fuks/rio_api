@@ -1,8 +1,15 @@
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones/:id_publicacion/informe_cotizacion' do
+    id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
     publicacion = repo_publicaciones.find(params[:id_publicacion])
     unless publicacion
       status 404
+      return
+    end
+
+    id_usuario_publicacion = publicacion.usuario.id_telegram
+    if id_telegram != id_usuario_publicacion
+      status 403
       return
     end
 
@@ -10,6 +17,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     if repo_publicaciones.save(publicacion)
       status 200
       publicacion_activada(publicacion)
+      # debería mandar un mensaje/mail al usuario informando
     else
       status 500
     end

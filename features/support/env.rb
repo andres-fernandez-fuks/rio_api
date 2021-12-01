@@ -79,3 +79,7 @@ end
 def informe_de_cotizacion_url(id_publicacion)
   "#{BASE_URL}/publicaciones/#{id_publicacion}/informe_de_cotizacion"
 end
+
+def listar_publicaciones_url
+  "#{BASE_URL}/publicaciones"
+end

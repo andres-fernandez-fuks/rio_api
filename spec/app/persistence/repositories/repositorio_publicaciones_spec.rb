@@ -34,7 +34,7 @@ describe Persistence::Repositories::RepositorioPublicaciones do
       expect(repositorio.buscar_activas.length).to eq 0
     end
 
-    xit 'si existe una publicacion activa, al listar activas se devuelve correctamente' do
+    it 'si existe una publicacion activa, al listar activas se devuelve correctamente' do
       publicacion = Publicacion.new(30, usuario)
       publicacion.activar
       repositorio.save(publicacion)

@@ -30,6 +30,7 @@ module WebTemplate
         tag_repo.delete_all
         user_repo.delete_all
         repo_usuario.delete_all
+        repo_publicaciones.delete_all
 
         status 200
         {message: 'reset ok'}.to_json

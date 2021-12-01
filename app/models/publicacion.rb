@@ -5,6 +5,7 @@ class Publicacion
   ESTADO_REVISION = 0
   ESTADO_ACTIVO = 1
   ESTADO_VENDIDO = 2
+  PRECIO_DEFAULT = 70_000
 
   def initialize(precio, usuario, id = nil)
     @precio = precio
@@ -15,5 +16,6 @@ class Publicacion
 
   def activar
     @estado = ESTADO_ACTIVO
+    @precio = PRECIO_DEFAULT
   end
 end

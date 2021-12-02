@@ -12,7 +12,6 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     if oferta
       status 200
       oferta_creada(oferta)
-      # deberia mandar un mensaje/mail al usuario informando
     else
       status 500
     end

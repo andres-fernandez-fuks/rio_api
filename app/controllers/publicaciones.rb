@@ -55,4 +55,19 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     status 200
     listar_publicaciones(publicaciones)
   end
+
+  post :create, :map => '/_publicacionesActivas' do
+    begin
+      usuario_nuevo = Usuario.new('Manu', 'm@asd.com','123')
+      usuario = repo_usuario.save(usuario_nuevo)
+      publicacion = Publicacion.new(454545, usuario)
+      publicacion.activar
+      nueva_publicacion = repo_publicaciones.save(publicacion)
+      status 201
+      publicacion_a_json nueva_publicacion
+    rescue StandardError => e
+      status 400
+      {error: e.message}.to_json
+    end
+  end
 end

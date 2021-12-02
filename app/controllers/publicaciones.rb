@@ -57,9 +57,9 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
 
   post :create, :map => '/_publicacionesActivas' do
     begin
-      usuario_nuevo = Usuario.new('Manu', 'm@asd.com','123')
+      usuario_nuevo = Usuario.new('Manu', 'm@asd.com', '123')
       usuario = repo_usuario.save(usuario_nuevo)
-      publicacion = Publicacion.new(454545, usuario)
+      publicacion = Publicacion.new(454_545, usuario)
       publicacion.activar
       nueva_publicacion = repo_publicaciones.save(publicacion)
       status 201

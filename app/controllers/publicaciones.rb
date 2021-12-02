@@ -33,12 +33,18 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
 
   get :show, :map => '/publicaciones/yo' do
     id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
-    unless id_telegram
+    if !id_telegram || id_telegram == ''
       status 400
       return
     end
 
     usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
+
+    unless usuario
+      status 404
+      return
+    end
+
     publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
     status 200
     listar_publicaciones(publicaciones_de_usuario)

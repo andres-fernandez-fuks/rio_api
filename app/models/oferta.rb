@@ -8,4 +8,8 @@ class Oferta
     @oferente = oferente
     @publicacion = publicacion
   end
+
+  def aceptar
+    @publicacion.vendendida
+  end
 end

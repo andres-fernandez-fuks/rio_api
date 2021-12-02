@@ -27,5 +27,11 @@ describe Publicacion do
       publicacion.activar
       expect(publicacion.precio).to eq 70000
     end
+
+    it 'cuando se vende, cambia su estado a vendida' do
+      publicacion = described_class.new(precio, usuario)
+      publicacion.vendendida
+      expect(publicacion.estado).to be_a(EstadoVendido)
+    end
   end
 end

@@ -15,4 +15,8 @@ class Publicacion
     @estado = EstadoActivo.new
     @precio = PRECIO_DEFAULT
   end
+
+  def vendendida
+    @estado = EstadoVendido.new
+  end
 end

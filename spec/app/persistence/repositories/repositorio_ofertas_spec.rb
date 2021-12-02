@@ -23,5 +23,23 @@ describe Persistence::Repositories::RepositorioOfertas do
       expect(oferta.oferente.id_telegram).to eq usuario.id_telegram
       expect(oferta.publicacion.id).to eq publicacion.id
     end
+
+    it 'consultar una oferta de un usuario con una oferta debería traer los datos correctos' do
+      repositorio.save(oferta)
+      ofertas = repositorio.buscar_por_oferente(usuario.id)
+      expect(ofertas.length).to eq 1
+      oferta = ofertas[0]
+      expect(oferta.precio).to eq 100
+      expect(oferta.oferente).to eq usuario
+    end
+
+    it 'consultar una oferta asociada a una publicación debería traer los datos correctos' do
+      repositorio.save(oferta)
+      ofertas = repositorio.buscar_por_publicacion(publicacion.id)
+      expect(ofertas.length).to eq 1
+      oferta = ofertas[0]
+      expect(oferta.precio).to eq 100
+      expect(oferta.publicacion.id).to eq publicacion.id
+    end
   end
 end

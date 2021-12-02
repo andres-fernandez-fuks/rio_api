@@ -5,10 +5,12 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 404
       return
     end
-    publicacion.activar
-    if repo_publicaciones.save(publicacion)
+    precio = params_publicacion[:precio]
+    oferta = repo_ofertas.save(Oferta.new(precio, Usuario.new('fiubak', 'fiubak', '0'), publicacion))
+
+    if oferta
       status 200
-      publicacion_activada(publicacion)
+      oferta_creada(oferta)
       # deberia mandar un mensaje/mail al usuario informando
     else
       status 500

@@ -29,6 +29,7 @@ module WebTemplate
         task_repo.delete_all
         tag_repo.delete_all
         user_repo.delete_all
+        repo_ofertas.delete_all
         repo_publicaciones.delete_all
         repo_usuario.delete_all
 

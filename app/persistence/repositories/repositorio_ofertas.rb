@@ -4,6 +4,14 @@ module Persistence
       self.table_name = :ofertas
       self.model_class = 'Oferta'
 
+      def buscar_por_oferente(id_usuario)
+        load_collection dataset.where(oferente: id_usuario)
+      end
+
+      def buscar_por_publicacion(id_publicacion)
+        load_collection dataset.where(publicacion: id_publicacion)
+      end
+
       protected
 
       def load_object(a_record)

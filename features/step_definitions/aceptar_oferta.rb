@@ -1,8 +1,14 @@
-Cuando('acepto la oferta {int}') do |id_oferta|
-  body = {estado: 'aceptada'}.to_json
-  @response = Faraday.patch(aceptar_oferta_url(id_oferta), body, header)
+Dado('que recibo un informe de cotizacion para el auto publicado') do
+  body = {precio: 70_000}.to_json
+  @response = Faraday.post(informe_de_cotizacion_url(@id_publicacion), body)
+  @id_oferta = JSON(@response.body)['id']
 end
 
-Entonces('la oferta {int} está con estado {string}') do |_id_oferta, _estado_oferta|
-  expect(@response.status).to eq 204
+Cuando('acepto la oferta') do
+  body = {estado: 'aceptada'}.to_json
+  @response = Faraday.patch(aceptar_oferta_url(@id_oferta), body, header)
+end
+
+Entonces('la oferta está con estado {string}') do |_string|
+  expect(@response.status).to be 204
 end

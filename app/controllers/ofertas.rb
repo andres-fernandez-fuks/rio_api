@@ -8,6 +8,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
         return
       end
       oferta.aceptar
+
       if repo_publicaciones.save(oferta)
         status 204
         publicacion_activada(publicacion)
@@ -23,7 +24,6 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       status 400
       return
     end
-
     publicacion = repo_publicaciones.find(params[:id_publicacion])
     usuario = publicacion.usuario
 
@@ -32,10 +32,8 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       return
     end
 
-    repo_ofertas
-      .usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
-    ofertas_de_usuario = repo_ofertas.buscar_por_oferente(usuario.id)
+    ofertas = repo_ofertas.buscar_por_publicacion(publicacion.id)
     status 200
-    listar_ofertas(ofertas_de_usuario)
+    listar_ofertas(ofertas)
   end
 end

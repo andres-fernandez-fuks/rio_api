@@ -6,8 +6,9 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       return
     end
     precio = params_publicacion[:precio]
-    oferta = repo_ofertas.save(Oferta.new(precio, Usuario.new('fiubak', 'fiubak', '0'), publicacion))
-
+    usuario = Usuario.new('fiubak', 'fiubak', 'fiubak')
+    usuario = repo_usuario.save(usuario)
+    oferta = repo_ofertas.save(Oferta.new(precio, usuario, publicacion))
     if oferta
       status 200
       oferta_creada(oferta)

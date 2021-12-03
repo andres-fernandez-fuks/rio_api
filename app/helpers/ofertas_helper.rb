@@ -40,7 +40,7 @@ module WebTemplate
       end
 
       def aceptar_oferta(oferta)
-        AceptarOferta.ejecutar(oferta)
+        AceptarOferta.new.ejecutar(oferta)
       end
 
       private

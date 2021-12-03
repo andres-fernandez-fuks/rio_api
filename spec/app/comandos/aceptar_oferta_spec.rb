@@ -17,16 +17,22 @@ describe AceptarOferta do
 
   context 'Aceptar una oferta FIUBAK ' do
     it 'marca la publicación como vendida' do
-      aceptar_oferta = described_class.ejecutar(oferta)
+      aceptar_oferta = described_class.new.ejecutar(oferta)
       expect(aceptar_oferta.publicacion.estado).to eq EstadoVendido.new
     end
 
     it 'guarda los cambios correctamente' do
-      debugger
-      aceptar_oferta = described_class.ejecutar(oferta)
+      aceptar_oferta = described_class.new.ejecutar(oferta)
       oferta = Persistence::Repositories::RepositorioOfertas.new.find(aceptar_oferta.id)
       publicacion = oferta.publicacion
       expect(publicacion.estado).to eq EstadoVendido.new
+    end
+
+    it 'crea una publicacion nueva con incremento de precio' do
+      described_class.new.ejecutar(oferta)
+      publicaciones = Persistence::Repositories::RepositorioPublicaciones.new.all
+      expect(publicaciones.length).to eq 2
+      expect(publicaciones[0].precio < publicaciones[1].precio).to eq true
     end
   end
 end

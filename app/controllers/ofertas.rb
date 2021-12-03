@@ -5,14 +5,16 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       oferta = repo_ofertas.find(params[:id_oferta])
       unless oferta
         status 404
+        error_oferta_no_encontrada
         return
       end
-      oferta.aceptar
-
-      if repo_ofertas.save(oferta)
+      begin
+        aceptar_oferta(oferta)
         status 204
-      else
+        oferta_a_json(oferta)
+      rescue StandardError => e
         status 500
+        {error: e.message}.to_json
       end
     end
   end

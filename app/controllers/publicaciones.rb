@@ -11,7 +11,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     oferta = repo_ofertas.save(Oferta.new(precio, usuario, publicacion))
     if oferta
       status 200
-      oferta_creada(oferta)
+      oferta_a_json(oferta)
     else
       status 500
     end

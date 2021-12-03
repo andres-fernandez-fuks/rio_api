@@ -1,5 +1,5 @@
 # Helper methods defined here can be accessed in any controller or view in the application
-
+require_relative '../comandos/aceptar_oferta'
 module WebTemplate
   class App
     module OfertasHelper
@@ -12,7 +12,7 @@ module WebTemplate
         JSON.parse(@body).symbolize_keys
       end
 
-      def oferta_creada(oferta)
+      def oferta_a_json(oferta)
         {
           id: oferta.id,
           precio: oferta.precio,
@@ -37,6 +37,10 @@ module WebTemplate
           body.append(info_oferta)
         end
         body.to_json
+      end
+
+      def aceptar_oferta(oferta)
+        AceptarOferta.ejecutar(oferta)
       end
 
       private

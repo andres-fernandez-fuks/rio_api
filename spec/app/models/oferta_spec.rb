@@ -12,6 +12,11 @@ describe Oferta do
       expect(oferta.publicacion.id).to eq publicacion.id
       expect(oferta.oferente.nombre).to eq oferente.nombre
     end
+
+    it 'la oferta es de fiubak' do
+      oferta = described_class.new(precio, oferente, publicacion)
+      expect(oferta.fiubak?).to eq true
+    end
   end
 
   describe 'Al aceptar la oferta' do

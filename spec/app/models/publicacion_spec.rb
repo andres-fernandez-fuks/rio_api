@@ -30,7 +30,7 @@ describe Publicacion do
 
     it 'cuando se vende, cambia su estado a vendida' do
       publicacion = described_class.new(precio, usuario)
-      publicacion.vendendida
+      publicacion.vendida
       expect(publicacion.estado).to be_a(EstadoVendido)
     end
   end

@@ -10,6 +10,10 @@ class Oferta
   end
 
   def aceptar
-    @publicacion.vendendida
+    @publicacion.vendida
+  end
+
+  def fiubak?
+    true
   end
 end

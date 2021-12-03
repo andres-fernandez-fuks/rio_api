@@ -31,7 +31,8 @@ module Persistence
       end
 
       def configurar_estado(publicacion, estado)
-        publicacion.activar if estado == 'Activo'
+        publicacion.activar if estado == EstadoActivo.new.id
+        publicacion.vendida if estado == EstadoVendido.new.id
       end
     end
   end

@@ -27,6 +27,13 @@ describe Persistence::Repositories::RepositorioPublicaciones do
       publicacion = repositorio.find(id)
       expect(publicacion.estado).to eq EstadoActivo.new
     end
+
+    it 'guardar una publicacion vendida se guarda con el estado correcto' do
+      publicacion.vendida
+      id = repositorio.save(publicacion).id
+      publicacion = repositorio.find(id)
+      expect(publicacion.estado).to eq EstadoVendido.new
+    end
   end
 
   context 'Listar publicaciones activas' do

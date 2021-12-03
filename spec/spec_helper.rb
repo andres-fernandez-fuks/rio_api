@@ -13,6 +13,7 @@ SimpleCov.start do
   add_group 'Persistence', 'app/persistence'
   add_group 'Mailers', 'app/mailers'
   add_group 'Lib', 'lib'
+  add_group 'Comandos', 'app/comandos'
 end
 
 require "#{__dir__}/../config/boot"

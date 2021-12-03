@@ -34,7 +34,7 @@ end
 
 Entonces('tiene los datos correspondientes') do
   respuesta = JSON.parse(@response.body)
-  expect(respuesta[0]['precio']).to eq @datos_publicacion[:precio]
+  expect(respuesta[0]['precio'].to_i).to eq @datos_publicacion[:precio].to_i
 end
 
 def registrar_usuario(id_telegram)

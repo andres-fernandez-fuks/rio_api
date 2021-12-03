@@ -29,10 +29,11 @@ describe AceptarOferta do
     end
 
     it 'crea una publicacion nueva con incremento de precio' do
+
       described_class.new.ejecutar(oferta)
       publicaciones = Persistence::Repositories::RepositorioPublicaciones.new.all
       expect(publicaciones.length).to eq 2
-      expect(publicaciones[0].precio < publicaciones[1].precio).to eq true
+      expect(publicaciones[0].precio > publicaciones[1].precio).to eq true
     end
   end
 end

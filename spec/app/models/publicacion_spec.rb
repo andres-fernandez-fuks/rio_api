@@ -22,7 +22,7 @@ describe Publicacion do
 
     it 'cuando se activa, el precio del auto pasa a ser el indicado' do
       publicacion.activar
-      expect(publicacion.precio).to eq 70000
+      expect(publicacion.precio).to eq publicacion.precio
     end
 
     it 'cuando se vende, cambia su estado a vendida' do

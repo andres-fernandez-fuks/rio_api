@@ -18,3 +18,19 @@ Entonces('publico el auto con un incremento del {float}% a un precio de {float}'
   response = Faraday.post(crear_publicacion_url, @datos_publicacion.to_json, header)
   expect(JSON.parse(response.body)['precio']).to eq precio
 end
+
+Dado('que existe una oferta con precio {float} de FIUBAK para la publicacion') do |precio|
+  response = Faraday.post(informe_de_cotizacion_url(@id_publicacion), { precio: precio}.to_json)
+  @id_oferta = JSON.parse(response.body)['id']
+end
+
+Cuando('el usuario vendedor acepta la oferta de FIUBAK') do
+  body = {estado: 'aceptada'}.to_json
+  @response = Faraday.patch(aceptar_oferta_url(@id_oferta), body)
+end
+
+Entonces('se crea una nueva publicación de FIUBAK por el mismo auto que la anterior con un precio de {float}') do |precio|
+  @response = Faraday.get(listar_publicaciones_url)
+  respuesta = JSON.parse(@response.body)
+  expect(respuesta[0]['precio'].to_f).to eq precio.to_f
+end

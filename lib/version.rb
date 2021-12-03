@@ -1,6 +1,6 @@
 class Version
   MAYOR = 0 # Iteracion
-  MINOR = 6 # Historia de usuario
+  MINOR = 7 # Historia de usuario
   PATCH = 0
 
   def self.current

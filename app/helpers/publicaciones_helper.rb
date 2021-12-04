@@ -7,10 +7,6 @@ module WebTemplate
         Persistence::Repositories::RepositorioPublicaciones.new
       end
 
-      def repo_autos
-        Persistence::Repositories::RepositorioAutos.new
-      end
-
       def params_publicacion
         @body ||= request.body.read
         JSON.parse(@body).symbolize_keys

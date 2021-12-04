@@ -7,5 +7,6 @@ module WebTemplate
         Persistence::Repositories::RepositorioAutos.new
       end
     end
+    helpers AutosHelper
   end
 end

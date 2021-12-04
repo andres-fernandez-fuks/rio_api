@@ -1,6 +1,6 @@
 Sequel.migration do
   up do
-    add_column :publicaciones, :estado, Numeric
+    add_column :publicaciones, :estado, String, size: 50
   end
 
   down do

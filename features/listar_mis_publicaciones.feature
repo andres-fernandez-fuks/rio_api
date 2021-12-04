@@ -9,7 +9,7 @@ Característica: Registro de un usuario
   Dado que no tengo publicaciones
   Cuando consulto por mis publicaciones
   Entonces recibo 0 publicaciones
-  @wip
+
   Escenario: MP002 - Listado de mis publicaciones cuando tengo un auto publicado
   Dado que tengo un auto publicado marca “VW”, modelo “Suran”, año 2016 y precio $550000
   Cuando consulto por mis publicaciones

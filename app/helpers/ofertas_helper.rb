@@ -16,7 +16,9 @@ module WebTemplate
         {
           id: oferta.id,
           precio: oferta.precio,
-          id_publicacion: oferta.publicacion.id
+          id_publicacion: oferta.publicacion.id,
+          estado: oferta.estado,
+          usuario: oferta.oferente.nombre
         }.to_json
       end
 

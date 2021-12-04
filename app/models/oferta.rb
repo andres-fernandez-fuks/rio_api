@@ -18,4 +18,8 @@ class Oferta
   def fiubak?
     true
   end
+
+  def establecer_estado(estado)
+    @estado = estado
+  end
 end

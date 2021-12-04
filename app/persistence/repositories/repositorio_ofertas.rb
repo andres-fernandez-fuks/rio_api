@@ -15,18 +15,27 @@ module Persistence
       protected
 
       def load_object(a_record)
-        Object.const_get(self.class.model_class).new(a_record[:precio],
-                                                     RepositorioUsuarios.new.find(a_record[:oferente]),
-                                                     RepositorioPublicaciones.new.find(a_record[:publicacion]),
-                                                     a_record[:id])
+        oferta = Object.const_get(self.class.model_class).new(a_record[:precio],
+                                                              RepositorioUsuarios.new.find(a_record[:oferente]),
+                                                              RepositorioPublicaciones.new.find(a_record[:publicacion]),
+                                                              a_record[:id])
+        configurar_estado(oferta, a_record[:estado])
+        oferta
       end
 
       def changeset(oferta)
         {
           precio: oferta.precio,
           oferente: oferta.oferente.id,
-          publicacion: oferta.publicacion.id
+          publicacion: oferta.publicacion.id,
+          estado: oferta.estado.id
         }
+      end
+
+      def configurar_estado(oferta, estado)
+        oferta.establecer_estado(EstadoAceptada.new) if estado == EstadoAceptada.new.id
+        oferta.establecer_estado(EstadoRechazada.new) if estado == EstadoRechazada.new.id
+        oferta.establecer_estado(EstadoPendiente.new) if estado == EstadoPendiente.new.id
       end
     end
   end

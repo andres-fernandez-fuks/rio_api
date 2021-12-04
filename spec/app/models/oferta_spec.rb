@@ -17,12 +17,21 @@ describe Oferta do
       oferta = described_class.new(precio, oferente, publicacion)
       expect(oferta.fiubak?).to eq true
     end
+
+    it 'la oferta tiene estado pendiente' do
+      expect(oferta.estado).to be_a(EstadoPendiente)
+    end
   end
 
   describe 'Al aceptar la oferta' do
-    it 'la oferta se acepta correctamente' do
+    it 'la publicacion se convierte en vendida' do
       oferta.aceptar
       expect(oferta.publicacion.estado).to be_a(EstadoVendido)
+    end
+  
+    it 'la oferta se pasa a estado aceptada' do
+      oferta.aceptar
+      expect(oferta.estado).to be_a(EstadoAceptada)
     end
   end
 end

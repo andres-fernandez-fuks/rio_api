@@ -18,23 +18,4 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       end
     end
   end
-
-  get :show, :map => '/ofertas/:id_publicacion' do
-    id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
-    unless id_telegram
-      status 400
-      return
-    end
-    publicacion = repo_publicaciones.find(params[:id_publicacion])
-    usuario = publicacion.usuario
-
-    if usuario.id_telegram != id_telegram
-      status 403
-      return
-    end
-
-    ofertas = repo_ofertas.buscar_por_publicacion(publicacion.id)
-    status 200
-    listar_ofertas(ofertas)
-  end
 end

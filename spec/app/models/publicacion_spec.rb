@@ -15,9 +15,17 @@ describe Publicacion do
       expect(publicacion.estado).to eq EstadoRevision.new
     end
 
-    it 'cuando se cotiza, su estado pasa a ser ESTADO_COTIZADO' do
-      publicacion.activar
-      expect(publicacion.estado).to eq EstadoActivo.new
+    it 'cuando una publicación en revisión se cotiza, su estado pasa a ser ESTADO_COTIZADO' do
+      publicacion = described_class.new(precio, usuario)
+      publicacion.cotizada
+      expect(publicacion.estado).to eq EstadoCotizado.new
+    end
+
+    it 'cuando una publicación que no está en revisión se cotiza, su estado no se modifica' do
+      publicacion = described_class.new(precio, usuario)
+      publicacion.vendida
+      publicacion.cotizada
+      expect(publicacion.estado).not_to eq EstadoCotizado.new
     end
 
     it 'cuando se activa, su estado pasa a ser ESTADO_ACTIVO' do

@@ -16,4 +16,8 @@ class Publicacion
   def vendida
     @estado = EstadoVendido.new
   end
+
+  def cotizada
+    @estado = EstadoCotizado.new if @estado == EstadoRevision.new
+  end
 end

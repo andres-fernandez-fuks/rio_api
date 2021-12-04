@@ -19,7 +19,7 @@ Entonces('los datos de mi publicación son los correctos') do
 end
 
 # rubocop:disable all
-Dado('que hay un auto publicado patente {string}, marca {string}, modelo {string}, año {int} y precio {float}por el usuario con id_telegram {string}') do |patente, marca, modelo, anio, precio, otro_id_telegram|
+Dado('que hay un auto publicado patente {string}, marca {string}, modelo {string}, año {int} y precio {float} por el usuario con id_telegram {string}') do |patente, marca, modelo, anio, precio, otro_id_telegram|
   @body = {patente: patente, marca: marca, modelo: modelo, anio: anio, precio: precio, id_telegram: otro_id_telegram}.to_json
   @response = Faraday.post(crear_publicacion_url, @body, header)
   @id_publicacion = JSON(@response.body)['id']

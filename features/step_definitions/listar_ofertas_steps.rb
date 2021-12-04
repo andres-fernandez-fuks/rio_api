@@ -1,4 +1,4 @@
-TEST_ID_TELEGRAM = '555'
+TEST_ID_TELEGRAM = '555'.freeze
 MONTO_OFRECIDO_FIUBAK = 45_000
 
 Dado('que existe una publicación') do

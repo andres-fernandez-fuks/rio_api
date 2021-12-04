@@ -57,6 +57,15 @@ module WebTemplate
         }.to_json
       end
 
+      def estado_a_string(estado)
+        return 'En revisión' if estado == EstadoRevision.new
+        return 'Cotizado' if estado == EstadoCotizado.new
+        return 'Activo' if estado == EstadoActivo.new
+        return 'Vendido' if estado == EstadoVendido.new
+
+        'Desconocido'
+      end
+
       private
 
       def atributos_publicacion(publicacion)
@@ -69,19 +78,6 @@ module WebTemplate
 
       def publicacion_mapper
         Persistence::Mappers::PublicacionMapper.new
-      end
-    end
-
-    def estado_a_string(estado)
-      case estado.id
-      when ID_ESTADO_EN_REVISION
-        'En revisión'
-      when ID_ESTADO_ACTIVO
-        'Activo'
-      when ID_ESTADO_VENDIDO
-        'Vendido'
-      else
-        'Desconocido'
       end
     end
 

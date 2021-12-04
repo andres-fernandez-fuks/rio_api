@@ -1,5 +1,5 @@
 #language:es
-@wip
+
 Característica: Listar ofertas de una publicacion
   Antecedentes:
     Dado que estoy registrado como usuario
@@ -9,7 +9,7 @@ Característica: Listar ofertas de una publicacion
       Y la publicación fue cotizada por FIUBAK
       Cuando consulto por las ofertas de la publicación
       Entonces se devuelve la oferta de FIUBAK con el monto ofrecido y el estado “Pendiente”
-
+@wip
   Escenario: CO2 - Listado de 2 ofertas
       Dado que existe una publicación p2p
       Y hay una oferta p2p para la publicación

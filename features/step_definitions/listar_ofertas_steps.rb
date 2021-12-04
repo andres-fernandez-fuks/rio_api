@@ -1,4 +1,4 @@
-TEST_ID_TELEGRAM = 555
+TEST_ID_TELEGRAM = '555'
 MONTO_OFRECIDO_FIUBAK = 45_000
 
 Dado('que existe una publicación') do
@@ -16,11 +16,12 @@ Dado('la publicación fue cotizada por FIUBAK') do
 end
 
 Cuando('consulto por las ofertas de la publicación') do
-  @response = Faraday.get(ofertas_de_publicacion_url(@id_publicacion), body)
+  header = {'ID_TELEGRAM' => @id_telegram}
+  @response = Faraday.get(listar_ofertas_de_publicacion_url(@id_publicacion), nil, header)
 end
 
 Entonces('se devuelve la oferta de FIUBAK con el monto ofrecido y el estado “Pendiente”') do
-  expect(@response.body.length).to eq 1
+  expect(JSON(@response.body).length).to eq 1
 end
 
 Dado('que existe una publicación p2p') do

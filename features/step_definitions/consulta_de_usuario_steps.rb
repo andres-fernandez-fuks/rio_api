@@ -17,6 +17,7 @@ Entonces('recibo un error de usuario no registrado') do
 end
 
 Dado('que estoy registrado como usuario') do
+  Faraday.post(reset_url)
   @nombre = 'un nombre'
   @mail = 'ejemplo@gmail.com'
   @body = {nombre: @nombre, mail: @mail, id_telegram: @id_telegram}.to_json

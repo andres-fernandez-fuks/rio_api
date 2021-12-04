@@ -3,7 +3,7 @@ class Publicacion
   attr_accessor :id
 
   def initialize(precio, usuario, id = nil)
-    @precio = precio
+    @precio = precio.to_f
     @usuario = usuario
     @id = id
     @estado = EstadoRevision.new

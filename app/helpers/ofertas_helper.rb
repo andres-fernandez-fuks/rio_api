@@ -18,7 +18,7 @@ module WebTemplate
           precio: oferta.precio,
           id_publicacion: oferta.publicacion.id,
           estado: oferta.estado,
-          usuario: oferta.oferente.nombre
+          oferente: oferta.oferente.nombre
         }.to_json
       end
 
@@ -31,11 +31,7 @@ module WebTemplate
       def listar_ofertas(ofertas)
         body = []
         ofertas.each do |oferta|
-          info_oferta =
-            {
-              id: oferta.id,
-              precio: oferta.precio
-            }
+          info_oferta = oferta_a_json(oferta)
           body.append(info_oferta)
         end
         body.to_json

@@ -15,6 +15,11 @@ describe Publicacion do
       expect(publicacion.estado).to eq EstadoRevision.new
     end
 
+    it 'cuando se cotiza, su estado pasa a ser ESTADO_COTIZADO' do
+      publicacion.activar
+      expect(publicacion.estado).to eq EstadoActivo.new
+    end
+
     it 'cuando se activa, su estado pasa a ser ESTADO_ACTIVO' do
       publicacion.activar
       expect(publicacion.estado).to eq EstadoActivo.new

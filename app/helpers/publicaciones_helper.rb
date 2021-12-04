@@ -44,7 +44,8 @@ module WebTemplate
             {
               id: publicacion.id,
               precio: publicacion.precio,
-              estado: estado_a_string(publicacion.estado)
+              estado: estado_a_string(publicacion.estado),
+              auto: serializar_auto(publicacion.auto)
             }
           body.append(info_publicacion)
         end
@@ -69,11 +70,6 @@ module WebTemplate
       def guardar_publicacion(precio, usuario, auto)
         publicacion = Publicacion.new(precio, usuario, auto)
         repo_publicaciones.save(publicacion)
-      end
-
-      def guardar_auto(parametros)
-        auto = Auto.new(parametros[:patente], parametros[:marca], parametros[:modelo], parametros[:anio])
-        repo_autos.save(auto)
       end
 
       private

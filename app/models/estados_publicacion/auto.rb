@@ -7,6 +7,6 @@ class Auto
     @patente = patente
     @marca = marca
     @modelo = modelo
-    @anio = anio
+    @anio = anio.to_i
   end
 end

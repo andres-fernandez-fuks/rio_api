@@ -21,6 +21,10 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones' do
     begin
       usuario = repo_usuario.buscar_por_id_telegram(params_publicacion[:id_telegram])
+      unless usuario
+        status 405
+        return
+      end
       auto = guardar_auto(params_publicacion)
       publicacion = guardar_publicacion(params_publicacion[:precio], usuario, auto)
 

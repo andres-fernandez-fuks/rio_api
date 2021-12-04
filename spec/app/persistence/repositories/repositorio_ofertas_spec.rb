@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'integration_helper'
 describe Persistence::Repositories::RepositorioOfertas do
   let(:repositorio) { described_class.new }
   let(:usuario) {

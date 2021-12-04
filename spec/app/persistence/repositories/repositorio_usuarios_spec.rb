@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'integration_helper'
 describe Persistence::Repositories::RepositorioUsuarios do
   let(:repositorio) { described_class.new }
   before(:each) do

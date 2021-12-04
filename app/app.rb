@@ -26,7 +26,6 @@ module WebTemplate
 
     post '/reset', :provides => [:js] do
       if ENV['ENABLE_RESET'] == 'true'
-        user_repo.delete_all
         repo_ofertas.delete_all
         repo_publicaciones.delete_all
         repo_usuario.delete_all

@@ -11,12 +11,12 @@ Característica: Registro de un usuario
   Entonces recibo 0 publicaciones
 
   Escenario: MP002 - Listado de mis publicaciones cuando tengo un auto publicado
-  Dado que tengo un auto publicado patente "AAA000" marca "VW", modelo "Suran", anio 2016 y precio 550000
+  Dado que tengo un auto publicado patente "AAA000", marca "VW", modelo "Suran", año 2016 y precio 550000
   Cuando consulto por mis publicaciones
   Entonces recibo 1 publicaciones
   Y los datos de mi publicación son los correctos
-  @wip
-  Escenario: MP002 - Listar mis publicaciones no muestra publicaciones de otros usuarios
-  Dado que hay un auto publicado marca “VW”, modelo “Suran”, año 2016 y precio $550000 por el usuario con id de telegram “otro”
+
+  Escenario: MP003 - Listar mis publicaciones no muestra publicaciones de otros usuarios
+  Dado que hay un auto publicado patente "AAA000", marca "VW", modelo "Suran", año 2016 y precio 550000 por el usuario con id_telegram "otro"
   Cuando consulto por mis publicaciones
   Entonces recibo 0 publicaciones

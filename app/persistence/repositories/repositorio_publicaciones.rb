@@ -5,7 +5,7 @@ module Persistence
       self.model_class = 'Publicacion'
 
       def buscar_activas
-        load_collection dataset.where(Sequel.ilike(:estado, EstadoActivo.new.id))
+        load_collection dataset.where(estado: EstadoActivo.new.id)
       end
 
       def buscar_por_usuario(id_usuario)

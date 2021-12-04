@@ -46,7 +46,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
 
     publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
     status 200
-    listar_publicaciones(publicaciones_de_usuario)
+    listar_mis_publicaciones(publicaciones_de_usuario)
   end
 
   get :show, :map => '/publicaciones' do

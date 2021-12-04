@@ -37,6 +37,20 @@ module WebTemplate
         body.to_json
       end
 
+      def listar_mis_publicaciones(publicaciones)
+        body = []
+        publicaciones.each do |publicacion|
+          info_publicacion =
+            {
+              id: publicacion.id,
+              precio: publicacion.precio,
+              estado: estado_a_string(publicacion.estado)
+            }
+          body.append(info_publicacion)
+        end
+        body.to_json
+      end
+
       def error_publicacion_no_encontrado
         {
           "error": 'publicacion no encontrada'
@@ -55,6 +69,19 @@ module WebTemplate
 
       def publicacion_mapper
         Persistence::Mappers::PublicacionMapper.new
+      end
+    end
+
+    def estado_a_string(estado)
+      case estado.id
+      when ID_ESTADO_EN_REVISION
+        'En revisión'
+      when ID_ESTADO_ACTIVO
+        'Activo'
+      when ID_ESTADO_VENDIDO
+        'Vendido'
+      else
+        'Desconocido'
       end
     end
 

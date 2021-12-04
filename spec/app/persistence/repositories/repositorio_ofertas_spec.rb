@@ -2,12 +2,16 @@ require 'spec_helper'
 require 'integration_helper'
 describe Persistence::Repositories::RepositorioOfertas do
   let(:repositorio) { described_class.new }
+  let(:auto) {
+    auto = Auto.new("AAA000", "FORD", "AMAROK", 2019)
+    Persistence::Repositories::RepositorioAutos.new.save(auto)
+  }
   let(:usuario) {
     usuario = Usuario.new("Juan", "J@asd.com", "123", 123)
     Persistence::Repositories::RepositorioUsuarios.new.save(usuario)
   }
   let(:publicacion) {
-    publicacion = Publicacion.new(100, usuario, 1)
+    publicacion = Publicacion.new(100, usuario, auto, 1)
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)
   }
   let(:oferta) { Oferta.new(100, usuario, publicacion)}

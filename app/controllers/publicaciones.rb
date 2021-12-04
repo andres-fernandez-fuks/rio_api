@@ -21,10 +21,11 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones' do
     begin
       usuario = repo_usuario.buscar_por_id_telegram(params_publicacion[:id_telegram])
-      publicacion = Publicacion.new(params_publicacion[:precio], usuario)
-      nueva_publicacion = repo_publicaciones.save(publicacion)
+      auto = guardar_auto(params_publicacion)
+      publicacion = guardar_publicacion(params_publicacion[:precio], usuario, auto)
+
       status 201
-      publicacion_a_json nueva_publicacion
+      publicacion_a_json publicacion
     rescue StandardError => e
       status 400
       {error: e.message}.to_json

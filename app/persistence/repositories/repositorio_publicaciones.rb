@@ -17,6 +17,7 @@ module Persistence
       def load_object(a_record)
         publicacion = Object.const_get(self.class.model_class).new(a_record[:precio],
                                                                    RepositorioUsuarios.new.find(a_record[:usuario]),
+                                                                   RepositorioAutos.new.find(a_record[:auto]),
                                                                    a_record[:id])
         configurar_estado(publicacion, a_record[:estado])
         publicacion
@@ -26,7 +27,8 @@ module Persistence
         {
           precio: publicacion.precio,
           usuario: publicacion.usuario.id,
-          estado: publicacion.estado.id
+          estado: publicacion.estado.id,
+          auto: publicacion.auto.id
         }
       end
 

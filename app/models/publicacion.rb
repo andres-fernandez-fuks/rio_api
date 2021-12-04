@@ -1,10 +1,11 @@
 class Publicacion
-  attr_reader :precio, :usuario, :estado, :updated_on, :created_on
+  attr_reader :precio, :usuario, :estado, :auto, :updated_on, :created_on
   attr_accessor :id
 
-  def initialize(precio, usuario, id = nil)
+  def initialize(precio, usuario, auto, id = nil)
     @precio = precio.to_f
     @usuario = usuario
+    @auto = auto
     @id = id
     @estado = EstadoRevision.new
   end

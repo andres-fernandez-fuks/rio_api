@@ -2,12 +2,16 @@ require 'spec_helper'
 require 'integration_helper'
 describe Persistence::Repositories::RepositorioPublicaciones do
   let(:repositorio) { described_class.new }
+  let(:auto) {
+    auto = Auto.new("AAA000", "FORD", "AMAROK", 2019)
+    Persistence::Repositories::RepositorioAutos.new.save(auto)
+  }
   let(:usuario) {
     usuario = Usuario.new("Juan", "J@asd.com", "123", 123)
     Persistence::Repositories::RepositorioUsuarios.new.save(usuario)
   }
-  let(:publicacion) { Publicacion.new(30303, usuario)}
-  let(:publicacion_2) { Publicacion.new(10000, usuario)}
+  let(:publicacion) { Publicacion.new(30303, usuario, auto)}
+  let(:publicacion_2) { Publicacion.new(10000, usuario, auto)}
   before(:each) do
     repositorio.delete_all
   end
@@ -43,7 +47,7 @@ describe Persistence::Repositories::RepositorioPublicaciones do
     end
 
     it 'si existe una publicacion activa, al listar activas se devuelve correctamente' do
-      publicacion = Publicacion.new(30, usuario)
+      publicacion = Publicacion.new(30, usuario, auto)
       publicacion.activar
       repositorio.save(publicacion)
       expect(repositorio.buscar_activas.length).to eq 1

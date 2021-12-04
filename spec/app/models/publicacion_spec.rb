@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe Publicacion do
   context 'Creación de una publicacion' do
+    let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019)}
     let(:precio) {300000}
     let(:usuario) {Usuario.new("Manuel", "asd@asd.com", "123")}
-    let(:publicacion) {described_class.new(precio, usuario)}
+    let(:publicacion) {described_class.new(precio, usuario, auto)}
 
     it 'cuando se crea con todos sus campos validos' do
       expect(publicacion.precio).to eq precio
@@ -16,13 +17,13 @@ describe Publicacion do
     end
 
     it 'cuando una publicación en revisión se cotiza, su estado pasa a ser ESTADO_COTIZADO' do
-      publicacion = described_class.new(precio, usuario)
+      publicacion = described_class.new(precio, usuario, auto)
       publicacion.cotizada
       expect(publicacion.estado).to eq EstadoCotizado.new
     end
 
     it 'cuando una publicación que no está en revisión se cotiza, su estado no se modifica' do
-      publicacion = described_class.new(precio, usuario)
+      publicacion = described_class.new(precio, usuario, auto)
       publicacion.vendida
       publicacion.cotizada
       expect(publicacion.estado).not_to eq EstadoCotizado.new

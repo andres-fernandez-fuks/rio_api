@@ -42,11 +42,6 @@ Entonces('se devuelve la oferta p2p con el monto ofrecido y el estado {string}')
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Cuando('consulto por las ofertas') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Entonces('se devuelven {int} ofertas') do |_int|
-  # Entonces('se devuelven {float} ofertas') do |float|
-  pending # Write code here that turns the phrase above into concrete actions
+Entonces('se devuelven {int} ofertas') do |ofertas|
+  expect(JSON(@response.body).length).to eq ofertas
 end

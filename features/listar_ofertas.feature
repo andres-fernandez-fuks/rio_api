@@ -19,7 +19,7 @@ Característica: Listar ofertas de una publicacion
 
   Escenario: CO3 - Listado de ofertas vacío
       Dado que existe una publicación
-      Cuando consulto por las ofertas
+      Cuando consulto por las ofertas de la publicación
       Entonces se devuelven 0 ofertas
 
 

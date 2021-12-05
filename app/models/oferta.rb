@@ -11,7 +11,6 @@ class Oferta
   end
 
   def aceptar
-    @publicacion.vendida
     @estado = EstadoAceptada.new
   end
 

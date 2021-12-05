@@ -24,11 +24,6 @@ describe Oferta do
   end
 
   describe 'Al aceptar la oferta' do
-    it 'la publicacion se convierte en vendida' do
-      oferta.aceptar
-      expect(oferta.publicacion.estado).to be_a(EstadoVendido)
-    end
-  
     it 'la oferta se pasa a estado aceptada' do
       oferta.aceptar
       expect(oferta.estado).to be_a(EstadoAceptada)

@@ -1,4 +1,5 @@
-class AceptarOferta
+require_relative 'comando'
+class AceptarOferta < Comando
   def ejecutar(oferta)
     publicacion = oferta.publicacion
     publicacion.vendida if oferta.fiubak?
@@ -10,14 +11,14 @@ class AceptarOferta
   private
 
   def guardar_cambios(oferta, publicacion, publicacion_nueva)
-    Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion_nueva)
-    Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)
-    Persistence::Repositories::RepositorioOfertas.new.save(oferta)
+    guardar_publicacion(publicacion_nueva)
+    guardar_publicacion(publicacion)
+    guardar_oferta(oferta)
   end
 
   def fiubak
     fiubak = Usuario.new('fiubak', 'fiubak', 'fiubak')
-    Persistence::Repositories::RepositorioUsuarios.new.save(fiubak)
+    guardar_usuario(fiubak)
   end
 
   def auto_generico

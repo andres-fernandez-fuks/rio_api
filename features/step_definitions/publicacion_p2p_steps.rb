@@ -1,5 +1,5 @@
 Dado('que existe una publicación cotizada') do
-  body = {patente: '100', marca: 'FORD', modelo: 'A', anio: 2000, precio: 50_000, id_telegram: @id_telegram}.to_json
+  body = {patente: '100', marca: 'FORD', modelo: 'A', anio: 2000, precio: 50_000, id_telegram: '123'}.to_json
   response = Faraday.post(crear_publicacion_url, body, header)
   @id_publicacion = JSON(response.body)['id']
 

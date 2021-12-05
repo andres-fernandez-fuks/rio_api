@@ -6,14 +6,6 @@ Dado('hay {int} autos publicados') do |cant_autos|
   end
 end
 
-def crear_publicacion_activa(patente, marca, modelo, anio, precio)
-  body = {patente: patente, marca: marca, modelo: modelo, anio: anio, precio: 300_000, id_telegram: '123'}.to_json
-  response = Faraday.post(crear_publicacion_url, body)
-  id_publicacion = JSON.parse(response.body)['id']
-  response = Faraday.post(informe_de_cotizacion_url(id_publicacion), { precio: precio / 1.3}.to_json)
-  id_oferta = JSON.parse(response.body)['id']
-  Faraday.patch(aceptar_oferta_url(id_oferta), {estado: 'aceptada'}.to_json)
-end
 Cuando('consulto por todas las publicaciones') do
   @response = Faraday.get(listar_publicaciones_url)
 end

@@ -18,31 +18,32 @@ describe RechazarOferta do
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)
     Persistence::Repositories::RepositorioOfertas.new.save(oferta)
     @oferta_rechazada = described_class.new.ejecutar(oferta)
+    @oferta_persistida = Persistence::Repositories::RepositorioOfertas.new.find(@oferta_rechazada.id)
   end
 
   context 'Rechazar una oferta FIUBAK ' do
     it 'marca la publicacion como activa' do
-      oferta = Persistence::Repositories::RepositorioOfertas.new.find(@oferta_rechazada.id)
-      publicacion = oferta.publicacion
+      publicacion = @oferta_persistida.publicacion
       expect(publicacion.estado).to eq EstadoActivo.new
     end
 
-    xit 'guarda los cambios correctamente' do
-      oferta = Persistence::Repositories::RepositorioOfertas.new.find(@oferta_rechazada.id)
-      publicacion = oferta.publicacion
+    it 'guarda los cambios correctamente' do
+      publicacion = @oferta_persistida.publicacion
       expect(publicacion.estado).to eq EstadoActivo.new
     end
 
-    xit 'mantiene el precio original de la publicacion' do
-      oferta_persistida = Persistence::Repositories::RepositorioOfertas.new.find(@oferta_rechazada.id)
-      publicacion_persistida = oferta_persistida.publicacion
+    it 'mantiene el precio original de la publicacion' do
+      publicacion_persistida = @oferta_persistida.publicacion
       expect(publicacion_persistida.precio).to eq publicacion.precio
     end
 
-    xit 'mantiene el precio original' do
-      oferta_persistida = Persistence::Repositories::RepositorioOfertas.new.find(@oferta_rechazada.id)
-      publicacion_persistida = oferta_persistida.publicacion
+    it 'mantiene el precio original' do
+      publicacion_persistida = @oferta_persistida.publicacion
       expect(publicacion_persistida.precio).to eq publicacion.precio
+    end
+
+    it 'marca la oferta como rechazada' do
+      expect(@oferta_persistida.estado).to eq EstadoRechazada.new
     end
   end
 end

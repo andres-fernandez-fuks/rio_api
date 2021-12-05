@@ -9,7 +9,7 @@ Cuando('acepto la oferta') do
   @response = Faraday.patch(aceptar_oferta_url(@id_oferta), body, header)
 end
 
-Entonces('la oferta está con estado {string}') do |_string|
+Entonces('la oferta está con estado {string}') do |estado|
   expect(@response.status).to be 200
-  expect(JSON.parse(@response.body)['estado']['id']).to eq EstadoAceptada.new.id
+  expect(JSON.parse(@response.body)['estado']).to eq estado
 end

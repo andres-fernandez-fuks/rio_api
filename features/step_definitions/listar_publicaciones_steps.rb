@@ -26,10 +26,10 @@ end
 
 Entonces('tiene los datos correspondientes') do
   respuesta = JSON.parse(@response.body)
-  expect(JSON(respuesta[0])['precio'].to_i).to eq @precio_publicacion.to_i
-  expect(JSON(respuesta[0])['auto']['marca']).to eq @marca
-  expect(JSON(respuesta[0])['auto']['modelo']).to eq @modelo
-  expect(JSON(respuesta[0])['auto']['anio'].to_i).to eq @anio.to_i
+  expect(respuesta[0]['precio'].to_i).to eq @precio_publicacion.to_i
+  expect(respuesta[0]['auto']['marca']).to eq @marca
+  expect(respuesta[0]['auto']['modelo']).to eq @modelo
+  expect(respuesta[0]['auto']['anio'].to_i).to eq @anio.to_i
 end
 
 def registrar_usuario(id_telegram)

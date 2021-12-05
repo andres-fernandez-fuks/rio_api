@@ -22,6 +22,6 @@ end
 Entonces('obtiene la oferta para el auto, visible sólo para el usuario con id {int}') do |_id_telegram|
   header = {'ID_TELEGRAM' => @id_telegram}
   @response = Faraday.get(listar_ofertas_de_publicacion_url(@id_publicacion), nil, header)
-  id_oferta_encontrada = JSON(JSON(@response.body)[0])['id']
+  id_oferta_encontrada = JSON(@response.body)[0]['id']
   expect(@id_oferta).to eq id_oferta_encontrada
 end

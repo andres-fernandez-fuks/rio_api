@@ -29,10 +29,11 @@ module WebTemplate
       def publicacion_activada(publicacion)
         {
           id: publicacion.id,
+          tipo: publicacion.tipo.id,
           precio: publicacion.precio,
           estado: publicacion.estado,
           auto: publicacion.auto
-        }.to_json
+        }
       end
 
       def listar_publicaciones(publicaciones)

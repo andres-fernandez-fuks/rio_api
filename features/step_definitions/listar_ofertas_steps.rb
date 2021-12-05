@@ -22,8 +22,8 @@ end
 
 Entonces('se devuelve la oferta de FIUBAK con el monto ofrecido y el estado “Pendiente”') do
   expect(JSON(@response.body).length).to eq 1
-  expect(JSON(JSON(@response.body)[0])['oferente']).to eq 'fiubak'
-  expect(JSON(JSON(@response.body)[0])['estado']['id']).to eq EstadoPendiente.new.id
+  expect(JSON(@response.body)[0]['oferente']).to eq 'fiubak'
+  expect(JSON(@response.body)[0]['estado']).to eq EstadoPendiente.new.id
 end
 
 Dado('que existe una publicación p2p') do

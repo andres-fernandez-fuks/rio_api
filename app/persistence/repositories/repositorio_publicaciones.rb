@@ -18,7 +18,7 @@ module Persistence
         publicacion = Object.const_get(self.class.model_class).new(a_record[:precio],
                                                                    RepositorioUsuarios.new.find(a_record[:usuario]),
                                                                    RepositorioAutos.new.find(a_record[:auto]),
-                                                                   TipoP2P.new,
+                                                                   parsear_tipo(a_record[:tipo]),
                                                                    a_record[:id])
         configurar_estado(publicacion, a_record[:estado])
         publicacion
@@ -29,6 +29,7 @@ module Persistence
           precio: publicacion.precio,
           usuario: publicacion.usuario.id,
           estado: publicacion.estado.id,
+          tipo: serializar_tipo(publicacion.tipo),
           auto: publicacion.auto.id
         }
       end
@@ -36,6 +37,18 @@ module Persistence
       def configurar_estado(publicacion, estado)
         publicacion.activar if estado == EstadoActivo.new.id
         publicacion.vendida if estado == EstadoVendido.new.id
+      end
+
+      def serializar_tipo(tipo)
+        return 'p2p' if tipo == TipoP2P.new
+
+        'fiubak'
+      end
+
+      def parsear_tipo(valor)
+        return TipoP2P.new if valor == 'p2p'
+
+        TipoFiubak.new
       end
     end
   end

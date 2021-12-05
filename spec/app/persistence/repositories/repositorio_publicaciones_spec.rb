@@ -10,8 +10,13 @@ describe Persistence::Repositories::RepositorioPublicaciones do
     usuario = Usuario.new("Juan", "J@asd.com", "123", 123)
     Persistence::Repositories::RepositorioUsuarios.new.save(usuario)
   }
-  let(:publicacion) { Publicacion.new(30303, usuario, auto)}
+  let(:usuario_fiubak) {
+    usuario_fiubak = Usuario.new("fiubak", "fiubak@fiubak.com", "fiubak", 001)
+    Persistence::Repositories::RepositorioUsuarios.new.save(usuario_fiubak)
+  }
+  let(:publicacion) { Publicacion.new(30303, usuario, auto, TipoP2P.new)}
   let(:publicacion_2) { Publicacion.new(10000, usuario, auto)}
+  let(:publicacion_fiubak) { Publicacion.new(1000, usuario_fiubak, auto, TipoFiubak.new)}
   before(:each) do
     repositorio.delete_all
   end
@@ -37,6 +42,18 @@ describe Persistence::Repositories::RepositorioPublicaciones do
       id = repositorio.save(publicacion).id
       publicacion = repositorio.find(id)
       expect(publicacion.estado).to eq EstadoVendido.new
+    end
+
+    it 'una publicacion p2p se guarda con el tipo correcto' do
+      id_publicacion_p2p = repositorio.save(publicacion).id
+      publicacion = repositorio.find(id_publicacion_p2p)
+      expect(publicacion.tipo).to eq TipoP2P.new
+    end
+
+    it 'una publicacion de fiubak se guarda con el tipo correcto' do
+      id_publicacion_fiubak = repositorio.save(publicacion_fiubak).id
+      publicacion_fiubak = repositorio.find(id_publicacion_fiubak)
+      expect(publicacion_fiubak.tipo).to eq TipoFiubak.new
     end
   end
 

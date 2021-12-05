@@ -9,10 +9,6 @@ describe RechazarOferta do
   let(:oferta) {Oferta.new(precio, oferente, publicacion)}
 
   before(:each) do
-    Persistence::Repositories::RepositorioAutos.new.delete_all
-    Persistence::Repositories::RepositorioOfertas.new.delete_all
-    Persistence::Repositories::RepositorioPublicaciones.new.delete_all
-    Persistence::Repositories::RepositorioUsuarios.new.delete_all
     Persistence::Repositories::RepositorioAutos.new.save(auto)
     Persistence::Repositories::RepositorioUsuarios.new.save(oferente)
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)

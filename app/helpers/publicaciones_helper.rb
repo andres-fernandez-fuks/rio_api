@@ -16,22 +16,29 @@ module WebTemplate
         atributos_publicacion(publicacion).to_json
       end
 
+      def cotizar_publicacion(publicacion)
+        publicacion.cotizada
+        repo_publicaciones.save(publicacion)
+      end
+
+      def crear_usuario_fiubak
+        usuario = Usuario.new('fiubak', 'fiubak', 'fiubak')
+        repo_usuario.save(usuario)
+      end
+
       def publicacion_activada(publicacion)
         {
           id: publicacion.id,
           precio: publicacion.precio,
-          estado: publicacion.estado
+          estado: publicacion.estado,
+          auto: publicacion.auto
         }.to_json
       end
 
       def listar_publicaciones(publicaciones)
         body = []
         publicaciones.each do |publicacion|
-          info_publicacion =
-            {
-              id: publicacion.id,
-              precio: publicacion.precio
-            }
+          info_publicacion = publicacion_activada(publicacion)
           body.append(info_publicacion)
         end
         body.to_json

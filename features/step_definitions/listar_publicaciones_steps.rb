@@ -14,16 +14,22 @@ Entonces('recibo {int} publicaciones') do |cant_autos|
   expect(JSON.parse(@response.body).length).to eq cant_autos
 end
 
-When(/^hay que hay 1 auto publicado con patente "([^"]*)", marca "([^"]*)", modelo "([^"]*)", precio (\d+) y anio (\d+)$/) do |patente, marca, modelo, precio, anio|
+Dado(/^hay que hay 1 auto publicado con patente "([^"]*)", marca "([^"]*)", modelo "([^"]*)", precio (\d+) y anio (\d+)$/) do |patente, marca, modelo, precio, anio|
   Faraday.post(reset_url)
   registrar_usuario('123')
   @precio_publicacion = precio
+  @marca = marca
+  @modelo = modelo
+  @anio = anio
   crear_publicacion_activa(patente, marca, modelo, anio, precio)
 end
 
 Entonces('tiene los datos correspondientes') do
   respuesta = JSON.parse(@response.body)
-  expect(respuesta[0]['precio'].to_i).to eq @precio_publicacion.to_i
+  expect(JSON(respuesta[0])['precio'].to_i).to eq @precio_publicacion.to_i
+  expect(JSON(respuesta[0])['auto']['marca']).to eq @marca
+  expect(JSON(respuesta[0])['auto']['modelo']).to eq @modelo
+  expect(JSON(respuesta[0])['auto']['anio'].to_i).to eq @anio.to_i
 end
 
 def registrar_usuario(id_telegram)

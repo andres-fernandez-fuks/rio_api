@@ -15,7 +15,7 @@ module WebTemplate
       def oferta_a_json(oferta)
         {
           id: oferta.id,
-          precio: oferta.precio,
+          monto: oferta.monto,
           id_publicacion: oferta.publicacion.id,
           estado: oferta.estado,
           oferente: oferta.oferente.nombre

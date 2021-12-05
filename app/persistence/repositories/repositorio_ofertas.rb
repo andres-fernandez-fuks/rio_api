@@ -15,7 +15,7 @@ module Persistence
       protected
 
       def load_object(a_record)
-        oferta = Object.const_get(self.class.model_class).new(a_record[:precio],
+        oferta = Object.const_get(self.class.model_class).new(a_record[:monto],
                                                               RepositorioUsuarios.new.find(a_record[:oferente]),
                                                               RepositorioPublicaciones.new.find(a_record[:publicacion]),
                                                               a_record[:id])
@@ -25,7 +25,7 @@ module Persistence
 
       def changeset(oferta)
         {
-          precio: oferta.precio,
+          monto: oferta.monto,
           oferente: oferta.oferente.id,
           publicacion: oferta.publicacion.id,
           estado: oferta.estado.id

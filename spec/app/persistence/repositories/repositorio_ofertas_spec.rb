@@ -23,7 +23,7 @@ describe Persistence::Repositories::RepositorioOfertas do
     it 'guardar una oferta nueva la guarda correctamente' do
       id = repositorio.save(oferta).id
       oferta = repositorio.find(id)
-      expect(oferta.precio).to eq 100
+      expect(oferta.monto).to eq 100
       expect(oferta.oferente.id_telegram).to eq usuario.id_telegram
       expect(oferta.publicacion.id).to eq publicacion.id
     end
@@ -33,7 +33,7 @@ describe Persistence::Repositories::RepositorioOfertas do
       ofertas = repositorio.buscar_por_oferente(usuario.id)
       expect(ofertas.length).to eq 1
       oferta = ofertas[0]
-      expect(oferta.precio).to eq 100
+      expect(oferta.monto).to eq 100
       expect(oferta.oferente).to eq usuario
     end
 
@@ -42,7 +42,7 @@ describe Persistence::Repositories::RepositorioOfertas do
       ofertas = repositorio.buscar_por_publicacion(publicacion.id)
       expect(ofertas.length).to eq 1
       oferta = ofertas[0]
-      expect(oferta.precio).to eq 100
+      expect(oferta.monto).to eq 100
       expect(oferta.publicacion.id).to eq publicacion.id
     end
   end

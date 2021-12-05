@@ -2,7 +2,7 @@ class AceptarOferta
   def ejecutar(oferta)
     publicacion = oferta.publicacion
     publicacion.vendida if oferta.fiubak?
-    publicacion_nueva = Publicacion.new(oferta.precio * 1.3, fiubak, auto_generico)
+    publicacion_nueva = Publicacion.new(oferta.monto * 1.3, fiubak, auto_generico)
     publicacion_nueva.activar
     guardar_cambios(oferta, publicacion, publicacion_nueva)
   end

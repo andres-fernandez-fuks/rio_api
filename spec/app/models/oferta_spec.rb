@@ -34,4 +34,11 @@ describe Oferta do
       expect(oferta.estado).to be_a(EstadoAceptada)
     end
   end
+
+  describe 'Al rechazar la oferta' do
+    it 'la oferta se pasa a estado rechazada' do
+      oferta.rechazar
+      expect(oferta.estado).to be_a(EstadoRechazada)
+    end
+  end
 end

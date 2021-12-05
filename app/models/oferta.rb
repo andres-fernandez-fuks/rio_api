@@ -22,4 +22,8 @@ class Oferta
   def establecer_estado(estado)
     @estado = estado
   end
+
+  def rechazar
+    @estado = EstadoRechazada.new
+  end
 end

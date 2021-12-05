@@ -13,7 +13,7 @@ Then, you can run script `start_dev_containers.sh`. After this, you will be insi
 1. Run **_bundle install --without staging production_**, to install all application dependencies
 1. Run **_RACK_ENV=test bundle exec rake_**, to run all tests and ensure everything is properly setup
 1. Run **_RACK_ENV=development bundle exec rake db:migrate db:seed_**, to setup the development database
-1. Run **_bundle exec padrino start -h 0.0.0.0_**, to start the application and check health in another terminal at `http://localhost:3000/`
+1. Run **_PORT=3000 ./start_app.sh_**, to start the application and check health in another terminal at `http://localhost:3000/`
 
 ### Deploy with Dockerfile + Heroku
 

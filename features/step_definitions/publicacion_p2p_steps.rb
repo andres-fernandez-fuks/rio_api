@@ -7,3 +7,8 @@ Dado('que existe una publicación cotizada') do
   response = Faraday.post(informe_de_cotizacion_url(@id_publicacion), body)
   @id_oferta = JSON(response.body)['id']
 end
+
+Cuando('se rechaza la oferta de FIUBAK para la publicación') do
+  body = {estado: 'rechazada'}.to_json
+  @response = Faraday.patch(rechazar_oferta_url(@id_oferta), body, header)
+end

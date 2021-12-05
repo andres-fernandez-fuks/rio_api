@@ -92,6 +92,10 @@ def aceptar_oferta_url(id_oferta)
   "#{BASE_URL}/ofertas/#{id_oferta}"
 end
 
+def rechazar_oferta_url(id_oferta)
+  "#{BASE_URL}/ofertas/#{id_oferta}"
+end
+
 def listar_ofertas_de_publicacion_url(id_publicacion)
   "#{BASE_URL}/publicaciones/#{id_publicacion}/ofertas"
 end

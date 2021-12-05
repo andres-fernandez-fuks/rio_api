@@ -18,6 +18,7 @@ module Persistence
         publicacion = Object.const_get(self.class.model_class).new(a_record[:precio],
                                                                    RepositorioUsuarios.new.find(a_record[:usuario]),
                                                                    RepositorioAutos.new.find(a_record[:auto]),
+                                                                   TipoP2P.new,
                                                                    a_record[:id])
         configurar_estado(publicacion, a_record[:estado])
         publicacion

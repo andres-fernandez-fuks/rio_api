@@ -11,7 +11,7 @@ describe Persistence::Repositories::RepositorioOfertas do
     Persistence::Repositories::RepositorioUsuarios.new.save(usuario)
   }
   let(:publicacion) {
-    publicacion = Publicacion.new(100, usuario, auto, 1)
+    publicacion = Publicacion.new(100, usuario, auto, TipoP2P.new, 1)
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)
   }
   let(:oferta) { Oferta.new(100, usuario, publicacion)}

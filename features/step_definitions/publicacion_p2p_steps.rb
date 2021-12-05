@@ -10,5 +10,11 @@ end
 
 Cuando('se rechaza la oferta de FIUBAK para la publicación') do
   body = {estado: 'rechazada'}.to_json
-  @response = Faraday.patch(rechazar_oferta_url(@id_oferta), body, header)
+  Faraday.patch(rechazar_oferta_url(@id_oferta), body)
+end
+
+Entonces('la publicación pasa a estado activo') do
+  response = Faraday.get(consultar_publicacion_url(@id_publicacion))
+  estado = JSON.parse(response.body)['estado']
+  expect(estado).to eq('activo')
 end

@@ -32,5 +32,5 @@ end
 Entonces('se crea una nueva publicación de FIUBAK por el mismo auto que la anterior con un precio de {float}') do |precio|
   @response = Faraday.get(listar_publicaciones_url)
   respuesta = JSON.parse(@response.body)
-  expect(respuesta[0]['precio'].to_f).to eq precio.to_f
+  expect(JSON(respuesta[0])['precio'].to_f).to eq precio.to_f
 end

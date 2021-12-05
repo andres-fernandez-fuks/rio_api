@@ -6,9 +6,8 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       return
     end
     precio = params_publicacion[:precio]
-    publicacion.cotizada
-    usuario = Usuario.new('fiubak', 'fiubak', 'fiubak')
-    usuario = repo_usuario.save(usuario)
+    publicacion = cotizar_publicacion(publicacion)
+    usuario = crear_usuario_fiubak
     oferta = repo_ofertas.save(Oferta.new(precio, usuario, publicacion))
     if oferta
       status 200
@@ -44,7 +43,6 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     end
 
     usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
-
     unless usuario
       status 404
       return
@@ -59,21 +57,6 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     publicaciones = repo_publicaciones.buscar_activas
     status 200
     listar_publicaciones(publicaciones)
-  end
-
-  post :create, :map => '/_publicacionesActivas' do
-    begin
-      usuario_nuevo = Usuario.new('Manu', 'm@asd.com', '123')
-      usuario = repo_usuario.save(usuario_nuevo)
-      publicacion = Publicacion.new(454_545, usuario)
-      publicacion.activar
-      nueva_publicacion = repo_publicaciones.save(publicacion)
-      status 201
-      publicacion_a_json nueva_publicacion
-    rescue StandardError => e
-      status 400
-      {error: e.message}.to_json
-    end
   end
 
   get :show, :map => '/publicaciones/:id_publicacion/ofertas' do

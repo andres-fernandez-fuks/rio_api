@@ -37,6 +37,7 @@ module Persistence
       def configurar_estado(publicacion, estado)
         publicacion.activar if estado == EstadoActivo.new.id
         publicacion.vendida if estado == EstadoVendido.new.id
+        publicacion.cotizada if estado == EstadoCotizado.new.id
       end
 
       def serializar_tipo(tipo)

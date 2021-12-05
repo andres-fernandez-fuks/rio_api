@@ -1,21 +1,33 @@
 WebTemplate::App.controllers :ofertas, :provides => [:json] do
-  patch :create, :map => '/ofertas/:id_oferta' do
+  patch :create, :map => '/ofertas/:id_oferta' do # rubocop:disable Metrics/BlockLength
     mensaje = params_oferta[:estado]
-    if mensaje == 'aceptada'
+    begin
       oferta = repo_ofertas.find(params[:id_oferta])
-      unless oferta
-        status 404
-        error_oferta_no_encontrada
-        return
-      end
+    rescue ObjectNotFound
+      status 404
+      error_oferta_no_encontrada
+    end
+    case mensaje.downcase
+    when EstadoAceptada.new.id.downcase
       begin
         aceptar_oferta(oferta)
-        status 204
+        status 200
         oferta_a_json(oferta)
       rescue StandardError => e
         status 500
         {error: e.message}.to_json
       end
+    when EstadoRechazada.new.id.downcase
+      begin
+        rechazar_oferta(oferta)
+        status 200
+        oferta_a_json(oferta)
+      rescue StandardError => e
+        status 500
+        {error: e.message}.to_json
+      end
+    else
+      status 400
     end
   end
 end

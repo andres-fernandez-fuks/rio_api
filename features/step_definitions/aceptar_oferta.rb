@@ -10,5 +10,6 @@ Cuando('acepto la oferta') do
 end
 
 Entonces('la oferta está con estado {string}') do |_string|
-  expect(@response.status).to be 204
+  expect(@response.status).to be 200
+  expect(JSON.parse(@response.body)['estado']['id']).to eq EstadoAceptada.new.id
 end

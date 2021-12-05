@@ -34,5 +34,11 @@ describe AceptarOferta do
       expect(publicaciones.length).to eq 2
       expect(publicaciones[0].precio > publicaciones[1].precio).to eq true
     end
+
+    it 'marca la oferta como aceptada' do
+      aceptar_oferta = described_class.new.ejecutar(oferta)
+      oferta = Persistence::Repositories::RepositorioOfertas.new.find(aceptar_oferta.id)
+      expect(oferta.estado).to eq EstadoAceptada.new
+    end
   end
 end

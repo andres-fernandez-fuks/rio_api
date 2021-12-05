@@ -5,6 +5,7 @@ class AceptarOferta < Comando
     publicacion.vendida if oferta.fiubak?
     publicacion_nueva = Publicacion.new(oferta.monto * 1.3, fiubak, auto_generico)
     publicacion_nueva.activar
+    oferta.aceptar
     guardar_cambios(oferta, publicacion, publicacion_nueva)
   end
 

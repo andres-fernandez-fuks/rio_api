@@ -1,5 +1,6 @@
 #language: es
 
+@wip
 Característica: Publicación p2p
   Como usuario vendedor
   Quiero crear una publicación P2P

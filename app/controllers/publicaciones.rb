@@ -21,7 +21,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     begin
       usuario = repo_usuario.buscar_por_id_telegram(params_publicacion[:id_telegram])
       unless usuario
-        status 405
+        status 401
         return
       end
       auto = guardar_auto(params_publicacion)

@@ -5,7 +5,7 @@ describe PublicacionP2P do
     let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019)}
     let(:precio) {300000}
     let(:usuario) {Usuario.new("Manuel", "asd@asd.com", "123")}
-    let(:publicacion_p2p) {described_class.new(precio, usuario, auto, TipoP2P.new)}
+    let(:publicacion_p2p) {described_class.new(precio, usuario, auto)}
 
     it 'cuando se crea con todos sus campos validos' do
       expect(publicacion_p2p.precio).to eq precio

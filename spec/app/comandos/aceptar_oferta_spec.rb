@@ -1,6 +1,7 @@
 require 'spec_helper'
 require_relative '../../../app/comandos/aceptar_oferta'
-require 'byebug'
+require_relative '../../../app/models/errors/errores'
+
 describe AceptarOferta do
   let(:precio) {300000}
   let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019, 1)}
@@ -54,6 +55,19 @@ describe AceptarOferta do
       aceptar_oferta = described_class.new.ejecutar(oferta)
       oferta = Persistence::Repositories::RepositorioOfertas.new.find(aceptar_oferta.id)
       expect(oferta.estado).to eq EstadoAceptada.new
+    end
+  end
+  
+  context 'Dado que acepté la oferta por una publicacion' do
+    before(:each) do
+      aceptar_oferta = described_class.new.ejecutar(oferta)
+      oferta = Persistence::Repositories::RepositorioOfertas.new.find(aceptar_oferta.id)
+      expect(oferta.estado).to eq EstadoAceptada.new
+    end
+
+    it 'Cuando intento aceptar otra oferta deberia lanzar un error' do
+      otra_oferta = Oferta.new(100000, oferente, publicacion)
+      expect{ described_class.new.ejecutar(otra_oferta) }.to raise_error PublicacionVendidaError
     end
   end
 end

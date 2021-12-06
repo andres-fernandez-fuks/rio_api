@@ -1,7 +1,10 @@
 require_relative 'comando'
+require_relative '../models/errors/errores'
 class AceptarOferta < Comando
   def ejecutar(oferta)
     publicacion = oferta.publicacion
+    raise PublicacionVendidaError unless publicacion.estado != EstadoVendido.new
+
     publicacion.vendida if oferta.fiubak?
     publicacion_nueva = PublicacionFiubak.new(oferta.monto * 1.3, fiubak, publicacion.auto)
     publicacion_nueva.activar

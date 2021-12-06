@@ -1,7 +1,9 @@
+require_relative '../comandos/registrar_usuario'
+
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/usuarios' do
     usuario = Usuario.new(params_usuario[:nombre], params_usuario[:mail], params_usuario[:id_telegram])
-    nuevo_usuario = repo_usuario.save(usuario)
+    nuevo_usuario = RegistrarUsuario.new.ejecutar(usuario)
     status 201
     usuario_a_json nuevo_usuario
   end

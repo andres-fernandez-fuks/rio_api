@@ -25,4 +25,8 @@ class Oferta
   def rechazar
     @estado = EstadoRechazada.new
   end
+
+  def es_p2p?
+    true
+  end
 end

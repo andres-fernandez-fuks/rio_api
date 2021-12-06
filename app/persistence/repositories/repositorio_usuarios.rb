@@ -9,6 +9,11 @@ module Persistence
         load_object(row) unless row.nil?
       end
 
+      def buscar_por_mail(mail)
+        row = dataset.first(mail: mail)
+        load_object(row) unless row.nil?
+      end
+
       protected
 
       def load_object(a_record)

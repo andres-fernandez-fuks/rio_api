@@ -4,7 +4,7 @@ class Oferta
 
   def initialize(monto, oferente, publicacion, id = nil)
     @id = id
-    @monto = monto
+    @monto = monto.to_f
     @oferente = oferente
     @publicacion = publicacion
     @estado = EstadoPendiente.new

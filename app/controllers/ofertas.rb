@@ -33,19 +33,28 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
 
   post :show, :map => '/publicaciones/:id_publicacion/oferta' do
     id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
-    unless id_telegram
+    precio = params_oferta[:precio]
+    id_publicacion = params[:id_publicacion]
+    unless id_telegram && precio && id_publicacion
       status 400
       return
     end
 
-    usuario = repo_usuarios.find(id_telegram)
-    unless usuario
+    begin
+      usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
+    rescue ObjectNotFound
       status 401
       return
     end
 
-    ofertas = repo_ofertas.buscar_por_publicacion(publicacion.id)
+    begin
+      publicacion = repo_publicaciones.find(id_publicacion)
+    rescue ObjectNotFound
+      status 404
+      return
+    end
+    oferta = realizar_oferta(precio, usuario, publicacion)
     status 200
-    listar_ofertas(ofertas)
+    oferta_a_json(oferta)
   end
 end

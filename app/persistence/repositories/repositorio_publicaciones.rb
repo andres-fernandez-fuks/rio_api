@@ -15,11 +15,11 @@ module Persistence
       protected
 
       def load_object(a_record)
-        publicacion = Object.const_get(self.class.model_class).new(a_record[:precio],
-                                                                   RepositorioUsuarios.new.find(a_record[:usuario]),
-                                                                   RepositorioAutos.new.find(a_record[:auto]),
-                                                                   parsear_tipo(a_record[:tipo]),
-                                                                   a_record[:id])
+        # tipo = parsear_tipo(a_record[:tipo])
+        publicacion = PublicacionP2P.new(a_record[:precio],
+                                         RepositorioUsuarios.new.find(a_record[:usuario]),
+                                         RepositorioAutos.new.find(a_record[:auto]),
+                                         a_record[:id])
         configurar_estado(publicacion, a_record[:estado])
         publicacion
       end

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Oferta do
   let(:precio) {300000}
   let(:oferente) {Usuario.new('nombre', 'mail', '100')}
-  let(:publicacion) {Publicacion.new(precio, oferente, 1)}
+  let(:publicacion) {PublicacionP2P.new(precio, oferente, 1)}
   let(:oferta) {described_class.new(precio, oferente, publicacion)}
   
   context 'Creación de una oferta' do

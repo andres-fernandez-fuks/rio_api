@@ -76,7 +76,7 @@ module WebTemplate
       end
 
       def guardar_publicacion(precio, usuario, auto)
-        publicacion = Publicacion.new(precio, usuario, auto)
+        publicacion = PublicacionP2P.new(precio, usuario, auto)
         repo_publicaciones.save(publicacion)
       end
 

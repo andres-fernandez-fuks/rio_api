@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Publicacion do
+describe PublicacionP2P do
   context 'Creación de una publicación p2p' do
     let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019)}
     let(:precio) {300000}

@@ -4,7 +4,7 @@ describe AceptarOferta do
   let(:precio) {300000}
   let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019, 1)}
   let(:oferente) {Usuario.new('nombre', 'mail', '100')}
-  let(:publicacion) {Publicacion.new(precio, oferente, auto, TipoP2P.new, 1)}
+  let(:publicacion) {PublicacionP2P.new(precio, oferente, auto, 1)}
   let(:oferta) {Oferta.new(precio, oferente, publicacion)}
 
   before(:each) do

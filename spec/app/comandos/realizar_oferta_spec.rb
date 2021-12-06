@@ -11,14 +11,13 @@ describe RealizarOferta do
   let(:repo_ofertas) {Persistence::Repositories::RepositorioOfertas.new}
 
   before(:each) do
-    publicacion.cotizada
     Persistence::Repositories::RepositorioAutos.new.save(auto)
     Persistence::Repositories::RepositorioUsuarios.new.save(oferente)
     Persistence::Repositories::RepositorioUsuarios.new.save(vendedor)
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)
   end
 
-  context 'Realizar una oferta por una publicación p2p' do
+  context 'Realizar una oferta por una publicación p2p activa' do
     it 'crea la oferta correctamente' do
       realizar_oferta = described_class.new.ejecutar(monto, oferente, publicacion)
       expect(realizar_oferta.monto).to eq monto
@@ -37,6 +36,34 @@ describe RealizarOferta do
     it 'no modifica el estado de la publicación' do
       realizar_oferta = described_class.new.ejecutar(monto, oferente, publicacion)
       expect(publicacion.estado).to eq realizar_oferta.publicacion.estado
+    end
+  end
+
+  context 'Realizar una oferta por una publicación p2p vendida' do
+
+    before(:each) do
+      publicacion.vendida
+    end
+
+    it 'lanza un error al crear la oferta' do
+      expect{described_class.new.ejecutar(monto, oferente, publicacion)}.to raise_error(PublicacionVendidaError)
+    end
+
+    it 'no agrega la oferta a la publicación' do
+      begin
+        described_class.new.ejecutar(monto, oferente, publicacion)
+      rescue PublicacionVendidaError
+        ofertas_de_publicacion = repo_ofertas.buscar_por_publicacion(publicacion.id)
+        expect(ofertas_de_publicacion.length).to eq 0
+      end
+    end
+
+    it 'no modifica el estado de la publicación' do
+      begin
+        described_class.new.ejecutar(monto, oferente, publicacion)
+      rescue PublicacionVendidaError
+        expect(publicacion.estado).to eq EstadoVendido.new
+      end
     end
   end
 end

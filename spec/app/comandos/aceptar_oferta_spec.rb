@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../../app/comandos/aceptar_oferta'
+require_relative '../../../app/comandos'
 require_relative '../../../app/models/errors/errores'
 
 describe AceptarOferta do
@@ -60,9 +60,7 @@ describe AceptarOferta do
   
   context 'Dado que acepté la oferta por una publicacion' do
     before(:each) do
-      aceptar_oferta = described_class.new.ejecutar(oferta)
-      oferta = Persistence::Repositories::RepositorioOfertas.new.find(aceptar_oferta.id)
-      expect(oferta.estado).to eq EstadoAceptada.new
+      described_class.new.ejecutar(oferta)
     end
 
     it 'Cuando intento aceptar otra oferta deberia lanzar un error' do

@@ -9,4 +9,8 @@ describe PublicacionFiubak do
   it 'Al crear la publicacion debería estar activa' do
     expect(publicacion_fiubak.estado).to eq EstadoActivo.new
   end
+
+  it 'El tipo debería ser TipoFiubak' do
+    expect(publicacion_fiubak.tipo).to eq TipoFiubak.new
+  end
 end

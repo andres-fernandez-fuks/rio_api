@@ -3,4 +3,8 @@ class PublicacionFiubak < Publicacion
     super(precio, usuario, auto, id)
     @estado = EstadoActivo.new
   end
+
+  def tipo
+    TipoFiubak.new
+  end
 end

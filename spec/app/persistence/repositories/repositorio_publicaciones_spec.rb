@@ -16,7 +16,7 @@ describe Persistence::Repositories::RepositorioPublicaciones do
   }
   let(:publicacion) { PublicacionP2P.new(30303, usuario, auto)}
   let(:publicacion_2) { PublicacionP2P.new(10000, usuario, auto)}
-  let(:publicacion_fiubak) { Publicacion.new(1000, usuario_fiubak, auto)}
+  let(:publicacion_fiubak) { PublicacionFiubak.new(1000, usuario_fiubak, auto)}
   before(:each) do
     repositorio.delete_all
   end
@@ -51,7 +51,7 @@ describe Persistence::Repositories::RepositorioPublicaciones do
     end
 
 
-    xit 'una publicacion de fiubak se guarda con el tipo correcto' do
+    it 'una publicacion de fiubak se guarda con el tipo correcto' do
       id_publicacion_fiubak = repositorio.save(publicacion_fiubak).id
       publicacion_fiubak = repositorio.find(id_publicacion_fiubak)
       expect(publicacion_fiubak.tipo).to eq TipoFiubak.new

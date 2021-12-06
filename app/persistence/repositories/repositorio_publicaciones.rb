@@ -15,11 +15,12 @@ module Persistence
       protected
 
       def load_object(a_record)
-        # tipo = parsear_tipo(a_record[:tipo])
-        publicacion = PublicacionP2P.new(a_record[:precio],
-                                         RepositorioUsuarios.new.find(a_record[:usuario]),
-                                         RepositorioAutos.new.find(a_record[:auto]),
-                                         a_record[:id])
+        tipo = parsear_tipo(a_record[:tipo])
+        subclase = tipo == TipoP2P.new ? PublicacionP2P : PublicacionFiubak
+        publicacion = subclase.new(a_record[:precio],
+                                   RepositorioUsuarios.new.find(a_record[:usuario]),
+                                   RepositorioAutos.new.find(a_record[:auto]),
+                                   a_record[:id])
         configurar_estado(publicacion, a_record[:estado])
         publicacion
       end

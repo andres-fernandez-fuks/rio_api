@@ -8,7 +8,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     precio = params_publicacion[:precio]
     publicacion = cotizar_publicacion(publicacion)
     usuario = crear_usuario_fiubak
-    oferta = repo_ofertas.save(Oferta.new(precio, usuario, publicacion))
+    oferta = realizar_oferta(precio, usuario, publicacion)
     if oferta
       status 200
       oferta_a_json(oferta)

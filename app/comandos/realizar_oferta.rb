@@ -1,8 +1,8 @@
 require_relative 'comando'
 
 class RealizarOferta < Comando
-  def ejecutar(publicacion, precio, usuario)
-    oferta = Oferta.new(precio, usuario, publicacion)
+  def ejecutar(monto, oferente, publicacion)
+    oferta = Oferta.new(monto, oferente, publicacion)
     # guardar_publicacion(publicacion)
     guardar_oferta(oferta)
   end

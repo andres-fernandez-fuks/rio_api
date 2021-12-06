@@ -1,6 +1,7 @@
 # Helper methods defined here can be accessed in any controller or view in the application
 require_relative '../comandos/aceptar_oferta'
 require_relative '../comandos/rechazar_oferta'
+require_relative '../comandos/realizar_oferta'
 module WebTemplate
   class App
     module OfertasHelper
@@ -48,6 +49,10 @@ module WebTemplate
           body.append(info_oferta)
         end
         body.to_json
+      end
+
+      def realizar_oferta(monto, oferente, publicacion)
+        RealizarOferta.new.ejecutar(monto, oferente, publicacion)
       end
 
       def aceptar_oferta(oferta)

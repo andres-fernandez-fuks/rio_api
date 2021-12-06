@@ -1,11 +1,17 @@
 require_relative '../comandos/registrar_usuario'
+require_relative '../models/errors/errores'
 
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/usuarios' do
-    usuario = Usuario.new(params_usuario[:nombre], params_usuario[:mail], params_usuario[:id_telegram])
-    nuevo_usuario = RegistrarUsuario.new.ejecutar(usuario)
-    status 201
-    usuario_a_json nuevo_usuario
+    begin
+      usuario = Usuario.new(params_usuario[:nombre], params_usuario[:mail], params_usuario[:id_telegram])
+      nuevo_usuario = RegistrarUsuario.new.ejecutar(usuario)
+      status 201
+      usuario_a_json nuevo_usuario
+    rescue MailDeUsuarioEnUsoError
+      status 409
+      error_mail_ya_registrado
+    end
   end
 
   get :show, :map => '/usuarios/yo' do

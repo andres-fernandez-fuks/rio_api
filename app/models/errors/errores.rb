@@ -1,0 +1,2 @@
+class MailDeUsuarioEnUsoError < StandardError
+end

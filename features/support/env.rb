@@ -104,10 +104,7 @@ def consultar_publicacion_url(id_publicacion)
   "#{BASE_URL}/publicaciones/#{id_publicacion}"
 end
 
-def crear_publicacion_activa(patente, marca, modelo, anio, precio)
-  id_telegram = "123"
-  @body = {nombre: @nombre, mail: @mail, id_telegram: id_telegram}.to_json
-  Faraday.post(crear_usuario_url, @body, header)
+def crear_publicacion_activa(patente, marca, modelo, anio, precio, id_telegram)
   body = {patente: patente, marca: marca, modelo: modelo, anio: anio, precio: 300_000, id_telegram: id_telegram}.to_json
   response = Faraday.post(crear_publicacion_url, body)
   id_publicacion = JSON.parse(response.body)['id']

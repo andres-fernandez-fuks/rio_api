@@ -22,6 +22,12 @@ module WebTemplate
         }.to_json
       end
 
+      def error_mail_ya_registrado
+        {
+          "error": 'El registro no fue posible - Mail en uso'
+        }.to_json
+      end
+
       private
 
       def atributos_usuario(usuario)

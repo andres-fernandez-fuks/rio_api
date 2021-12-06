@@ -9,7 +9,7 @@ Característica: Oferta p2p
     Dado que existe una publicación P2P activa
     Cuando creo una oferta sobre esa publicación
     Entonces la oferta se crea correctamente
-  @wip
+
   Escenario: OP002 - Una oferta sobre una publicación vendida devuelve un error
     Dado que existe una publicación P2P vendida
     Cuando creo una oferta sobre esa publicación

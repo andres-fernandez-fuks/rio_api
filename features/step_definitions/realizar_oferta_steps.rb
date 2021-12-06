@@ -5,17 +5,28 @@ Dado('que existe una publicación P2P activa') do
   rechazar_oferta(id_oferta)
 end
 
+Dado('que existe una publicación P2P vendida') do
+  registrar_un_usuario
+  @id_publicacion = JSON(publicar_auto.body)['id']
+  id_oferta = JSON(enviar_informe.body)['id']
+  rechazar_oferta(id_oferta)
+  id_oferta = JSON(realizar_oferta(@id_telegram, 15_000).body)['id']
+  aceptar_oferta(id_oferta)
+end
+
 Cuando('creo una oferta sobre esa publicación') do
   @precio = 15_000
-  body = {precio: @precio}.to_json
-  header = {'ID_TELEGRAM' => @id_telegram}
-  @response = Faraday.post(realizar_oferta_url(@id_publicacion), body, header)
+  @response = realizar_oferta(@id_telegram, @precio)
 end
 
 Entonces('la oferta se crea correctamente') do
   respuesta = JSON.parse(@response.body)
   expect(respuesta['monto']).to eq @precio
   expect(respuesta['id_publicacion']).to eq @id_publicacion
+end
+
+Entonces('se devuelve un error y la oferta no se crea') do
+  expect(@response.status).to eq 409
 end
 
 def registrar_un_usuario
@@ -34,4 +45,14 @@ end
 
 def rechazar_oferta(id_oferta)
   Faraday.patch(rechazar_oferta_url(id_oferta), {estado: 'rechazada'}.to_json)
+end
+
+def realizar_oferta(id_telegram, precio)
+  body = {precio: precio}.to_json
+  header = {'ID_TELEGRAM' => id_telegram}
+  Faraday.post(realizar_oferta_url(@id_publicacion), body, header)
+end
+
+def aceptar_oferta(id_oferta)
+  Faraday.patch(aceptar_oferta_url(id_oferta), {estado: 'aceptada'}.to_json)
 end

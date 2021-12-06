@@ -31,6 +31,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     end
   end
 
+  # rubocop: disable Metrics/BlockLength
   post :show, :map => '/publicaciones/:id_publicacion/oferta' do
     id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
     precio = params_oferta[:precio]
@@ -53,8 +54,13 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       status 404
       return
     end
-    oferta = realizar_oferta(precio, usuario, publicacion)
-    status 200
-    oferta_a_json(oferta)
+    begin
+      oferta = realizar_oferta(precio, usuario, publicacion)
+      status 201
+      oferta_a_json(oferta)
+    rescue PublicacionVendidaError
+      status 409
+    end
   end
 end
+# rubocop: enable Metrics/BlockLength

@@ -1,5 +1,6 @@
 require 'spec_helper'
 require_relative '../../../app/comandos/aceptar_oferta'
+require 'byebug'
 describe AceptarOferta do
   let(:precio) {300000}
   let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019, 1)}
@@ -33,6 +34,20 @@ describe AceptarOferta do
       publicaciones = Persistence::Repositories::RepositorioPublicaciones.new.all
       expect(publicaciones.length).to eq 2
       expect(publicaciones[0].precio > publicaciones[1].precio).to eq true
+    end
+
+    it 'crea una publicacion nueva de tipo fiubak' do
+      described_class.new.ejecutar(oferta)
+      publicaciones = Persistence::Repositories::RepositorioPublicaciones.new.all
+      publicacion_creada_por_fiubak = publicaciones.find { |pub| pub.id != publicacion.id }
+      expect(publicacion_creada_por_fiubak.tipo).to eq TipoFiubak.new
+    end
+
+    it 'la publicacion creada por fiubak se encuentra activa' do
+      described_class.new.ejecutar(oferta)
+      publicaciones = Persistence::Repositories::RepositorioPublicaciones.new.all
+      publicacion_creada_por_fiubak = publicaciones.find { |pub| pub.id != publicacion.id }
+      expect(publicacion_creada_por_fiubak.estado).to eq EstadoActivo.new
     end
 
     it 'marca la oferta como aceptada' do

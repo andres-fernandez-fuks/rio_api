@@ -61,8 +61,9 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       oferta = realizar_oferta(precio, usuario, publicacion)
       status 201
       oferta_a_json(oferta)
-    rescue PublicacionVendidaError
+    rescue PublicacionVendidaError => e
       status 409
+      {error: e.message}.to_json
     end
   end
 end

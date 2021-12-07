@@ -35,6 +35,7 @@ end
 
 Entonces('se devuelve un error y la oferta no se crea') do
   expect(@response.status).to eq 409
+  expect(JSON(@response.body)['error']).to eq 'La publicación ya fue vendida'
 end
 
 Entonces('ambas ofertas quedan guardadas') do

@@ -13,6 +13,9 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
         aceptar_oferta(oferta)
         status 200
         oferta_a_json(oferta, incluir_contacto: true)
+      rescue PublicacionVendidaError => e
+        status 400
+        { error: e.message }.to_json
       rescue StandardError => e
         status 500
         {error: e.message}.to_json

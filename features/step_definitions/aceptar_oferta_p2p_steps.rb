@@ -7,5 +7,7 @@ Dado('que tengo una publicación p2p por un auto patente {string}, marca {string
   Faraday.patch(rechazar_oferta_url(id_oferta), {estado: 'rechazada'}.to_json)
 end
 
-Dado('hay una oferta p2p por 2000000 para la publicación') do
+Dado('hay una oferta p2p por 2000000 para la publicación')
+  response = Faraday.post(realizar_oferta_url(@id_publicacion), header)
+  @id_oferta = JSON(response.body)['id']
 end

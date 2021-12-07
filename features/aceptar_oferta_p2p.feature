@@ -7,11 +7,10 @@ Antecedentes:
   Y que tengo una publicación p2p por un auto patente "AAA000", marca "VW", modelo "Suran", año 2016 y precio 550000
   Y hay una oferta p2p por 2000000 para la publicación del usuario con email "usuario@test.com"
 
-@wip
 Escenario: AO001 - Aceptar una oferta P2P
   Cuando acepto la oferta
   Entonces se me comunica el correo del comprador
-  Y la publicacion esta en estado “Vendida”
+  Y la publicacion esta en estado “Vendido”
 
 @wip
 Escenario: AO002 - No se permite aceptar dos ofertas para la misma publicacion P2P

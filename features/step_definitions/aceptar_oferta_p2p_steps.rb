@@ -3,8 +3,8 @@ Dado('que tengo una publicación p2p por un auto patente {string}, marca {string
   response = Faraday.post(crear_publicacion_url, body_registro, header)
   @id_publicacion = JSON(response.body)['id']
   response = Faraday.post(informe_de_cotizacion_url(@id_publicacion), {precio: 70_000}.to_json)
-  @id_oferta = JSON(response.body)['id']
-  Faraday.patch(rechazar_oferta_url(@id_oferta), {estado: 'rechazada'}.to_json)
+  id_oferta = JSON(response.body)['id']
+  Faraday.patch(rechazar_oferta_url(id_oferta), {estado: 'rechazada'}.to_json)
 end
 
 Dado('hay una oferta p2p por 2000000 para la publicación del usuario con email {string}') do |email|
@@ -14,7 +14,8 @@ Dado('hay una oferta p2p por 2000000 para la publicación del usuario con email 
   body = {nombre: nombre, mail: @email, id_telegram: id_telegram}.to_json
 
   Faraday.post(crear_usuario_url, body, header)
-  realizar_oferta(id_telegram, 200_000)
+  respuesta = realizar_oferta(id_telegram, 200_000)
+  @id_oferta = JSON.parse(respuesta.body)['id']
 end
 
 Entonces('se me comunica el correo del comprador') do
@@ -22,7 +23,7 @@ Entonces('se me comunica el correo del comprador') do
   expect(mail_del_comprador).to eq @email
 end
 
-Entonces('la publicacion esta en estado “Vendida”') do
+Entonces('la publicacion esta en estado “Vendido”') do
   header = {'ID_TELEGRAM' => @id_telegram}
   respuesta = Faraday.get(listar_mis_publicaciones_url, nil, header)
   publicaciones = JSON.parse(respuesta.body)

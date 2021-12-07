@@ -3,7 +3,7 @@ require 'spec_helper'
 describe PublicacionFiubak do
   let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019)}
   let(:precio) {300000}
-  let(:fiubak) { Usuario.new('fiubak', 'fiubak@fiubak.com', '12345678')}
+  let(:fiubak) { UsuarioFiubak.new}
   let(:publicacion_fiubak) { described_class.new(precio, fiubak, auto) }
 
   it 'Al crear la publicacion debería estar activa' do

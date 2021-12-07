@@ -37,7 +37,15 @@ module WebTemplate
         status 403
         {message: 'reset not enabled'}.to_json
       end
-      load '/app/db/seeds.rb'
+      load_seeds
+    end
+
+    def load_seeds
+      repo_usuarios = Persistence::Repositories::RepositorioUsuarios.new
+      return if repo_usuarios.all.count.positive?
+
+      usuario_fiubak = UsuarioFiubak.new
+      repo_usuarios.save usuario_fiubak
     end
 
     def notify(_user)

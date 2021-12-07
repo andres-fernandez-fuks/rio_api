@@ -7,7 +7,7 @@ describe AceptarOferta do
   let(:auto) {Auto.new("AAA000", "FORD", "AMAROK", 2019, 1)}
   let(:vendedor) { Usuario.new('vendedor', 'vendedor@gmail.com', '001') }
   let(:oferente) { Usuario.new('nombre', 'mail', '100') }
-  let(:oferente_fiubak) { Usuario.new('fiubak', 'fiubak@fiubak.com', '000') }
+  let(:oferente_fiubak) { UsuarioFiubak.new }
   let(:publicacion) {PublicacionP2P.new(precio, vendedor, auto, 1)}
   let(:oferta_fiubak) {Oferta.new(precio, oferente_fiubak, publicacion)}
 

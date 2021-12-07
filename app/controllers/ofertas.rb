@@ -12,7 +12,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       begin
         aceptar_oferta(oferta)
         status 200
-        oferta_a_json(oferta)
+        oferta_a_json(oferta, incluir_contacto: true)
       rescue StandardError => e
         status 500
         {error: e.message}.to_json

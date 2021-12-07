@@ -14,16 +14,17 @@ module WebTemplate
         JSON.parse(@body).symbolize_keys
       end
 
-      def oferta_a_json(oferta)
-        serializar_oferta(oferta).to_json
+      def oferta_a_json(oferta, incluir_contacto: false)
+        serializar_oferta(oferta, incluir_contacto).to_json
       end
 
-      def serializar_oferta(oferta)
+      def serializar_oferta(oferta, incluir_contacto)
         {
           id: oferta.id,
           monto: oferta.monto,
           id_publicacion: oferta.publicacion.id,
           estado: estado_oferta_a_string(oferta.estado),
+          mail: incluir_contacto ? oferta.oferente.mail : nil,
           oferente: oferta.oferente.nombre
         }
       end
@@ -45,7 +46,7 @@ module WebTemplate
       def listar_ofertas(ofertas)
         body = []
         ofertas.each do |oferta|
-          info_oferta = serializar_oferta(oferta)
+          info_oferta = serializar_oferta(oferta, false)
           body.append(info_oferta)
         end
         body.to_json

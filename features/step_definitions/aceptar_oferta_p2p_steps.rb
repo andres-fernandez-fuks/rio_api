@@ -8,14 +8,20 @@ Dado('que tengo una publicación p2p por un auto patente {string}, marca {string
 end
 
 Dado('hay una oferta p2p por 2000000 para la publicación del usuario con email {string}') do |email|
-  nombre = 'test'
   @email = email
-  id_telegram = '01010101'
-  body = {nombre: nombre, mail: @email, id_telegram: id_telegram}.to_json
+  @id_oferta = crear_oferta_p2p(email)
+end
 
-  Faraday.post(crear_usuario_url, body, header)
-  respuesta = realizar_oferta(id_telegram, 200_000)
-  @id_oferta = JSON.parse(respuesta.body)['id']
+Dado('que hay otra oferta p2p') do
+  @id_otra_oferta = crear_oferta_p2p('otro_oferente@test.com')
+end
+
+Dado('que acepto la primer oferta p2p') do
+  @response = aceptar_oferta(@id_oferta)
+end
+
+Dado('Cuando acepto la otra oferta p2p') do
+  @response = aceptar_oferta(@id_otra_oferta)
 end
 
 Entonces('se me comunica el correo del comprador') do
@@ -29,4 +35,19 @@ Entonces('la publicacion esta en estado “Vendido”') do
   publicaciones = JSON.parse(respuesta.body)
   publicacion = publicaciones.find { |pub| pub['id'] == @id_publicacion }
   expect(publicacion['estado']).to eq 'Vendido'
+end
+
+def crear_oferta_p2p(email)
+  nombre = 'test'
+  id_telegram = '01010101'
+  body = {nombre: nombre, mail: email, id_telegram: id_telegram}.to_json
+
+  Faraday.post(crear_usuario_url, body, header)
+  respuesta = realizar_oferta(id_telegram, 200_000)
+  JSON.parse(respuesta.body)['id']
+end
+
+def aceptar_oferta(id)
+  body = {estado: 'aceptada'}.to_json
+  Faraday.patch(aceptar_oferta_url(id), body, header)
 end

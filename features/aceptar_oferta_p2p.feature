@@ -14,8 +14,8 @@ Escenario: AO001 - Aceptar una oferta P2P
 
 @wip
 Escenario: AO002 - No se permite aceptar dos ofertas para la misma publicacion P2P
-  Dado hay una oferta p2p por 3000000 para la publicación
-  Y que acepto la oferta 1
-  Cuando acepto la oferta 2
+  Dado que hay otra oferta p2p
+  Y que acepto la primer oferta p2p
+  Cuando acepto la otra oferta p2p
   Entonces se levanta un error de que la publicación ya fue vendida
   Y la oferta 2 no fue aceptada

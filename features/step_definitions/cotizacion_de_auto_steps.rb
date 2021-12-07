@@ -1,4 +1,5 @@
 Dado('que hay un auto ingresado para cotizar por el usuario con id {string}') do |id_telegram|
+  Faraday.post(reset_url)
   @id_telegram = id_telegram
   body = {nombre: 'nombre', mail: 'mail@gmail.com', id_telegram: id_telegram}.to_json
   Faraday.post(crear_usuario_url, body, header)

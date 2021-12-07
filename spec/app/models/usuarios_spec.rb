@@ -17,7 +17,7 @@ describe Usuario do
 
     it 'comparar dos usuarios diferentes da falso' do
       usuario1 = described_class.new('Fulanito', 'fulanito@gmail.com', '14', 3031)
-      usuario2 = described_class.new('Fulanito', 'fulanito@gmail.com', '14', 3030)
+      usuario2 = described_class.new('Fulanito', 'fulanito2@gmail.com', '14', 3030)
       expect(usuario1).to_not eq usuario2
     end
   end

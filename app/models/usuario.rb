@@ -10,6 +10,6 @@ class Usuario
   end
 
   def ==(other)
-    @nombre == other.nombre and @mail == other.mail and @id_telegram == other.id_telegram and @id == other.id
+    @mail == other.mail
   end
 end

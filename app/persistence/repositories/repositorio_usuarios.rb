@@ -14,6 +14,11 @@ module Persistence
         load_object(row) unless row.nil?
       end
 
+      def buscar_usuario_fiubak
+        row = dataset.first(mail: UsuarioFiubak.new.mail)
+        load_object(row) unless row.nil?
+      end
+
       protected
 
       def load_object(a_record)

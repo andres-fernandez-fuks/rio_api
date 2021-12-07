@@ -12,4 +12,8 @@ class Comando
   def guardar_usuario(usuario)
     Persistence::Repositories::RepositorioUsuarios.new.save(usuario)
   end
+
+  def usuario_fiubak
+    Persistence::Repositories::RepositorioUsuarios.new.buscar_usuario_fiubak
+  end
 end

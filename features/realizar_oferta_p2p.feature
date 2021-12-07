@@ -1,5 +1,4 @@
 #language: es
-
 Característica: Oferta p2p
   Antecedentes:
     Dado que mi id_telegram es "1000"

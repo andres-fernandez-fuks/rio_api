@@ -14,10 +14,6 @@ class Oferta
     @estado = EstadoAceptada.new
   end
 
-  def fiubak?
-    true
-  end
-
   def establecer_estado(estado)
     @estado = estado
   end
@@ -26,7 +22,11 @@ class Oferta
     @estado = EstadoRechazada.new
   end
 
+  def es_fiubak?
+    oferente == UsuarioFiubak.new
+  end
+
   def es_p2p?
-    true
+    !es_fiubak?
   end
 end

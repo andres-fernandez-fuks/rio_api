@@ -1,5 +1,5 @@
 # Helper methods defined here can be accessed in any controller or view in the application
-
+require_relative '../comandos/comando'
 module WebTemplate
   class App
     module PublicacionHelper
@@ -16,14 +16,13 @@ module WebTemplate
         atributos_publicacion(publicacion).to_json
       end
 
+      def usuario_fiubak
+        Persistence::Repositories::RepositorioUsuarios.new.buscar_usuario_fiubak
+      end
+
       def cotizar_publicacion(publicacion)
         publicacion.cotizada
         repo_publicaciones.save(publicacion)
-      end
-
-      def crear_usuario_fiubak
-        usuario = Usuario.new('fiubak', 'fiubak', 'fiubak')
-        repo_usuario.save(usuario)
       end
 
       def publicacion_activada(publicacion)

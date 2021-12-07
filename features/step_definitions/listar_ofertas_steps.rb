@@ -2,6 +2,7 @@ TEST_ID_TELEGRAM = '555'.freeze
 MONTO_OFRECIDO_FIUBAK = 45_000
 
 Dado('que existe una publicación') do
+  Faraday.post(reset_url)
   @id_telegram = TEST_ID_TELEGRAM
   body = {nombre: 'nombre', mail: 'mail@gmail.com', id_telegram: @id_telegram}.to_json
   Faraday.post(crear_usuario_url, body, header)

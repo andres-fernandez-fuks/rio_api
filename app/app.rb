@@ -37,6 +37,7 @@ module WebTemplate
         status 403
         {message: 'reset not enabled'}.to_json
       end
+      load '/app/db/seeds.rb'
     end
 
     def notify(_user)

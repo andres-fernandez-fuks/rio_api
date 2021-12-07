@@ -20,7 +20,7 @@ Dado('que acepto la primer oferta p2p') do
   @response = aceptar_oferta(@id_oferta)
 end
 
-Dado('Cuando acepto la otra oferta p2p') do
+Cuando('acepto la otra oferta p2p') do
   @response = aceptar_oferta(@id_otra_oferta)
 end
 
@@ -35,6 +35,22 @@ Entonces('la publicacion esta en estado “Vendido”') do
   publicaciones = JSON.parse(respuesta.body)
   publicacion = publicaciones.find { |pub| pub['id'] == @id_publicacion }
   expect(publicacion['estado']).to eq 'Vendido'
+end
+
+Entonces('se levanta un error de que la publicación ya fue vendida') do
+  expect(@response.status).to eq 400
+  mensaje_error = JSON(@response.body)['error']
+  mensaje_esperado = JSON({ :error => 'La publicación ya fue vendida' }.to_json)['error']
+  expect(mensaje_error).to eq(mensaje_esperado)
+end
+
+Entonces('la otra oferta p2p no fue aceptada') do
+  header = {'ID_TELEGRAM' => @id_telegram}
+  respuesta = Faraday.get(listar_ofertas_de_publicacion_url(@id_publicacion), nil, header)
+  ofertas = JSON.parse(respuesta.body)
+  otra_oferta = ofertas.find { |oferta| oferta['id'] == @id_otra_oferta }
+  expect(otra_oferta['estado']).not_to be nil
+  expect(otra_oferta['estado']).not_to eq 'Aceptada'
 end
 
 def crear_oferta_p2p(email)

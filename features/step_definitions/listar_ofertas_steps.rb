@@ -27,20 +27,15 @@ Entonces('se devuelve la oferta de FIUBAK con el monto ofrecido y el estado “P
   expect(JSON(@response.body)[0]['estado']).to eq EstadoPendiente.new.id
 end
 
-Dado('que existe una publicación p2p') do
-  pending # Write code here that turns the phrase above into concrete actions
+Entonces('se devuelve la oferta de FIUBAK con el monto cotizado y el estado {string}') do |estado|
+  oferta_fiubak = JSON(@response.body).find { |oferta| oferta['oferente'] == 'fiubak' }
+  expect(oferta_fiubak['oferente']).to eq 'fiubak'
+  expect(oferta_fiubak['estado']).to eq estado
 end
 
-Dado('hay una oferta p2p para la publicación') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Entonces('se devuelve la oferta de FIUBA con el monto cotizado y el estado {string}') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-Entonces('se devuelve la oferta p2p con el monto ofrecido y el estado {string}') do |_string|
-  pending # Write code here that turns the phrase above into concrete actions
+Entonces('se devuelve la oferta p2p con el monto ofrecido y el estado {string}') do |estado|
+  oferta_p2p = JSON(@response.body).find { |oferta| oferta['oferente'] != 'fiubak' }
+  expect(oferta_p2p['estado']).to eq estado
 end
 
 Entonces('se devuelven {int} ofertas') do |ofertas|

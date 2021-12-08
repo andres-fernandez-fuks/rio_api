@@ -11,14 +11,14 @@ Característica: Rechazar ofertas p2p
     Cuando rechazo la oferta
     Entonces la oferta no fue aceptada
     Y la publicacion esta en estado "Activo"
-  @wip
+
   Escenario: RO002 - Rechazar multiples ofertas para la misma publicacion P2P
-    Dado hay una oferta p2p por 3000000 para la publicación
-    Y que rechazo la oferta 1
-    Cuando rechazo la oferta 2
-    Entonces la oferta 1 no fue aceptada
-    Y la oferta 2 no fue aceptada
-    Y la publicacion esta en estado “Activa”
+    Dado hay una oferta p2p por 2000000 para la publicación del usuario con email "usuario2@test.com"
+    Cuando rechazo la oferta del usuario con email "usuario@test.com"
+    Y rechazo la oferta del usuario con email "usuario2@test.com"
+    Entonces la oferta del usuario con email "usuario@test.com" no fue aceptada
+    Y la oferta del usuario con email "usuario2@test.com" no fue aceptada
+    Y la publicacion esta en estado "Activo"
   @wip
   Escenario: RO003 - Rechazar una oferta y aceptar otra para la misma publicacion P2P
     Dado hay una oferta p2p por 3000000 para la publicación

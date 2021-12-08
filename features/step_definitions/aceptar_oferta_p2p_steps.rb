@@ -10,6 +10,8 @@ end
 Dado('hay una oferta p2p por 2000000 para la publicación del usuario con email {string}') do |email|
   @email = email
   @id_oferta = crear_oferta_p2p(email)
+  @ofertas ||= {}
+  @ofertas[@email] = @id_oferta
 end
 
 Dado('que hay otra oferta p2p') do

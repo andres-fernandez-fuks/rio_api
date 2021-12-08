@@ -29,12 +29,12 @@ Entonces('se me comunica el correo del comprador') do
   expect(mail_del_comprador).to eq @email
 end
 
-Entonces('la publicacion esta en estado “Vendido”') do
+Entonces('la publicacion esta en estado {string}') do |estado|
   header = {'ID_TELEGRAM' => @id_telegram}
   respuesta = Faraday.get(listar_mis_publicaciones_url, nil, header)
   publicaciones = JSON.parse(respuesta.body)
   publicacion = publicaciones.find { |pub| pub['id'] == @id_publicacion }
-  expect(publicacion['estado']).to eq 'Vendido'
+  expect(publicacion['estado']).to eq estado
 end
 
 Entonces('se levanta un error de que la publicación ya fue vendida') do

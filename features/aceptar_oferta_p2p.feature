@@ -10,7 +10,7 @@ Antecedentes:
 Escenario: AO001 - Aceptar una oferta P2P
   Cuando acepto la oferta
   Entonces se me comunica el correo del comprador
-  Y la publicacion esta en estado “Vendido”
+  Y la publicacion esta en estado "Vendido"
 
 Escenario: AO002 - No se permite aceptar dos ofertas para la misma publicacion P2P
   Dado que hay otra oferta p2p

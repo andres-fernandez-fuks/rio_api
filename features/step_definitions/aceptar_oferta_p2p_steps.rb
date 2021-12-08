@@ -57,7 +57,7 @@ end
 
 def crear_oferta_p2p(email)
   nombre = 'test'
-  id_telegram = '01010101'
+  id_telegram = email
   body = {nombre: nombre, mail: email, id_telegram: id_telegram}.to_json
 
   Faraday.post(crear_usuario_url, body, header)

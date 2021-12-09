@@ -14,7 +14,7 @@ Entonces('recibo {int} publicaciones') do |cant_autos|
   expect(JSON.parse(@response.body).length).to eq cant_autos
 end
 
-Dado(/^hay que hay 1 auto publicado con patente "([^"]*)", marca "([^"]*)", modelo "([^"]*)", precio (\d+) y anio (\d+)$/) do |patente, marca, modelo, precio, anio|
+Dado('hay que hay 1 auto publicado con patente {string}, marca {string}, modelo {string}, precio {float} y anio {int}') do |patente, marca, modelo, precio, anio|
   Faraday.post(reset_url)
   registrar_usuario('321', 'testmail@gmail.com')
   @precio_publicacion = precio

@@ -30,7 +30,7 @@ module WebTemplate
           id: publicacion.id,
           tipo: publicacion.tipo.id,
           precio: publicacion.precio,
-          estado: publicacion.estado,
+          estado: estado_a_string(publicacion.estado),
           auto: publicacion.auto
         }
       end

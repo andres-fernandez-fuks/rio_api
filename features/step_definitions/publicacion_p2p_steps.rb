@@ -19,7 +19,7 @@ end
 Entonces('la publicación pasa a estado activo') do
   response = Faraday.get(listar_publicaciones_url)
   estado = JSON.parse(response.body)[0]['estado']
-  expect(estado['id']).to eq('Activo')
+  expect(estado).to eq('Activo')
 end
 
 Entonces('la publicación es de tipo P2P') do

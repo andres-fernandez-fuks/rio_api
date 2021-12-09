@@ -12,6 +12,12 @@ module WebTemplate
         repo_autos.save(auto)
       end
 
+      def auto_a_json(auto)
+        serializar_auto(auto).to_json
+      end
+
+      private
+
       def serializar_auto(auto)
         {
           patente: auto.patente,

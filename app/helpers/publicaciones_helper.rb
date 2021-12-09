@@ -52,7 +52,7 @@ module WebTemplate
               id: publicacion.id,
               precio: publicacion.precio,
               estado: estado_a_string(publicacion.estado),
-              auto: serializar_auto(publicacion.auto)
+              auto: auto_a_json(publicacion.auto)
             }
           body.append(info_publicacion)
         end

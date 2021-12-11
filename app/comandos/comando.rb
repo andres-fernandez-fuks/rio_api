@@ -16,4 +16,8 @@ class Comando
   def usuario_fiubak
     Persistence::Repositories::RepositorioUsuarios.new.buscar_usuario_fiubak
   end
+
+  def repo_de_publicaciones
+    Persistence::Repositories::RepositorioPublicaciones.new
+  end
 end

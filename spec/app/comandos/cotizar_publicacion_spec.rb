@@ -33,6 +33,23 @@ describe CotizarPublicacion do
       expect(ofertas[0].es_fiubak?).to eq true
     end
   end
+
+  context 'Dada una publicacion con auto de 1994 y un informe con falla estética grave' do
+    before(:each) do
+      auto = Auto.new("AAA000", "Peugeot", "505", 1994, 1)
+      @publicacion = PublicacionP2P.new(100_000, vendedor, auto, 1)
+      guardar_publicacion(auto, @publicacion)
+      @informe = InformeDeRevision.new.con_falla_estetica(InformeDeRevision::GRAVEDAD_GRAVE)
+    end
+
+    it 'Cuando ejecuto la cotizacion entonces la publicacion esta en estado cancelado' do
+      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe)
+      cotizar_publicacion.ejecutar()
+      publicacion = obtener_publicacion(@publicacion.id)
+
+      expect(publicacion.estado).to eq EstadoCancelado.new
+    end
+  end
 end
 
 def guardar_publicacion(auto, publicacion)

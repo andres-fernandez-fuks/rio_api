@@ -35,11 +35,12 @@ module Persistence
         }
       end
 
-      def configurar_estado(publicacion, estado)
+      def configurar_estado(publicacion, estado) # rubocop:disable Metrics/AbcSize
         publicacion.activar if estado == EstadoActivo.new.id
         publicacion.vendida if estado == EstadoVendido.new.id
         publicacion.cotizada if estado == EstadoCotizado.new.id
         publicacion.cancelar if estado == EstadoCancelado.new.id
+        publicacion.reservar if estado == EstadoReservado.new.id
       end
 
       def serializar_tipo(tipo)

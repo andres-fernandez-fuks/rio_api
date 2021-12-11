@@ -1,6 +1,6 @@
 #language: es
 
-Característica: Registro de un usuario
+Característica: Cotización de un auto
   Antecedentes:
     Dado que hay un auto ingresado para cotizar por el usuario con id "4"
 
@@ -8,3 +8,97 @@ Característica: Registro de un usuario
     Cuando recibo un informe de cotizacion para el auto publicado con un precio de 700000
     Entonces la cotización del auto publicado es 700000
     Y obtiene la oferta para el auto, visible sólo para el usuario con id 4
+
+  @wip
+  Escenario: COT01
+    Dado que registro un auto del año 1994
+    Cuando se recibe un informe con falla de tipo “Estetica” con gravedad GRAVE
+    Entonces se cancela la publicación.
+  
+  @wip
+  Escenario: COT02
+    Dado que se ingresó un auto del año 1994
+    Cuando se recibe un informe sin fallas
+    Entonces se realizar una oferta de fiubak por 800.000
+
+  @wip
+  Escenario: COT03
+    Dado que se ingresó un auto del año 1995
+    Cuando se recibe un informe sin fallas
+    Entonces se realiza una oferta de fiubak por 1.000.000
+
+  @wip
+  Escenario: COT04
+    Dado que se ingresó un auto del año 2009
+    Cuando se recibe un informe sin fallas
+    Entonces se realiza una oferta de fiubak por 1.000.000
+
+  @wip
+  Escenario: COT05
+    Dado que se ingresó un auto del año 2010
+    Cuando se recibe un informe sin fallas
+    Entonces se realiza una oferta de fiubak por 2.000.000
+
+  @wip
+  Escenario: COT06
+    Dado que se ingresó un auto del año 2021
+    Cuando se recibe un informe sin fallas
+    Entonces se realiza una oferta de fiubak por 2.000.000
+
+  @wip
+  Escenario: COT07
+    Dado que se ingresó un auto del año 1995
+    Cuando se recibe un informe con falla de tipo Estética con gravedad Leve
+    Entonces se realiza una oferta de fiubak por 970000
+
+  @wip
+  Escenario: COT08
+    Dado que se ingresó un auto del año 1994
+    Cuando se recibe un informe con falla de tipo Estética con gravedad Leve
+    Entonces se realiza una oferta de fiubak por 776000
+
+  @wip
+  Escenario: COT09
+    Dado que se ingresó un auto del año 2020
+    Cuando se recibe un informe con falla de tipo Estética con gravedad Leve
+    Y falla de tipo Neumáticos con gravedad Leve
+    Entonces se realiza una oferta de fiubak por 1.880.000
+
+  @wip
+  Escenario: COT10
+    Dado que se ingresó un auto del año 2005
+    Cuando se recibe un informe con falla de tipo Neumáticos con gravedad Leve
+    Y falla de tipo Estética con gravedad Grave
+    Entonces se realiza una oferta de fiubak por 890000
+
+  @wip
+  Escenario: COT11
+    Dado que se ingresó un auto del año 2005
+    Cuando se recibe un informe con falla de tipo Estética con gravedad Grave
+    Entonces se realiza una oferta de fiubak por 920000
+
+  @wip
+  Escenario: COT12
+    Dado que se ingresó un auto del año 2005
+    Cuando se recibe un informe con falla de tipo Motor con gravedad Leve
+    Y una falla de tipo Estetica con gravedad Leve
+    Y una falla de tipo Neumáticos con gravedad Leve
+    Entonces se realiza una oferta de fiubak por 910000
+
+  Escenario: COT13
+    Dado que se ingresó un auto del año 2005
+    Cuando se recibe un informe con falla de tipo Motor con gravedad Grave
+    Entonces se realiza una oferta de fiubak por 900000
+
+  Escenario: COT14
+    Dado que se ingresó un auto del año 2020
+    Cuando se recibe un informe con falla de tipo Motor con gravedad Grave
+    Y una falla de tipo Estética con gravedad Grave
+    Y una falla de tipo Neumáticos con gravedad Leve
+    Entonces se realiza una oferta de fiubak por 1.580.000
+
+  Escenario: COT15
+    Dado que se recibe un auto del año 2010
+    Cuando se recibe un informe con falla de tipo Motor con gravedad Grave
+    Y una falla de tipo Neumáticos con gravedad Grave
+    Entonces se realiza una oferta de fiubak por 820000

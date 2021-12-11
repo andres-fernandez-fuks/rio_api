@@ -56,17 +56,15 @@ Característica: Cotización de un auto
     Y falla de tipo 'neumaticos' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 1880000
 
-  @wip
   Escenario: COT10
     Dado que se ingresó un auto del año 2005
-    Cuando se recibe un informe con falla de tipo Neumáticos con gravedad Leve
-    Y falla de tipo Estética con gravedad Grave
+    Cuando se recibe un informe con falla de tipo 'neumaticos' con gravedad 'Leve'
+    Y falla de tipo 'estetica' con gravedad 'Grave'
     Entonces se realiza una oferta de fiubak por 890000
 
-  @wip
   Escenario: COT11
     Dado que se ingresó un auto del año 2005
-    Cuando se recibe un informe con falla de tipo Estética con gravedad Grave
+    Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Grave'
     Entonces se realiza una oferta de fiubak por 920000
 
   @wip

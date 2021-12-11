@@ -49,7 +49,7 @@ module WebTemplate
     end
 
     def notify(_user)
-      email(:from => 'tony@reyes.com',
+      email(:from => 'rio.job.vacancy@gmail.com',
             :to => 'john@smith.com',
             :subject => 'Welcome!',
             :body => 'Body')

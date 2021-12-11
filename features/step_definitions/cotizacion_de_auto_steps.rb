@@ -60,7 +60,8 @@ Cuando('falla de tipo {string} con gravedad {string}') do |tipo, gravedad|
 end
 
 Entonces('se cancela la publicación.') do
-  Faraday.post(informe_de_cotizacion_url(@id_publicacion), @body_informe.to_json)
+  respuesta_cotizacion = Faraday.post(informe_de_cotizacion_url(@id_publicacion), @body_informe.to_json)
+  expect(respuesta_cotizacion.status).to eq 204
   header = {'ID_TELEGRAM' => @id_telegram}
   respuesta = Faraday.get(listar_mis_publicaciones_url, nil, header)
   publicaciones = JSON(respuesta.body)

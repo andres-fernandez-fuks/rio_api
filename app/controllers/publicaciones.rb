@@ -14,7 +14,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 200
       oferta_a_json(oferta)
     else
-      status 500
+      status 204
     end
   end
 

@@ -23,5 +23,9 @@ describe InformeDeRevision do
     before(:each) do
       @informe = InformeDeRevision.new.con_falla_estetica(InformeDeRevision::GRAVEDAD_LEVE)
     end
+
+    it 'Cuando consulto por falla estetica entonces devuelve gravedad leve' do
+      expect(@informe.falla_estetica).to eq InformeDeRevision::GRAVEDAD_LEVE
+    end
   end
 end

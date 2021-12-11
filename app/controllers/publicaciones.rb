@@ -7,7 +7,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 404
       return
     end
-    comando = CotizarPublicacion.new(publicacion.id, InformeDeRevision.new)
+    comando = CotizarPublicacion.new(publicacion.id, parsear_informe(params_publicacion))
     comando.ejecutar
     oferta = repo_ofertas.buscar_por_publicacion(publicacion.id)[0]
     if oferta

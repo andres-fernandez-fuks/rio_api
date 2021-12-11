@@ -70,6 +70,7 @@ module WebTemplate
         return 'Cotizado' if estado == EstadoCotizado.new
         return 'Activo' if estado == EstadoActivo.new
         return 'Vendido' if estado == EstadoVendido.new
+        return 'Cancelado' if estado == EstadoCancelado.new
 
         'Desconocido'
       end

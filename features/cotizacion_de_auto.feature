@@ -10,10 +10,9 @@ Característica: Cotización de un auto
     Entonces la cotización del auto publicado es 700000
     Y obtiene la oferta para el auto, visible sólo para el usuario con id 4
 
-  @wip
   Escenario: COT01
-    Dado que registro un auto del año 1994
-    Cuando se recibe un informe con falla de tipo “Estetica” con gravedad GRAVE
+    Dado que se ingresó un auto del año 1994
+    Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Grave'
     Entonces se cancela la publicación.
   
   Escenario: COT02 - Auto previo a 1995 sin fallas

@@ -38,7 +38,7 @@ Dado('que se ingresó un auto del año {int}') do |anio|
 end
 
 Cuando('se recibe un informe sin fallas') do
-  body = {}
+  body = {}.to_json
   Faraday.post(informe_de_cotizacion_url(@id_publicacion), body)
 end
 
@@ -48,4 +48,18 @@ Entonces('se realiza una oferta de fiubak por {int}') do |monto|
   ofertas = JSON(respuesta.body)
   expect(ofertas.length).to eq 1
   expect(ofertas[0]['monto']).to eq monto
+end
+
+Cuando('se recibe un informe con falla de tipo {string} con gravedad {string}') do |tipo, gravedad|
+  @body_informe = {}
+  @body_informe[tipo] = gravedad
+  Faraday.post(informe_de_cotizacion_url(@id_publicacion), @body_informe.to_json)
+end
+
+Entonces('se cancela la publicación.') do
+  header = {'ID_TELEGRAM' => @id_telegram}
+  respuesta = Faraday.get(listar_mis_publicaciones_url, nil, header)
+  publicaciones = JSON(respuesta.body)
+  publicacion = publicaciones.find { |pub| pub['id'] == @id_publicacion }
+  expect(publicacion['estado']).to eq 'Cancelado'
 end

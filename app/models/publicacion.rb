@@ -21,4 +21,8 @@ class Publicacion
   def cotizada
     @estado = EstadoCotizado.new if @estado == EstadoRevision.new
   end
+
+  def cancelar
+    @estado = EstadoCancelado.new
+  end
 end

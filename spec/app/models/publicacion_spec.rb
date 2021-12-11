@@ -44,5 +44,10 @@ describe PublicacionP2P do
       publicacion_p2p.vendida
       expect(publicacion_p2p.estado).to be_a(EstadoVendido)
     end
+
+    it 'cuando se cancela, cambia su estado a cancelado' do
+      publicacion_p2p.cancelar
+      expect(publicacion_p2p.estado).to eq EstadoCancelado.new
+    end
   end
 end

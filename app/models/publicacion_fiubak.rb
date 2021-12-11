@@ -7,4 +7,8 @@ class PublicacionFiubak < Publicacion
   def tipo
     TipoFiubak.new
   end
+
+  def reservar
+    @estado = EstadoReservado.new
+  end
 end

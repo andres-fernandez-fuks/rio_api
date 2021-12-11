@@ -50,12 +50,11 @@ Característica: Cotización de un auto
     Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 776000
 
-  @wip
   Escenario: COT09
     Dado que se ingresó un auto del año 2020
-    Cuando se recibe un informe con falla de tipo Estética con gravedad Leve
-    Y falla de tipo Neumáticos con gravedad Leve
-    Entonces se realiza una oferta de fiubak por 1.880.000
+    Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Leve'
+    Y falla de tipo 'neumaticos' con gravedad 'Leve'
+    Entonces se realiza una oferta de fiubak por 1880000
 
   @wip
   Escenario: COT10

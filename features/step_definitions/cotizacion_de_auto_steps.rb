@@ -38,11 +38,11 @@ Dado('que se ingresó un auto del año {int}') do |anio|
 end
 
 Cuando('se recibe un informe sin fallas') do
-  body = {}.to_json
-  Faraday.post(informe_de_cotizacion_url(@id_publicacion), body)
+  @body_informe = {}
 end
 
 Entonces('se realiza una oferta de fiubak por {int}') do |monto|
+  Faraday.post(informe_de_cotizacion_url(@id_publicacion), @body_informe.to_json)
   header = {'ID_TELEGRAM' => @id_telegram}
   respuesta = Faraday.get(listar_ofertas_de_publicacion_url(@id_publicacion), nil, header)
   ofertas = JSON(respuesta.body)
@@ -53,10 +53,14 @@ end
 Cuando('se recibe un informe con falla de tipo {string} con gravedad {string}') do |tipo, gravedad|
   @body_informe = {}
   @body_informe[tipo] = gravedad
-  Faraday.post(informe_de_cotizacion_url(@id_publicacion), @body_informe.to_json)
+end
+
+Cuando('falla de tipo {string} con gravedad {string}') do |tipo, gravedad|
+  @body_informe[tipo] = gravedad
 end
 
 Entonces('se cancela la publicación.') do
+  Faraday.post(informe_de_cotizacion_url(@id_publicacion), @body_informe.to_json)
   header = {'ID_TELEGRAM' => @id_telegram}
   respuesta = Faraday.get(listar_mis_publicaciones_url, nil, header)
   publicaciones = JSON(respuesta.body)

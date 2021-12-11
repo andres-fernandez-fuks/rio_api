@@ -48,7 +48,6 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 404
       return
     end
-
     publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
     status 200
     listar_mis_publicaciones(publicaciones_de_usuario)
@@ -77,5 +76,19 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     ofertas = repo_ofertas.buscar_por_publicacion(publicacion.id)
     status 200
     listar_ofertas(ofertas)
+  end
+
+  post :create, :map => '/publicaciones/:id_publicacion/reservas' do
+    begin
+      publicacion = repo_publicaciones.find(params[:id_publicacion])
+      reservar(publicacion)
+      status 200
+    rescue ObjectNotFound => e
+      status 404
+      {:error => e.message}.to_json
+    rescue StandardError => e
+      status 500
+      {:error => e.message}.to_json
+    end
   end
 end

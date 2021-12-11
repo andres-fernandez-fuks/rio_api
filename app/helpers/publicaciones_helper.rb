@@ -1,5 +1,6 @@
 # Helper methods defined here can be accessed in any controller or view in the application
 require_relative '../comandos/comando'
+require_relative '../comandos/reservar_publicacion'
 module WebTemplate
   class App
     module PublicacionHelper
@@ -23,6 +24,10 @@ module WebTemplate
       def cotizar_publicacion(publicacion)
         publicacion.cotizada
         repo_publicaciones.save(publicacion)
+      end
+
+      def reservar(publicacion)
+        ReservarPublicacion.new.ejecutar(publicacion)
       end
 
       def publicacion_activada(publicacion)
@@ -71,6 +76,7 @@ module WebTemplate
         return 'Activo' if estado == EstadoActivo.new
         return 'Vendido' if estado == EstadoVendido.new
         return 'Cancelado' if estado == EstadoCancelado.new
+        return 'Reservado' if estado == EstadoReservado.new
 
         'Desconocido'
       end

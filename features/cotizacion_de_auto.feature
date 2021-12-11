@@ -10,7 +10,7 @@ Característica: Cotización de un auto
     Entonces la cotización del auto publicado es 700000
     Y obtiene la oferta para el auto, visible sólo para el usuario con id 4
 
-  Escenario: COT01
+  Escenario: COT01 - Auto previo a 1995 con falla grave
     Dado que se ingresó un auto del año 1994
     Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Grave'
     Entonces se cancela la publicación.
@@ -25,30 +25,29 @@ Característica: Cotización de un auto
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 1000000
 
-  Escenario: COT04
+  Escenario: COT04 - Auto previo a 2010 sin fallas
     Dado que se ingresó un auto del año 2009
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 1000000
 
-  Escenario: COT05
+  Escenario: COT05 - Auto de 2010 sin fallas
     Dado que se ingresó un auto del año 2010
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 2000000
 
-  Escenario: COT06
+  Escenario: COT06 - Auto posterior a 2010 sin fallas
     Dado que se ingresó un auto del año 2021
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 2000000
 
-  Escenario: COT07
+  Escenario: COT07 - Auto de 1995 con falla estética leve
     Dado que se ingresó un auto del año 1995
     Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 970000
 
-  @wip
-  Escenario: COT08
+  Escenario: COT08 - Auto previo a 1995 con falla estética leve
     Dado que se ingresó un auto del año 1994
-    Cuando se recibe un informe con falla de tipo Estética con gravedad Leve
+    Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 776000
 
   @wip

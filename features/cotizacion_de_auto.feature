@@ -21,11 +21,10 @@ Característica: Cotización de un auto
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 800000
 
-  @wip
   Escenario: COT03
     Dado que se ingresó un auto del año 1995
     Cuando se recibe un informe sin fallas
-    Entonces se realiza una oferta de fiubak por 1.000.000
+    Entonces se realiza una oferta de fiubak por 1000000
 
   @wip
   Escenario: COT04

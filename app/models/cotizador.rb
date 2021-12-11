@@ -10,11 +10,15 @@ class Cotizador
   def cotizar(publicacion, informe)
     return CotizacionFallida.new(publicacion) if es_fallida?(publicacion.auto, informe)
 
-    precio = precio_base(publicacion.auto) - penalidad_por_estetica(informe.falla_estetica) * precio_base(publicacion.auto)
+    precio = precio_base(publicacion.auto) - porcentaje_a_descontar(informe) * precio_base(publicacion.auto)
     CotizacionExitosa.new(publicacion, precio)
   end
 
   private
+
+  def porcentaje_a_descontar(informe)
+    penalidad_por_estetica(informe.falla_estetica) + penalidad_por_estetica(informe.falla_de_neumaticos)
+  end
 
   def es_fallida?(auto, informe)
     return [informe.falla_de_motor, informe.falla_estetica, informe.falla_de_neumaticos].include?(InformeDeRevision::GRAVEDAD_GRAVE) if auto.anio < 1995

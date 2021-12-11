@@ -16,33 +16,30 @@ Característica: Cotización de un auto
     Cuando se recibe un informe con falla de tipo “Estetica” con gravedad GRAVE
     Entonces se cancela la publicación.
   
-  Escenario: COT02
+  Escenario: COT02 - Auto previo a 1995 sin fallas
     Dado que se ingresó un auto del año 1994
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 800000
 
-  Escenario: COT03
+  Escenario: COT03 - Auto de 1995 sin fallas
     Dado que se ingresó un auto del año 1995
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 1000000
 
-  @wip
   Escenario: COT04
     Dado que se ingresó un auto del año 2009
     Cuando se recibe un informe sin fallas
-    Entonces se realiza una oferta de fiubak por 1.000.000
+    Entonces se realiza una oferta de fiubak por 1000000
 
-  @wip
   Escenario: COT05
     Dado que se ingresó un auto del año 2010
     Cuando se recibe un informe sin fallas
-    Entonces se realiza una oferta de fiubak por 2.000.000
+    Entonces se realiza una oferta de fiubak por 2000000
 
-  @wip
   Escenario: COT06
     Dado que se ingresó un auto del año 2021
     Cuando se recibe un informe sin fallas
-    Entonces se realiza una oferta de fiubak por 2.000.000
+    Entonces se realiza una oferta de fiubak por 2000000
 
   @wip
   Escenario: COT07

@@ -17,13 +17,9 @@ class InformeDeRevision
     self
   end
 
-  attr_reader :falla_estetica
+  attr_reader :falla_estetica, :falla_de_motor
 
   def falla_de_neumaticos
     GRAVEDAD_NULA
-  end
-
-  def falla_de_motor
-    @falla_de_motor
   end
 end

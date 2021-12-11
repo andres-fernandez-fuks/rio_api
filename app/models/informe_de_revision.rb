@@ -7,4 +7,8 @@ class InformeDeRevision
   def falla_de_neumaticos
     GRAVEDAD_NULA
   end
+
+  def falla_de_motor
+    GRAVEDAD_NULA
+  end
 end

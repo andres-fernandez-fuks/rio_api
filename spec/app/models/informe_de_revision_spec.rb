@@ -42,4 +42,14 @@ describe InformeDeRevision do
   it 'Cuando seteo falla estetica con gravedad invalida se levanta error por gravedad invalida' do
     expect { InformeDeRevision.new.con_falla_estetica('cualquier cosa') }.to raise_error GravedadInvalidaError
   end
+
+  context 'Dada un informe con falla de motor con gravedad grave' do
+    before(:each) do
+      @informe = InformeDeRevision.new.con_falla_de_motor(InformeDeRevision::GRAVEDAD_GRAVE)
+    end
+
+    it 'Cuando consulto por la falla de motor entonces devuelve gravedad grave' do
+      expect(@informe.falla_de_motor).to eq InformeDeRevision::GRAVEDAD_GRAVE
+    end
+  end
 end

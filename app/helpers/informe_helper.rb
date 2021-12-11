@@ -6,6 +6,7 @@ module WebTemplate
       def parsear_informe(request_body)
         informe = InformeDeRevision.new
         informe.con_falla_estetica(request_body[:estetica]) unless request_body[:estetica].nil?
+        informe.con_falla_de_neumaticos(request_body[:neumaticos]) unless request_body[:neumaticos].nil?
         informe
       end
 

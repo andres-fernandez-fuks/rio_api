@@ -8,6 +8,11 @@ class Cotizador
     InformeDeRevision::GRAVEDAD_GRAVE => 0.08
   }.freeze
 
+  PENALIDAD_MOTORICA = {
+    InformeDeRevision::GRAVEDAD_NULA => 0,
+    InformeDeRevision::GRAVEDAD_LEVE => 0.03
+  }.freeze
+
   def cotizar(publicacion, informe)
     return CotizacionFallida.new(publicacion) if es_fallida?(publicacion.auto, informe)
 
@@ -18,7 +23,7 @@ class Cotizador
   private
 
   def porcentaje_a_descontar(informe)
-    porcentaje_por_falla_no_motorica(informe.falla_estetica) + porcentaje_por_falla_no_motorica(informe.falla_de_neumaticos)
+    porcentaje_por_falla_no_motorica(informe.falla_estetica) + porcentaje_por_falla_no_motorica(informe.falla_de_neumaticos) + porcentaje_por_falla_motorica(informe.falla_de_motor)
   end
 
   def es_fallida?(auto, informe)
@@ -35,6 +40,10 @@ class Cotizador
   end
 
   def porcentaje_por_falla_no_motorica(gravedad)
+    PENALIDAD_NO_MOTORICA[gravedad]
+  end
+
+  def porcentaje_por_falla_motorica(gravedad)
     PENALIDAD_NO_MOTORICA[gravedad]
   end
 end

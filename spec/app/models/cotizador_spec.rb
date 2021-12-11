@@ -48,6 +48,11 @@ describe Cotizador do
       informe = InformeDeRevision.new.con_falla_estetica(InformeDeRevision::GRAVEDAD_GRAVE).con_falla_de_neumaticos(InformeDeRevision::GRAVEDAD_LEVE)
       expect(cotizador.cotizar(@publicacion, informe).monto).to eq 890000
     end
+
+    it 'Si lo cotizo con informe cona falla estetica, de neumaticos y de motor con gravedad leve, entonces la cotizacion es de 910.000' do
+      informe = InformeDeRevision.new.con_falla_estetica(InformeDeRevision::GRAVEDAD_LEVE).con_falla_de_neumaticos(InformeDeRevision::GRAVEDAD_LEVE).con_falla_de_motor(InformeDeRevision::GRAVEDAD_LEVE)
+      expect(cotizador.cotizar(@publicacion, informe).monto).to eq 910000
+    end
   end
 
   context 'Dada una publicacion con auto de 2010' do

@@ -5,6 +5,7 @@ class InformeDeRevision
   def initialize
     @falla_estetica = GRAVEDAD_NULA
     @falla_de_motor = GRAVEDAD_NULA
+    @falla_de_neumaticos = GRAVEDAD_NULA
   end
 
   def con_falla_estetica(gravedad)
@@ -17,9 +18,10 @@ class InformeDeRevision
     self
   end
 
-  attr_reader :falla_estetica, :falla_de_motor
-
-  def falla_de_neumaticos
-    GRAVEDAD_NULA
+  def con_falla_de_neumaticos(gravedad)
+    @falla_de_neumaticos = gravedad
+    self
   end
+
+  attr_reader :falla_estetica, :falla_de_motor, :falla_de_neumaticos
 end

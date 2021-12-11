@@ -33,5 +33,9 @@ describe InformeDeRevision do
       expect(informe_con_falla_de_motor.falla_estetica).to eq InformeDeRevision::GRAVEDAD_LEVE
       expect(informe_con_falla_de_motor.falla_de_motor).to eq InformeDeRevision::GRAVEDAD_LEVE
     end
+
+    it 'Cuando indico que tiene falla de neumaticos leve y consulto por falla de neumaticos, entonces devuelve gravedad leve' do
+      expect(@informe.con_falla_de_neumaticos(InformeDeRevision::GRAVEDAD_LEVE).falla_de_neumaticos).to eq InformeDeRevision::GRAVEDAD_LEVE
+    end
   end
 end

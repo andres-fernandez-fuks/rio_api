@@ -18,4 +18,10 @@ describe InformeDeRevision do
       expect(@informe.falla_de_motor).to eq InformeDeRevision::GRAVEDAD_NULA
     end
   end
+
+  context 'Dado un informe con falla estetica leve' do
+    before(:each) do
+      @informe = InformeDeRevision.new.con_falla_estetica(InformeDeRevision::GRAVEDAD_LEVE)
+    end
+  end
 end

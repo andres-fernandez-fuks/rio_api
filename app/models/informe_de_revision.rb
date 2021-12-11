@@ -1,8 +1,17 @@
 class InformeDeRevision
   GRAVEDAD_NULA = 0
-  def falla_estetica
-    GRAVEDAD_NULA
+  GRAVEDAD_LEVE = 1
+
+  def initialize
+    @falla_estetica = GRAVEDAD_NULA
   end
+
+  def con_falla_estetica(gravedad)
+    @falla_estetica = gravedad
+    self
+  end
+
+  attr_reader :falla_estetica
 
   def falla_de_neumaticos
     GRAVEDAD_NULA

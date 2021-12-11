@@ -20,4 +20,8 @@ class Comando
   def repo_de_publicaciones
     Persistence::Repositories::RepositorioPublicaciones.new
   end
+
+  def repo_de_ofertas
+    Persistence::Repositories::RepositorioOfertas.new
+  end
 end

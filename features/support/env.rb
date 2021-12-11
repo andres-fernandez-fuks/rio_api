@@ -109,10 +109,10 @@ def consultar_publicacion_url(id_publicacion)
 end
 
 def crear_publicacion_activa(patente, marca, modelo, anio, precio, id_telegram)
-  body = {patente: patente, marca: marca, modelo: modelo, anio: anio, precio: 300_000, id_telegram: id_telegram}.to_json
+  body = {patente: patente, marca: marca, modelo: modelo, anio: anio, precio: precio, id_telegram: id_telegram}.to_json
   response = Faraday.post(crear_publicacion_url, body)
   id_publicacion = JSON.parse(response.body)['id']
   response = Faraday.post(informe_de_cotizacion_url(id_publicacion), { precio: precio / 1.3}.to_json)
   id_oferta = JSON.parse(response.body)['id']
-  Faraday.patch(aceptar_oferta_url(id_oferta), {estado: 'aceptada'}.to_json)
+  Faraday.patch(rechazar_oferta_url(id_oferta), {estado: 'rechazada'}.to_json)
 end

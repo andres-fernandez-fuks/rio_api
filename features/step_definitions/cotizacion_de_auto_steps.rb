@@ -26,3 +26,26 @@ Entonces('obtiene la oferta para el auto, visible sólo para el usuario con id {
   id_oferta_encontrada = JSON(@response.body)[0]['id']
   expect(@id_oferta).to eq id_oferta_encontrada
 end
+
+Dado('que se ingresó un auto del año {int}') do |anio|
+  Faraday.post(reset_url)
+  @id_telegram = '12345678'
+  body = {nombre: 'nombre', mail: 'mail@gmail.com', id_telegram: @id_telegram}.to_json
+  Faraday.post(crear_usuario_url, body, header)
+  body = {patente: '100', marca: 'FORD', modelo: 'A', anio: anio, precio: 50_000, id_telegram: @id_telegram}.to_json
+  response = Faraday.post(crear_publicacion_url, body, header)
+  @id_publicacion = JSON(response.body)['id']
+end
+
+Cuando('se recibe un informe sin fallas') do
+  body = {}
+  Faraday.post(informe_de_cotizacion_url(@id_publicacion), body)
+end
+
+Entonces('se realiza una oferta de fiubak por {int}') do |monto|
+  header = {'ID_TELEGRAM' => @id_telegram}
+  respuesta = Faraday.get(listar_ofertas_de_publicacion_url(@id_publicacion), nil, header)
+  ofertas = JSON(respuesta.body)
+  expect(ofertas.length).to eq 1
+  expect(ofertas[0]['monto']).to eq monto
+end

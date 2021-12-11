@@ -1,3 +1,5 @@
+require_relative '../comandos/cotizar_publicacion'
+
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones/:id_publicacion/informe_cotizacion' do
     publicacion = repo_publicaciones.find(params[:id_publicacion])
@@ -5,9 +7,9 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 404
       return
     end
-    precio = params_publicacion[:precio]
-    publicacion = cotizar_publicacion(publicacion)
-    oferta = realizar_oferta(precio, usuario_fiubak, publicacion)
+    comando = CotizarPublicacion.new(publicacion.id, InformeDeRevision.new)
+    comando.ejecutar
+    oferta = repo_ofertas.buscar_por_publicacion(publicacion.id)[0]
     if oferta
       status 200
       oferta_a_json(oferta)

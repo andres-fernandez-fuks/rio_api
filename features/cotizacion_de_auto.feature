@@ -4,6 +4,7 @@ Característica: Cotización de un auto
   Antecedentes:
     Dado que hay un auto ingresado para cotizar por el usuario con id "4"
 
+  @wip
   Escenario: C001 - Cotizacion exitosa de un auto
     Cuando recibo un informe de cotizacion para el auto publicado con un precio de 700000
     Entonces la cotización del auto publicado es 700000
@@ -15,11 +16,10 @@ Característica: Cotización de un auto
     Cuando se recibe un informe con falla de tipo “Estetica” con gravedad GRAVE
     Entonces se cancela la publicación.
   
-  @wip
   Escenario: COT02
     Dado que se ingresó un auto del año 1994
     Cuando se recibe un informe sin fallas
-    Entonces se realizar una oferta de fiubak por 800.000
+    Entonces se realiza una oferta de fiubak por 800000
 
   @wip
   Escenario: COT03
@@ -85,11 +85,13 @@ Característica: Cotización de un auto
     Y una falla de tipo Neumáticos con gravedad Leve
     Entonces se realiza una oferta de fiubak por 910000
 
+  @wip
   Escenario: COT13
     Dado que se ingresó un auto del año 2005
     Cuando se recibe un informe con falla de tipo Motor con gravedad Grave
     Entonces se realiza una oferta de fiubak por 900000
 
+  @wip
   Escenario: COT14
     Dado que se ingresó un auto del año 2020
     Cuando se recibe un informe con falla de tipo Motor con gravedad Grave
@@ -97,6 +99,7 @@ Característica: Cotización de un auto
     Y una falla de tipo Neumáticos con gravedad Leve
     Entonces se realiza una oferta de fiubak por 1.580.000
 
+  @wip
   Escenario: COT15
     Dado que se recibe un auto del año 2010
     Cuando se recibe un informe con falla de tipo Motor con gravedad Grave

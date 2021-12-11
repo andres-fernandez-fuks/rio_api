@@ -50,43 +50,43 @@ Característica: Cotización de un auto
     Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 776000
 
-  Escenario: COT09
+  Escenario: COT09 - Auto del 2020 con falla estetica y de neumaticos leves
     Dado que se ingresó un auto del año 2020
     Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Leve'
     Y falla de tipo 'neumaticos' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 1880000
 
-  Escenario: COT10
+  Escenario: COT10 - Auto del 2005 con falla de neumaticos leve y estetica grave
     Dado que se ingresó un auto del año 2005
     Cuando se recibe un informe con falla de tipo 'neumaticos' con gravedad 'Leve'
     Y falla de tipo 'estetica' con gravedad 'Grave'
     Entonces se realiza una oferta de fiubak por 890000
 
-  Escenario: COT11
+  Escenario: COT11 - Auto del 2005 con falla estetica grave
     Dado que se ingresó un auto del año 2005
     Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Grave'
     Entonces se realiza una oferta de fiubak por 920000
 
-  Escenario: COT12
+  Escenario: COT12 - Auto del 2005 con fallas estetica, de motor y de neumaticos leves
     Dado que se ingresó un auto del año 2005
     Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Leve'
     Y falla de tipo 'estetica' con gravedad 'Leve'
     Y falla de tipo 'neumaticos' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 910000
 
-  Escenario: COT13
+  Escenario: COT13 - Auto del 2005 con falla de motor grave
     Dado que se ingresó un auto del año 2005
     Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Grave'
     Entonces se realiza una oferta de fiubak por 900000
 
-  Escenario: COT14
+  Escenario: COT14 - Auto del 2020 con fallas graves de motor y estetica, y leve de neumaticos
     Dado que se ingresó un auto del año 2020
     Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Grave'
     Y falla de tipo 'estetica' con gravedad 'Grave'
     Y falla de tipo 'neumaticos' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 1580000
 
-  Escenario: COT15
+  Escenario: COT15 - Auto del 2010 con fallas de motor y de neumaticos graves
     Dado que se ingresó un auto del año 2010
     Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Grave'
     Y falla de tipo 'neumaticos' con gravedad 'Grave'

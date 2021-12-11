@@ -40,10 +40,9 @@ Característica: Cotización de un auto
     Cuando se recibe un informe sin fallas
     Entonces se realiza una oferta de fiubak por 2000000
 
-  @wip
   Escenario: COT07
     Dado que se ingresó un auto del año 1995
-    Cuando se recibe un informe con falla de tipo Estética con gravedad Leve
+    Cuando se recibe un informe con falla de tipo 'estetica' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 970000
 
   @wip

@@ -87,7 +87,7 @@ Característica: Cotización de un auto
     Entonces se realiza una oferta de fiubak por 1580000
 
   Escenario: COT15
-    Dado que se recibe un auto del año 2010
+    Dado que se ingresó un auto del año 2010
     Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Grave'
-    Y falla de tipo 'neumaticos' con gravedad 'grave'
-    Entonces se realiza una oferta de fiubak por 820000
+    Y falla de tipo 'neumaticos' con gravedad 'Grave'
+    Entonces se realiza una oferta de fiubak por 1640000

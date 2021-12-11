@@ -44,6 +44,13 @@ describe Persistence::Repositories::RepositorioPublicaciones do
       expect(publicacion.estado).to eq EstadoVendido.new
     end
 
+    it 'una publicacion cancelada se guarda y carga con estado correcto' do
+      publicacion.cancelar
+      id = repositorio.save(publicacion).id
+      publicacion = repositorio.find(id)
+      expect(publicacion.estado).to eq EstadoCancelado.new
+    end
+
     it 'una publicacion p2p se guarda con el tipo correcto' do
       id_publicacion_p2p = repositorio.save(publicacion).id
       publicacion = repositorio.find(id_publicacion_p2p)

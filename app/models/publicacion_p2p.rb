@@ -7,4 +7,8 @@ class PublicacionP2P < Publicacion
   def tipo
     TipoP2P.new
   end
+
+  def reservar
+    raise PublicacionNoReservableError
+  end
 end

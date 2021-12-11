@@ -49,5 +49,9 @@ describe PublicacionP2P do
       publicacion_p2p.cancelar
       expect(publicacion_p2p.estado).to eq EstadoCancelado.new
     end
+
+    it 'cuando se reserva, levanta un error' do
+      expect{publicacion_p2p.reservar}.to raise_error(PublicacionNoReservableError)
+    end
   end
 end

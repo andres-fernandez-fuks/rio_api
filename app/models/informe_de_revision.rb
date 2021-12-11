@@ -1,6 +1,10 @@
+require_relative './errors/errores'
+
 class InformeDeRevision
   GRAVEDAD_NULA = 0
   GRAVEDAD_LEVE = 1
+
+  GRAVEDADES_VALIDAS = [GRAVEDAD_NULA, GRAVEDAD_LEVE].freeze
 
   def initialize
     @falla_estetica = GRAVEDAD_NULA
@@ -9,6 +13,8 @@ class InformeDeRevision
   end
 
   def con_falla_estetica(gravedad)
+    raise GravedadInvalidaError unless GRAVEDADES_VALIDAS.include?(gravedad)
+
     @falla_estetica = gravedad
     self
   end

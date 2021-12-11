@@ -38,4 +38,8 @@ describe InformeDeRevision do
       expect(@informe.con_falla_de_neumaticos(InformeDeRevision::GRAVEDAD_LEVE).falla_de_neumaticos).to eq InformeDeRevision::GRAVEDAD_LEVE
     end
   end
+
+  it 'Cuando seteo falla estetica con gravedad invalida se levanta error por gravedad invalida' do
+    expect { InformeDeRevision.new.con_falla_estetica('cualquier cosa') }.to raise_error GravedadInvalidaError
+  end
 end

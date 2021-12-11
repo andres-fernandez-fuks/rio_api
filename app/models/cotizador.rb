@@ -10,7 +10,8 @@ class Cotizador
 
   PENALIDAD_MOTORICA = {
     InformeDeRevision::GRAVEDAD_NULA => 0,
-    InformeDeRevision::GRAVEDAD_LEVE => 0.03
+    InformeDeRevision::GRAVEDAD_LEVE => 0.03,
+    InformeDeRevision::GRAVEDAD_GRAVE => 0.10
   }.freeze
 
   def cotizar(publicacion, informe)
@@ -44,6 +45,6 @@ class Cotizador
   end
 
   def porcentaje_por_falla_motorica(gravedad)
-    PENALIDAD_NO_MOTORICA[gravedad]
+    PENALIDAD_MOTORICA[gravedad]
   end
 end

@@ -4,10 +4,16 @@ class InformeDeRevision
 
   def initialize
     @falla_estetica = GRAVEDAD_NULA
+    @falla_de_motor = GRAVEDAD_NULA
   end
 
   def con_falla_estetica(gravedad)
     @falla_estetica = gravedad
+    self
+  end
+
+  def con_falla_de_motor(gravedad)
+    @falla_de_motor = gravedad
     self
   end
 
@@ -18,6 +24,6 @@ class InformeDeRevision
   end
 
   def falla_de_motor
-    GRAVEDAD_NULA
+    @falla_de_motor
   end
 end

@@ -27,5 +27,11 @@ describe InformeDeRevision do
     it 'Cuando consulto por falla estetica entonces devuelve gravedad leve' do
       expect(@informe.falla_estetica).to eq InformeDeRevision::GRAVEDAD_LEVE
     end
+
+    it 'Cuando indico que tiene falla de motor leve y consulto por las fallas estetica y de motor, entonces devuelve gravedad leve para ambas' do
+      informe_con_falla_de_motor = @informe.con_falla_de_motor(InformeDeRevision::GRAVEDAD_LEVE)
+      expect(informe_con_falla_de_motor.falla_estetica).to eq InformeDeRevision::GRAVEDAD_LEVE
+      expect(informe_con_falla_de_motor.falla_de_motor).to eq InformeDeRevision::GRAVEDAD_LEVE
+    end
   end
 end

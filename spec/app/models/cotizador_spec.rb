@@ -14,6 +14,11 @@ describe Cotizador do
       informe = InformeDeRevision.new
       expect(cotizador.cotizar(@publicacion, informe).monto).to eq 800_000
     end
+
+    it 'Si la cotizo con un informe con falla estetica grave entonces la cotizacion es fallida' do
+      informe = InformeDeRevision.new.con_falla_estetica(InformeDeRevision::GRAVEDAD_GRAVE)
+      expect(cotizador.cotizar(@publicacion, informe).exitosa?).to eq false
+    end
   end
 
   context 'Dado una publicacion con auto de 1995' do

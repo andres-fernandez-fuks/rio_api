@@ -8,4 +8,8 @@ class CotizacionFallida < Comando
     @publicacion.cancelar
     repo_de_publicaciones.save(@publicacion)
   end
+
+  def exitosa?
+    false
+  end
 end

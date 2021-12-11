@@ -1,11 +1,17 @@
 require_relative '../comandos/cotizacion_exitosa'
 require_relative '../comandos/cotizacion_fallida'
-
+require_relative './informe_de_revision'
 class Cotizador
+  PENALIDAD_POR_ESTETICA = {
+    InformeDeRevision::GRAVEDAD_NULA => 0,
+    InformeDeRevision::GRAVEDAD_LEVE => 0.03
+  }.freeze
+
   def cotizar(publicacion, informe)
     return CotizacionFallida.new(publicacion) if es_fallida?(publicacion.auto, informe)
 
-    CotizacionExitosa.new(publicacion, precio_base(publicacion.auto))
+    precio = precio_base(publicacion.auto) - penalidad_por_estetica(informe.falla_estetica) * precio_base(publicacion.auto)
+    CotizacionExitosa.new(publicacion, precio)
   end
 
   private
@@ -21,5 +27,9 @@ class Cotizador
     return 1_000_000 if auto.anio < 2010
 
     2_000_000
+  end
+
+  def penalidad_por_estetica(gravedad)
+    PENALIDAD_POR_ESTETICA[gravedad]
   end
 end

@@ -1,6 +1,8 @@
+require_relative '../comandos/cotizacion_exitosa'
+
 class Cotizador
-  def cotizar(auto, _informe)
-    precio_base(auto)
+  def cotizar(publicacion, _informe)
+    CotizacionExitosa.new(publicacion, precio_base(publicacion.auto))
   end
 
   private

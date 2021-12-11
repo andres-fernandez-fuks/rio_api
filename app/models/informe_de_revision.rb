@@ -1,9 +1,9 @@
 require_relative './errors/errores'
 
 class InformeDeRevision
-  GRAVEDAD_NULA = 0
-  GRAVEDAD_LEVE = 1
-  GRAVEDAD_GRAVE = 2
+  GRAVEDAD_NULA = 'Ninguna'.freeze
+  GRAVEDAD_LEVE = 'Leve'.freeze
+  GRAVEDAD_GRAVE = 'Grave'.freeze
 
   GRAVEDADES_VALIDAS = [GRAVEDAD_NULA, GRAVEDAD_LEVE, GRAVEDAD_GRAVE].freeze
 

@@ -2,9 +2,10 @@ require_relative '../comandos/cotizacion_exitosa'
 require_relative '../comandos/cotizacion_fallida'
 require_relative './informe_de_revision'
 class Cotizador
-  PENALIDAD_POR_ESTETICA = {
+  PENALIDAD_NO_MOTORICA = {
     InformeDeRevision::GRAVEDAD_NULA => 0,
-    InformeDeRevision::GRAVEDAD_LEVE => 0.03
+    InformeDeRevision::GRAVEDAD_LEVE => 0.03,
+    InformeDeRevision::GRAVEDAD_GRAVE => 0.08
   }.freeze
 
   def cotizar(publicacion, informe)
@@ -17,7 +18,7 @@ class Cotizador
   private
 
   def porcentaje_a_descontar(informe)
-    penalidad_por_estetica(informe.falla_estetica) + penalidad_por_estetica(informe.falla_de_neumaticos)
+    porcentaje_por_falla_no_motorica(informe.falla_estetica) + porcentaje_por_falla_no_motorica(informe.falla_de_neumaticos)
   end
 
   def es_fallida?(auto, informe)
@@ -33,7 +34,7 @@ class Cotizador
     2_000_000
   end
 
-  def penalidad_por_estetica(gravedad)
-    PENALIDAD_POR_ESTETICA[gravedad]
+  def porcentaje_por_falla_no_motorica(gravedad)
+    PENALIDAD_NO_MOTORICA[gravedad]
   end
 end

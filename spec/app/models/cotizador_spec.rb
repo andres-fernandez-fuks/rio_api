@@ -38,6 +38,18 @@ describe Cotizador do
     end
   end
 
+  context 'Dado un publicacion con una uto de 2005' do
+    before(:each) do
+      auto = Auto.new('AAA123', 'Ford', 'Fiesta', 2005)
+      @publicacion = PublicacionP2P.new(100_000, vendedor, auto, 1)
+    end
+
+    it 'Si la cotizo con un informe con falla de neumaticos leve y estetica grave, entonces la cotizacion es de 890.000' do
+      informe = InformeDeRevision.new.con_falla_estetica(InformeDeRevision::GRAVEDAD_GRAVE).con_falla_de_neumaticos(InformeDeRevision::GRAVEDAD_LEVE)
+      expect(cotizador.cotizar(@publicacion, informe).monto).to eq 890000
+    end
+  end
+
   context 'Dada una publicacion con auto de 2010' do
     before(:each) do
       auto = Auto.new('AAA123', 'Ford', 'Fiesta', 2010)

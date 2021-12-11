@@ -13,4 +13,9 @@ describe PublicacionFiubak do
   it 'El tipo debería ser TipoFiubak' do
     expect(publicacion_fiubak.tipo).to eq TipoFiubak.new
   end
+
+  it 'Al reservarla el estado cambia a Reservada' do
+    publicacion_fiubak.reservar
+    expect(publicacion_fiubak.estado).to eq EstadoReservado.new
+  end
 end

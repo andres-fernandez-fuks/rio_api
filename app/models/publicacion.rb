@@ -25,4 +25,8 @@ class Publicacion
   def cancelar
     @estado = EstadoCancelado.new
   end
+
+  def reservar
+    raise 'Subclass must implement'
+  end
 end

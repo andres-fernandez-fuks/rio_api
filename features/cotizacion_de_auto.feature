@@ -70,14 +70,13 @@ Característica: Cotización de un auto
   Escenario: COT12
     Dado que se ingresó un auto del año 2005
     Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Leve'
-    Y una falla de tipo 'estetica' con gravedad 'Leve'
-    Y una falla de tipo 'neumaticos' con gravedad 'Leve'
+    Y falla de tipo 'estetica' con gravedad 'Leve'
+    Y falla de tipo 'neumaticos' con gravedad 'Leve'
     Entonces se realiza una oferta de fiubak por 910000
 
-  @wip
   Escenario: COT13
     Dado que se ingresó un auto del año 2005
-    Cuando se recibe un informe con falla de tipo Motor con gravedad Grave
+    Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Grave'
     Entonces se realiza una oferta de fiubak por 900000
 
   @wip

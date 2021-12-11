@@ -79,13 +79,12 @@ Característica: Cotización de un auto
     Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Grave'
     Entonces se realiza una oferta de fiubak por 900000
 
-  @wip
   Escenario: COT14
     Dado que se ingresó un auto del año 2020
-    Cuando se recibe un informe con falla de tipo Motor con gravedad Grave
-    Y una falla de tipo Estética con gravedad Grave
-    Y una falla de tipo Neumáticos con gravedad Leve
-    Entonces se realiza una oferta de fiubak por 1.580.000
+    Cuando se recibe un informe con falla de tipo 'motor' con gravedad 'Grave'
+    Y falla de tipo 'estetica' con gravedad 'Grave'
+    Y falla de tipo 'neumaticos' con gravedad 'Leve'
+    Entonces se realiza una oferta de fiubak por 1580000
 
   @wip
   Escenario: COT15

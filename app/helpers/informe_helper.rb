@@ -11,6 +11,17 @@ module WebTemplate
         informe
       end
 
+      def formatear_para_mail(informe)
+        "Su auto cuenta con las siguientes condiciones:
+        Fallas esteticas: #{informe.falla_estetica}
+        Fallas de motor: #{informe.falla_de_motor}
+        Fallas de neumaticos: #{informe.falla_de_neumaticos}
+        Nos estaremos contactando con usted a la brevedad.
+        Saludos,
+        Fiubak
+        "
+      end
+
       private
 
       def serializar_auto(auto)

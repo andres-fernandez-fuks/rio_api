@@ -18,4 +18,8 @@ describe PublicacionFiubak do
     publicacion_fiubak.reservar
     expect(publicacion_fiubak.estado).to eq EstadoReservado.new
   end
+
+  it 'retorna el mail del usuario creador cuando se le pide' do
+    expect(publicacion_fiubak.mail_usuario).to eq(fiubak.mail)
+  end
 end

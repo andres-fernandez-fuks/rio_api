@@ -4,6 +4,11 @@ class EnviadorDeMails
     enviar(destinatario, asunto, mensaje)
   end
 
+  def self.enviar_informe_a(destinatario, mensaje)
+    asunto = 'Fiubak - La cotizacion de tu auto ya está lista'
+    enviar(destinatario, asunto, mensaje)
+  end
+
   def self.enviar(destinatario, asunto, mensaje)
     WebTemplate::App.email(
       :from => @mail_desde,

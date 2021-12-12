@@ -11,6 +11,7 @@ describe RealizarOferta do
   let(:repo_ofertas) {Persistence::Repositories::RepositorioOfertas.new}
 
   before(:each) do
+    allow_any_instance_of(NotificadorDeOferta).to receive(:notificar)
     Persistence::Repositories::RepositorioAutos.new.save(auto)
     Persistence::Repositories::RepositorioUsuarios.new.save(oferente)
     Persistence::Repositories::RepositorioUsuarios.new.save(vendedor)
@@ -36,6 +37,11 @@ describe RealizarOferta do
     it 'no modifica el estado de la publicación' do
       realizar_oferta = described_class.new.ejecutar(monto, oferente, publicacion)
       expect(publicacion.estado).to eq realizar_oferta.publicacion.estado
+    end
+
+    it 'se envia una notificacion de la oferta' do
+      expect_any_instance_of(NotificadorDeOferta).to receive(:notificar)
+      described_class.new.ejecutar(monto, oferente, publicacion)
     end
   end
 

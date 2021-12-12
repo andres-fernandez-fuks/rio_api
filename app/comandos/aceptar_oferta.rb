@@ -1,5 +1,6 @@
 require_relative 'comando'
 require_relative '../models/errors/errores'
+require_relative '../models/oferta_aceptada'
 
 FACTOR_INCREMENTO_DE_PRECIO = 1.3
 
@@ -19,7 +20,7 @@ class AceptarOferta < Comando
       publicacion_nueva.activar
       id_publicacion_nueva = guardar_publicacion(publicacion_nueva).id
     end
-    {oferta: oferta, id_publicacion_nueva: id_publicacion_nueva}
+    OfertaAceptada.new(oferta, id_publicacion_nueva)
   end
 
   private

@@ -9,27 +9,27 @@ Característica: Validaciones en el registro de usuario
     Dado que existe una publicación "Cancelada" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
     Entonces la publicación se crea correctamente
-  @wip
+
   Escenario: VP02 Es posible publicar un auto si hay una publicación Reservada del mismo
     Dado que existe una publicación "Reservada" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
     Entonces la publicación se crea correctamente
-  @wip
+
   Escenario: VP03 Es posible publicar un auto si hay una publicación Vendida del mismo
     Dado que existe una publicación "Vendida" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
     Entonces la publicación se crea correctamente
-  @wip
+
   Escenario: VP04 No es posible crear una publicación si hay otra “En revisión" para un auto de la misma patente
     Dado que existe una publicación “En revisión" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
     Entonces recibo un error
-  @wip
+
   Escenario: VP05 No es posible crear una publicación si hay otra “Cotizada" para un auto de la misma patente
     Dado que existe una publicación "Cotizada" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
     Entonces recibo un error
-  @wip
+
   Escenario: VP04 No es posible crear una publicación si hay otra “Activa" para un auto de la misma patente
     Dado que existe una publicación "Activa" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"

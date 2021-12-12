@@ -11,9 +11,9 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     when EstadoAceptada.new.id.downcase
       begin
         oferta_aceptada = aceptar_oferta(oferta)
-        id_nueva_publicacion = oferta_aceptada[:id_nueva_publicacion]
+        id_publicacion_nueva = oferta_aceptada[:id_publicacion_nueva]
         status 200
-        oferta_a_json(oferta, incluir_contacto: true, id_publicacion_fiubak: id_nueva_publicacion)
+        oferta_a_json(oferta, incluir_contacto: true, id_publicacion_fiubak: id_publicacion_nueva)
       rescue PublicacionVendidaError => e
         status 400
         { error: e.message }.to_json

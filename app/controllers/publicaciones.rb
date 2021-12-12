@@ -1,4 +1,5 @@
 require_relative '../comandos/cotizar_publicacion'
+require_relative '../comandos/registrar_auto'
 
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones/:id_publicacion/informe_cotizacion' do
@@ -25,14 +26,16 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
         status 401
         return
       end
-      auto = guardar_auto(params_publicacion)
-      publicacion = guardar_publicacion(params_publicacion[:precio], usuario, auto)
+      auto = parsear_auto(params_publicacion)
+      publicacion = parsear_publicacion(params_publicacion[:precio], usuario, auto)
+      RegistrarAuto.new.ejecutar(publicacion)
 
       status 201
       publicacion_a_json publicacion
-    rescue StandardError => e
+    rescue PatenteYaRegistradaError
+      status 409
+    rescue ObjectNotFound
       status 400
-      {error: e.message}.to_json
     end
   end
 

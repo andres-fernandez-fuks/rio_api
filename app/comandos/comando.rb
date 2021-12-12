@@ -9,6 +9,10 @@ class Comando
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)
   end
 
+  def guardar_auto(auto)
+    Persistence::Repositories::RepositorioAutos.new.save(auto)
+  end
+
   def guardar_usuario(usuario)
     Persistence::Repositories::RepositorioUsuarios.new.save(usuario)
   end

@@ -7,9 +7,8 @@ module WebTemplate
         Persistence::Repositories::RepositorioAutos.new
       end
 
-      def guardar_auto(parametros)
-        auto = Auto.new(parametros[:patente], parametros[:marca], parametros[:modelo], parametros[:anio])
-        repo_autos.save(auto)
+      def parsear_auto(parametros)
+        Auto.new(parametros[:patente], parametros[:marca], parametros[:modelo], parametros[:anio])
       end
 
       def auto_a_json(auto)

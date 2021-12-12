@@ -4,6 +4,7 @@ class RegistrarAuto < Comando
   def ejecutar(publicacion)
     raise PatenteYaRegistradaError if patente_registrada?(publicacion.patente_de_auto)
 
+    guardar_auto(publicacion.auto)
     guardar_publicacion(publicacion)
   end
 

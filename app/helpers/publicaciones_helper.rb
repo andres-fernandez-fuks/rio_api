@@ -81,9 +81,8 @@ module WebTemplate
         'Desconocido'
       end
 
-      def guardar_publicacion(precio, usuario, auto)
-        publicacion = PublicacionP2P.new(precio, usuario, auto)
-        repo_publicaciones.save(publicacion)
+      def parsear_publicacion(precio, usuario, auto)
+        PublicacionP2P.new(precio, usuario, auto)
       end
 
       private

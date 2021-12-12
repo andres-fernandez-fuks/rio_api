@@ -16,9 +16,6 @@ end
 
 Dado('ya se realizó una oferta por esa publicación') do
   registrar_un_usuario
-  @id_publicacion = JSON(publicar_auto.body)['id']
-  id_oferta = JSON(enviar_informe.body)['id']
-  rechazar_oferta(id_oferta)
   JSON(realizar_oferta(@id_telegram, 15_000).body)['id']
 end
 

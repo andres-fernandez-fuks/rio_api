@@ -10,9 +10,10 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     case mensaje.downcase
     when EstadoAceptada.new.id.downcase
       begin
-        aceptar_oferta(oferta)
+        oferta_aceptada = aceptar_oferta(oferta)
+        id_nueva_publicacion = oferta_aceptada[:id_nueva_publicacion]
         status 200
-        oferta_a_json(oferta, incluir_contacto: true)
+        oferta_a_json(oferta, incluir_contacto: true, id_publicacion_fiubak: id_nueva_publicacion)
       rescue PublicacionVendidaError => e
         status 400
         { error: e.message }.to_json

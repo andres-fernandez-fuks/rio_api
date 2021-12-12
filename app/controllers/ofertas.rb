@@ -1,3 +1,5 @@
+require_relative '../logger/logger'
+
 WebTemplate::App.controllers :ofertas, :provides => [:json] do
   patch :create, :map => '/ofertas/:id_oferta' do # rubocop:disable Metrics/BlockLength
     mensaje = params_oferta[:estado]
@@ -5,6 +7,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       oferta = repo_ofertas.find(params[:id_oferta])
     rescue ObjectNotFound
       status 404
+      Logger.log('info', "Oferta con id: #{params[:id_oferta]} no encontrada")
       error_oferta_no_encontrada
     end
     case mensaje.downcase
@@ -16,8 +19,10 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
         oferta_a_json(oferta, incluir_contacto: true, id_publicacion_fiubak: id_publicacion_fiubak)
       rescue PublicacionVendidaError => e
         status 400
+        Logger.log('info', "Oferta con id: #{params[:id_oferta]} pertenece a una oferta vencida")
         { error: e.message }.to_json
       rescue StandardError => e
+        Logger.log('fatal', "Oferta con id: #{params[:id_oferta]} ha lanzado el error: #{e.message}")
         status 500
         {error: e.message}.to_json
       end
@@ -28,6 +33,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
         oferta_a_json(oferta)
       rescue StandardError => e
         status 500
+        Logger.log('fatal', "Oferta con id: #{params[:id_oferta]} ha lanzado el error: #{e.message}")
         {error: e.message}.to_json
       end
     else
@@ -41,6 +47,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     precio = params_oferta[:precio]
     id_publicacion = params[:id_publicacion]
     unless id_telegram && precio && id_publicacion
+      Logger.log('fatal', "Publicacion con id: #{id_publicacion} tiene parametros faltantes")
       status 400
       return
     end
@@ -48,6 +55,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     begin
       usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
     rescue ObjectNotFound
+      Logger.log('info', "Usuario con id: #{id_telegram} de la publicacion con id: #{id_publicacion} no fue encontrado")
       status 401
       return
     end
@@ -56,6 +64,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       publicacion = repo_publicaciones.find(id_publicacion)
     rescue ObjectNotFound
       status 404
+      Logger.log('info', "Publicacion con id: #{id_publicacion} no fue encontrada")
       return
     end
     begin
@@ -64,6 +73,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
       oferta_a_json(oferta)
     rescue PublicacionVendidaError => e
       status 409
+      Logger.log('info', "Publicacion con id: #{id_publicacion} ya fue vendida")
       {error: e.message}.to_json
     end
   end

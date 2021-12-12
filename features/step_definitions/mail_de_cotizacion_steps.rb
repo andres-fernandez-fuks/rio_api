@@ -1,4 +1,5 @@
 Dado('que estoy registrado con el email {string}') do |mail|
+  FileUtils.rm_f Dir.glob("#{Padrino.root}/tmp/emails/*")
   nombre = 'Cualquiera'
   @id_telegram = '123'
   body = {nombre: nombre, mail: mail, id_telegram: @id_telegram}.to_json

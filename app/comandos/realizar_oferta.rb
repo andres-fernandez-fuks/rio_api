@@ -7,5 +7,7 @@ class RealizarOferta < Comando
     oferta = Oferta.new(monto, oferente, publicacion)
     # guardar_publicacion(publicacion)
     guardar_oferta(oferta)
+    NotificadorDeOferta.new(oferta).notificar
+    oferta
   end
 end

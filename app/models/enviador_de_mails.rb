@@ -5,7 +5,7 @@ class EnviadorDeMails
   end
 
   def self.enviar_informe_a(destinatario, mensaje)
-    asunto = 'Fiubak - La cotizacion de tu auto ya está lista'
+    asunto = 'Fiubak - El informe de tu auto ya está listo'
     enviar(destinatario, asunto, mensaje)
   end
 

@@ -11,6 +11,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     informe = parsear_informe(params_publicacion)
     comando = CotizarPublicacion.new(publicacion.id, informe)
     comando.ejecutar
+    print(publicacion.mail_usuario)
     EnviadorDeMails.enviar_informe_a(publicacion.mail_usuario, formatear_para_mail(informe))
     oferta = repo_ofertas.buscar_por_publicacion(publicacion.id)[0]
     if oferta

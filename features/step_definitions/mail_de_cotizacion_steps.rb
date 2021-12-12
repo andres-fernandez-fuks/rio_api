@@ -11,8 +11,12 @@ Dado('tengo una publicación en revisión') do
   @id_publicacion = JSON(respuesta.body)['id']
 end
 
-Cuando('se realiza la cotización') do
-  body = {}.to_json
+Cuando('se realiza la cotización con fallas esteticas {string}, con fallas de motor {string} y con fallas de neumaticos {string}') do |fallas_esteticas, fallas_de_motor, fallas_de_neumaticos|
+  body = {
+    estetica: fallas_esteticas,
+    motor: fallas_de_motor,
+    neumaticos: fallas_de_neumaticos
+  }.to_json
   Faraday.post(informe_de_cotizacion_url(@id_publicacion), body)
 end
 
@@ -22,14 +26,6 @@ Entonces('recibo un correo electrónico con el informe de la cotización a la di
   @content = file.read
 end
 
-Entonces('se puede ver la gravedad de las fallas estéticas') do
-  @content.include?('Fallas esteticas: Ninguna').should be true
-end
-
-Entonces('se puede ver la gravedad de las fallas de motor') do
-  @content.include?('Fallas de motor: Ninguna').should be true
-end
-
-Entonces('se puede ver la gravedad de las fallas de neumáticos') do
-  @content.include?('Fallas de neumaticos: Ninguna').should be true
+Entonces('se puede ver la gravedad {string} de las fallas {string}') do |gravedad, falla|
+  @content.include?("Fallas #{falla}: #{gravedad}").should be true
 end

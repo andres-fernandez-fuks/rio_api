@@ -1,6 +1,6 @@
 Dado('hay {int} autos publicados') do |cant_autos|
   Faraday.post(reset_url)
-  registrar_usuario('123', 'mail.com')
+  registrar_usuario('123', 'prueba@gmail.com')
   (1..cant_autos).each do |i|
     crear_publicacion_activa("AAA12#{i}", 'VW', 'Suran', 2010 + i, 600_000, '123')
   end

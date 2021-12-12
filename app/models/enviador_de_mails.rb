@@ -10,6 +10,8 @@ class EnviadorDeMails
   end
 
   def self.enviar(destinatario, asunto, mensaje)
+    return if ENV['ENABLE_MAILS'] == 'false'
+
     WebTemplate::App.email(
       :from => @mail_desde,
       :to => destinatario,

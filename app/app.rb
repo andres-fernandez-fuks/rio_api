@@ -40,6 +40,18 @@ module WebTemplate
       load_seeds
     end
 
+    post '/deshabilitar_mails', :provides => [:js] do
+      ENV['ENABLE_MAILS'] = 'false'
+      status 200
+      {message: 'deshabilitar ok'}.to_json
+    end
+
+    post '/habilitar_mails', :provides => [:js] do
+      ENV['ENABLE_MAILS'] = 'true'
+      status 200
+      {message: 'habilitar ok'}.to_json
+    end
+
     def load_seeds
       repo_usuarios = Persistence::Repositories::RepositorioUsuarios.new
       return if repo_usuarios.all.count.positive?

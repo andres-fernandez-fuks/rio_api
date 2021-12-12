@@ -12,14 +12,17 @@ end
 
 Dado('que existe una publicación “En revisión" para el auto con patente {string}') do |patente|
   crear_publicacion_en_revision(patente)
+  @publicaciones_esperadas = 0
 end
 
 Dado('que existe una publicación "Cotizada" para el auto con patente {string}') do |patente|
   crear_publicacion_cotizada(patente)
+  @publicaciones_esperadas = 0
 end
 
 Dado('que existe una publicación "Activa" para el auto con patente {string}') do |patente|
   crear_una_publicacion_activa(patente)
+  @publicaciones_esperadas = 1
 end
 
 Cuando('creo una publicación para el auto con patente {string}') do |patente|
@@ -31,8 +34,11 @@ Entonces('la publicación se crea correctamente') do
   expect(@response.status).to be 201
 end
 
-Entonces('recibo un error') do
+Entonces('recibo un error y la publicación no se creó') do
   expect(@response.status).to be 409
+  response = Faraday.get(listar_publicaciones_url, nil, header)
+  publicaciones_encontradas = JSON.parse(response.body).length
+  expect(publicaciones_encontradas).to eq @publicaciones_esperadas
 end
 
 def crear_publicacion_cancelada(patente)

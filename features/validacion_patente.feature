@@ -23,14 +23,14 @@ Característica: Validaciones en el registro de usuario
   Escenario: VP04 No es posible crear una publicación si hay otra “En revisión" para un auto de la misma patente
     Dado que existe una publicación “En revisión" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
-    Entonces recibo un error
+    Entonces recibo un error y la publicación no se creó
 
   Escenario: VP05 No es posible crear una publicación si hay otra “Cotizada" para un auto de la misma patente
     Dado que existe una publicación "Cotizada" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
-    Entonces recibo un error
+    Entonces recibo un error y la publicación no se creó
 
   Escenario: VP04 No es posible crear una publicación si hay otra “Activa" para un auto de la misma patente
     Dado que existe una publicación "Activa" para el auto con patente "AAA333"
     Cuando creo una publicación para el auto con patente "AAA333"
-    Entonces recibo un error
+    Entonces recibo un error y la publicación no se creó

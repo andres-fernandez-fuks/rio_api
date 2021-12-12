@@ -12,6 +12,12 @@ module Persistence
         load_collection dataset.where(usuario: id_usuario)
       end
 
+      def buscar_por_patente_y_estado(patente, estado)
+        autos_ds = Persistence::Repositories::RepositorioAutos.new.dataset
+        autos_con_patente = autos_ds.where(Sequel.ilike(:patente, "%#{patente}%"))
+        load_collection dataset.join(autos_con_patente, id: :auto).where(Sequel.ilike(:estado, "%#{estado}%"))
+      end
+
       protected
 
       def load_object(a_record)

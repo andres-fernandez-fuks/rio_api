@@ -2,8 +2,9 @@ require 'spec_helper'
 require 'integration_helper'
 describe Persistence::Repositories::RepositorioPublicaciones do
   let(:repositorio) { described_class.new }
+  let(:patente) {'AAA000'}
   let(:auto) {
-    auto = Auto.new("AAA000", "FORD", "AMAROK", 2019)
+    auto = Auto.new(patente, "FORD", "AMAROK", 2019)
     Persistence::Repositories::RepositorioAutos.new.save(auto)
   }
   let(:usuario) {
@@ -98,6 +99,39 @@ describe Persistence::Repositories::RepositorioPublicaciones do
     repositorio.save(publicacion_2)
     publicaciones = repositorio.buscar_por_usuario(usuario.id)
     expect(publicaciones.length).to eq 2
+  end
+
+  context 'Consulta de publicaciones por estado y patente' do
+    let(:patente) {'AAA000'}
+    let(:estado_activo) {'Activo'}
+    it 'si no existe ninguna publicación, la consulta devuelve vacía' do
+      repositorio.delete_all
+      expect(repositorio.buscar_por_patente_y_estado(patente, estado_activo).length).to eq 0
+    end
+  end
+
+  let(:estado_revision) {'Revision'}
+
+  it 'si existe una publicación con el estado por el que consulto y esa patente, la devuelve correctamente' do
+    repositorio.save(publicacion)
+    publicaciones = repositorio.buscar_por_patente_y_estado(patente, estado_revision)
+    expect(publicaciones.length).to eq 1
+    publicacion = publicaciones[0]
+    expect(publicacion.precio).to eq 30303
+    expect(publicacion.usuario).to eq usuario
+    expect(publicacion.estado).to eq EstadoRevision.new
+  end
+
+  let(:estado_activo) {'Activo'}
+  it 'si existe una publicación por un estado diferente al que consulto y esa patente, la consulta devuelve vacía' do
+    repositorio.save(publicacion)
+    expect(repositorio.buscar_por_patente_y_estado(patente, estado_activo).length).to eq 0
+  end
+
+  let(:otra_patente) {'ABC012'}
+  it 'si existe una publicación por el estado que consulto pero por otra patente, la consulta devuelve vacía' do
+    repositorio.save(publicacion)
+    expect(repositorio.buscar_por_patente_y_estado(otra_patente, estado_revision).length).to eq 0
   end
 end
 

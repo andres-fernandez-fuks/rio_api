@@ -29,4 +29,8 @@ class Publicacion
   def reservar
     raise 'Subclass must implement'
   end
+
+  def mail_usuario
+    @usuario.mail
+  end
 end

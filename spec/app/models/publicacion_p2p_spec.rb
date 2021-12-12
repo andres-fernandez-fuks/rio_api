@@ -53,5 +53,9 @@ describe PublicacionP2P do
     it 'cuando se reserva, levanta un error' do
       expect{publicacion_p2p.reservar}.to raise_error(PublicacionNoReservableError)
     end
+
+    it 'retorna el mail del usuario creador cuando se le pide' do
+      expect(publicacion_p2p.mail_usuario).to eq(usuario.mail)
+    end
   end
 end

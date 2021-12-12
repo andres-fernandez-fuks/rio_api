@@ -16,5 +16,10 @@ describe NotificadorDeOferta do
       expect(EnviadorDeMails).to receive(:enviar_mail_a).with(usuario_publicacion.mail, anything, anything)
       NotificadorDeOferta.new(@oferta).notificar
     end
+
+    it 'Cuando envio la notificaion, se envia un mail con asunto "Has recibido una oferta por tu publicación"' do
+      expect(EnviadorDeMails).to receive(:enviar_mail_a).with(usuario_publicacion.mail, 'Has recibido una oferta por tu publicación', anything)
+      NotificadorDeOferta.new(@oferta).notificar
+    end
   end
 end

@@ -32,6 +32,11 @@ describe CotizacionExitosa do
       expect(ofertas[0].monto).to eq 800_000
       expect(ofertas[0].es_fiubak?).to eq true
     end
+
+    it 'Cuando ejecuto la cotizacion se envia un mail de notificacion por la oferta' do
+      expect_any_instance_of(NotificadorDeOferta).to receive(:notificar)
+      @cotizacion_exitosa.ejecutar()
+    end
   end
 end
 

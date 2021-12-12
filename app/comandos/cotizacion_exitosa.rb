@@ -14,5 +14,6 @@ class CotizacionExitosa < Comando
     oferta = Oferta.new(@monto, usuario_fiubak, @publicacion)
     repo_de_ofertas.save(oferta)
     repo_de_publicaciones.save(@publicacion)
+    NotificadorDeOferta.new(oferta).notificar
   end
 end

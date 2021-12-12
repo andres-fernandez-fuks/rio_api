@@ -8,16 +8,16 @@ Dado('que hay un auto ingresado para cotizar por el usuario con id {string}') do
   @id_publicacion = JSON(response.body)['id']
 end
 
-Cuando('recibo un informe de cotizacion para el auto publicado con un precio de {int}') do |precio|
-  body = {precio: precio}.to_json
+Cuando('recibo un informe de cotizacion para el auto publicado') do
+  body = {precio: 10_000}.to_json
   @response = Faraday.post(informe_de_cotizacion_url(@id_publicacion), body)
 end
 
-Entonces('la cotización del auto publicado es {float}') do |monto|
+Entonces('el auto se cotiza correctamente') do
   expect(@response.status).to be 200
   @id_oferta = JSON(@response.body)['id']
   expect(JSON(@response.body)['id_publicacion']).to eq @id_publicacion
-  expect(JSON(@response.body)['monto']).to eq monto
+  expect(JSON(@response.body)['oferente']).to eq 'fiubak'
 end
 
 Entonces('obtiene la oferta para el auto, visible sólo para el usuario con id {int}') do |_id_telegram|

@@ -6,8 +6,8 @@ Característica: Cotización de un auto
 
   @wip
   Escenario: C001 - Cotizacion exitosa de un auto
-    Cuando recibo un informe de cotizacion para el auto publicado con un precio de 700000
-    Entonces la cotización del auto publicado es 700000
+    Cuando recibo un informe de cotizacion para el auto publicado
+    Entonces el auto se cotiza correctamente
     Y obtiene la oferta para el auto, visible sólo para el usuario con id 4
 
   Escenario: COT01 - Auto previo a 1995 con falla grave

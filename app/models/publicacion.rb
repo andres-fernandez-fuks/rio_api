@@ -33,4 +33,8 @@ class Publicacion
   def mail_usuario
     @usuario.mail
   end
+
+  def patente_de_auto
+    auto.patente
+  end
 end

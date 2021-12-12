@@ -1,5 +1,4 @@
 require 'spec_helper'
-# require_relative '../../../app/helpers/informe_helper'
 
 describe EnviadorDeMails do
     context 'Cuando se le pide enviar un mail de cotizacion sin fallas a "test@gmail.com"' do
@@ -18,7 +17,6 @@ describe EnviadorDeMails do
         it 'Se le envia un informe de cotizacion a "test@gmail.com" diciendo que todas las fallas son nulas' do
             destinatario = "test@gmail.com"
             informe = InformeDeRevision.new
-            # mensaje = WebTemplate::App::InformeHelper.formatear_para_mail(informe) <- chequear como hacer andar esto
             mensaje = "Su auto cuenta con las siguientes condiciones:
             Fallas esteticas: #{informe.falla_estetica}
             Fallas de motor: #{informe.falla_de_motor}
@@ -26,7 +24,7 @@ describe EnviadorDeMails do
             Nos estaremos contactando con usted a la brevedad.
             Saludos,
             Fiubak"
-            asunto = "Fiubak - La cotizacion de tu auto ya está lista"
+            asunto = "Fiubak - El informe de tu auto ya está listo"
             expect(WebTemplate::App).to receive(:email).with({
                 :body=>mensaje,
                 :from=>"rio.job.vacancy@gmail.com",

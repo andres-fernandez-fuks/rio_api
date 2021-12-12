@@ -16,10 +16,7 @@ module WebTemplate
         Fallas esteticas: #{informe.falla_estetica}
         Fallas de motor: #{informe.falla_de_motor}
         Fallas de neumaticos: #{informe.falla_de_neumaticos}
-        Nos estaremos contactando con usted a la brevedad.
-        Saludos,
-        Fiubak
-        "
+        Nos estaremos contactando con usted a la brevedad.\nSaludos,\nFiubak"
       end
 
       private

@@ -1,10 +1,12 @@
 require_relative '../comandos/cotizar_publicacion'
 require_relative '../comandos/registrar_auto'
+require_relative '../logger/logger'
 
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones/:id_publicacion/informe_cotizacion' do
     publicacion = repo_publicaciones.find(params[:id_publicacion])
     unless publicacion
+      Logger.log('info', "Publicacion con id: #{params[:id_publicacion]} no fue encontrada")
       status 404
       return
     end
@@ -15,7 +17,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     begin
       EnviadorDeMails.enviar_informe_a(publicacion.mail_usuario, formatear_para_mail(informe))
     rescue StandardError
-      logger.info 'API_FIUBAK: Error al enviar email'
+      Logger.log('info', 'Error al enviar email, posiblemente se alcanzó el maximo de envios diarios')
     end
     oferta = repo_ofertas.buscar_por_publicacion(publicacion.id)[0]
     if oferta
@@ -31,6 +33,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       usuario = repo_usuario.buscar_por_id_telegram(params_publicacion[:id_telegram])
       unless usuario
         status 401
+        Logger.log('info', "Usuario con id: #{params_publicacion[:id_telegram]} no fue encontrado")
         return
       end
       auto = parsear_auto(params_publicacion)
@@ -41,8 +44,10 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       publicacion_a_json publicacion
     rescue PatenteYaRegistradaError
       status 409
+      Logger.log('info', 'Publicacion de auto con patente ya registrada')
     rescue ObjectNotFound
       status 400
+      Logger.log('info', 'Error al buscar auto o publicacion')
     end
   end
 
@@ -50,12 +55,14 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
     if !id_telegram || id_telegram == ''
       status 400
+      Logger.log('info', 'No se ha enviado el header con ID de telegram')
       return
     end
 
     usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
     unless usuario
       status 404
+      Logger.log('info', "Usuario con id: #{id_telegram} no fue encontrado")
       return
     end
     publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
@@ -73,6 +80,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
     unless id_telegram
       status 400
+      Logger.log('info', 'No se ha enviado el header con ID de telegram')
       return
     end
     publicacion = repo_publicaciones.find(params[:id_publicacion])
@@ -80,6 +88,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
 
     if usuario.id_telegram != id_telegram
       status 403
+      Logger.log('info', 'No coinciden el id de usuario con el usuario de la base de datos')
       return
     end
 
@@ -95,9 +104,11 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       status 200
     rescue ObjectNotFound => e
       status 404
+      Logger.log('info', "La publicacion con id: #{params[:id_publicacion]} no fue encontrada")
       {:error => e.message}.to_json
     rescue StandardError => e
       status 500
+      Logger.log('fatal', "Error al procesar reserva. Error: #{e.message}")
       {:error => e.message}.to_json
     end
   end

@@ -4,23 +4,26 @@ require_relative '../logger/logger'
 
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones/:id_publicacion/informe_cotizacion' do
-    publicacion = repo_publicaciones.find(params[:id_publicacion])
-    unless publicacion
+    begin
+      publicacion = repo_publicaciones.find(params[:id_publicacion])
+      informe = parsear_informe(params_publicacion)
+      comando = CotizarPublicacion.new(publicacion.id, informe)
+      comando.ejecutar
+    rescue ObjectNotFound => e
       Logger.log('info', "Publicacion con id: #{params[:id_publicacion]} no fue encontrada")
       status 404
-      return
+      {error: e.message}.to_json
+    rescue StandardError => e
+      status 500
+      {error: e.message}.to_json
     end
-    informe = parsear_informe(params_publicacion)
-    comando = CotizarPublicacion.new(publicacion.id, informe)
-    comando.ejecutar
-    print(publicacion.mail_usuario)
     begin
       EnviadorDeMails.enviar_informe_a(publicacion.mail_usuario, formatear_para_mail(informe))
     rescue StandardError
       Logger.log('info', 'Error al enviar email, posiblemente se alcanzó el maximo de envios diarios')
     end
-    oferta = repo_ofertas.buscar_por_publicacion(publicacion.id)[0]
-    if oferta
+    if comando.cotizacion_exitosa
+      oferta = repo_ofertas.buscar_por_publicacion(publicacion.id)[0]
       status 200
       oferta_a_json(oferta)
     else

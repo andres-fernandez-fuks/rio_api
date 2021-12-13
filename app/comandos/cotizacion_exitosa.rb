@@ -16,4 +16,8 @@ class CotizacionExitosa < Comando
     repo_de_publicaciones.save(@publicacion)
     NotificadorDeOferta.new(oferta).notificar
   end
+
+  def exitosa?
+    true
+  end
 end

@@ -32,6 +32,12 @@ describe CotizarPublicacion do
       expect(ofertas[0].monto).to eq 800_000
       expect(ofertas[0].es_fiubak?).to eq true
     end
+
+    it 'Cuando ejecuto la cotizacion entonces el comando tiene cotizacion_exitosa true' do
+      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe)
+      cotizar_publicacion.ejecutar()
+      expect(cotizar_publicacion.cotizacion_exitosa).to eq true
+    end
   end
 
   context 'Dada una publicacion con auto de 1994 y un informe con falla estética grave' do
@@ -48,6 +54,13 @@ describe CotizarPublicacion do
       publicacion = obtener_publicacion(@publicacion.id)
 
       expect(publicacion.estado).to eq EstadoCancelado.new
+    end
+
+    it 'Cuando ejecuto la cotizacion entonces el comando tiene cotizacion_exitosa en falso' do
+      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe)
+      cotizar_publicacion.ejecutar()
+
+      expect(cotizar_publicacion.cotizacion_exitosa).to eq false
     end
   end
 end

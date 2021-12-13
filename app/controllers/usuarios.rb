@@ -1,5 +1,6 @@
 require_relative '../comandos/registrar_usuario'
 require_relative '../models/errors/errores'
+require_relative '../logger/logger'
 
 WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/usuarios' do
@@ -10,6 +11,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       usuario_a_json nuevo_usuario
     rescue MailDeUsuarioEnUsoError
       status 409
+      Logger.log('info', "El usuario con mail: #{params_usuario[:mail]} ya se encuentra registrado")
       error_mail_ya_registrado
     end
   end
@@ -18,6 +20,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     id_telegram = request.get_header('HTTP_ID_TELEGRAM') || request.get_header('ID_TELEGRAM')
     unless id_telegram
       status 400
+      Logger.log('info', 'No se ha incluido un header con ID de telegram en la request')
       return
     end
 
@@ -27,6 +30,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       usuario_a_json usuario
     else
       status 404
+      Logger.log('info', "El usuario con id de telegram: #{id_telegram} no fue encontrado")
       error_usuario_no_encontrado
     end
   end

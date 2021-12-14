@@ -7,7 +7,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     begin
       publicacion = repo_publicaciones.find(params[:id_publicacion])
       informe = parsear_informe(params_publicacion)
-      comando = CotizarPublicacion.new(publicacion.id, informe)
+      comando = CotizarPublicacion.new(publicacion.id, informe, repo_publicaciones)
       comando.ejecutar
     rescue ObjectNotFound => e
       Logger.log('info', "Publicacion con id: #{params[:id_publicacion]} no fue encontrada")

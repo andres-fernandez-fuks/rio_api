@@ -4,6 +4,7 @@ require_relative '../../../app/comandos/cotizar_publicacion'
 
 describe CotizarPublicacion do
   let(:vendedor) { Usuario.new('vendedor', 'vendedor@gmail.com', '001') }
+  let(:repo_publicaciones) { Persistence::Repositories::RepositorioPublicaciones.new }
 
   before(:each) do
     Persistence::Repositories::RepositorioUsuarios.new.save(vendedor)
@@ -19,14 +20,14 @@ describe CotizarPublicacion do
     end
 
     it 'Cuando ejecuto la cotizacion entonces la publicacion esta en estado Cotizado' do
-      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe)
+      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe, repo_publicaciones)
       cotizar_publicacion.ejecutar()
       publicacion = obtener_publicacion(@publicacion.id)
       expect(publicacion.estado).to eq EstadoCotizado.new
     end
 
     it 'Cuando ejecuto la cotizacion se crea una oferta de fiubak por 800.000' do
-      CotizarPublicacion.new(@publicacion.id, @informe).ejecutar()
+      CotizarPublicacion.new(@publicacion.id, @informe, repo_publicaciones).ejecutar()
       ofertas = obtener_ofertas(@publicacion.id)
       expect(ofertas.length).to eq 1
       expect(ofertas[0].monto).to eq 800_000
@@ -34,7 +35,7 @@ describe CotizarPublicacion do
     end
 
     it 'Cuando ejecuto la cotizacion entonces el comando tiene cotizacion_exitosa true' do
-      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe)
+      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe, repo_publicaciones)
       cotizar_publicacion.ejecutar()
       expect(cotizar_publicacion.cotizacion_exitosa).to eq true
     end
@@ -49,7 +50,7 @@ describe CotizarPublicacion do
     end
 
     it 'Cuando ejecuto la cotizacion entonces la publicacion esta en estado cancelado' do
-      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe)
+      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe, repo_publicaciones)
       cotizar_publicacion.ejecutar()
       publicacion = obtener_publicacion(@publicacion.id)
 
@@ -57,7 +58,7 @@ describe CotizarPublicacion do
     end
 
     it 'Cuando ejecuto la cotizacion entonces el comando tiene cotizacion_exitosa en falso' do
-      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe)
+      cotizar_publicacion = CotizarPublicacion.new(@publicacion.id, @informe, repo_publicaciones)
       cotizar_publicacion.ejecutar()
 
       expect(cotizar_publicacion.cotizacion_exitosa).to eq false

@@ -27,7 +27,7 @@ module WebTemplate
       end
 
       def reservar(publicacion)
-        ReservarPublicacion.new.ejecutar(publicacion)
+        ReservarPublicacion.new(repo_publicaciones).ejecutar(publicacion)
       end
 
       def publicacion_activada(publicacion)

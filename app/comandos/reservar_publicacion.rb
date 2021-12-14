@@ -1,9 +1,10 @@
-require_relative 'comando'
-require_relative '../models/errors/errores'
+class ReservarPublicacion
+  def initialize(repo_publicaciones)
+    @repo_publicaciones = repo_publicaciones
+  end
 
-class ReservarPublicacion < Comando
   def ejecutar(publicacion)
     publicacion.reservar
-    guardar_publicacion(publicacion)
+    @repo_publicaciones.save(publicacion)
   end
 end

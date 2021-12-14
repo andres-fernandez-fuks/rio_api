@@ -18,7 +18,8 @@ class Cotizador
     return CotizacionFallida.new(publicacion) if es_fallida?(publicacion.auto, informe)
 
     precio = precio_base(publicacion.auto) - porcentaje_a_descontar(informe) * precio_base(publicacion.auto)
-    CotizacionExitosa.new(publicacion, precio)
+    CotizacionExitosa.new(publicacion, precio, Persistence::Repositories::RepositorioOfertas.new, Persistence::Repositories::RepositorioPublicaciones.new,
+                          Persistence::Repositories::RepositorioUsuarios.new)
   end
 
   private

@@ -1,3 +1,5 @@
+require_relative './comando'
+
 class CotizacionFallida < Comando
   def initialize(publicacion)
     super()

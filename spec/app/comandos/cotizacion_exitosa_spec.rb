@@ -4,7 +4,10 @@ require_relative '../../../app/comandos/cotizacion_exitosa'
 
 describe CotizacionExitosa do
   let(:vendedor) { Usuario.new('vendedor', 'vendedor@gmail.com', '001') }
-
+  
+  let(:repo_ofertas) {Persistence::Repositories::RepositorioOfertas.new}
+  let(:repo_publicaciones) {Persistence::Repositories::RepositorioPublicaciones.new}
+  let(:repo_usuarios) {Persistence::Repositories::RepositorioUsuarios.new}
   before(:each) do
     Persistence::Repositories::RepositorioUsuarios.new.save(vendedor)
     Persistence::Repositories::RepositorioUsuarios.new.save(UsuarioFiubak.new)
@@ -15,7 +18,7 @@ describe CotizacionExitosa do
       auto = Auto.new("AAA000", "Peugeot", "505", 1994, 1)
       @publicacion = PublicacionP2P.new(100_000, vendedor, auto, 1)
       guardar_publicacion(auto, @publicacion)
-      @cotizacion_exitosa = CotizacionExitosa.new(@publicacion, 800_000)
+      @cotizacion_exitosa = CotizacionExitosa.new(@publicacion, 800_000, repo_ofertas, repo_publicaciones, repo_usuarios)
       @informe = InformeDeRevision.new
     end
 

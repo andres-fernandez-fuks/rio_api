@@ -7,13 +7,17 @@ describe RechazarOferta do
   let(:oferente) {Usuario.new('nombre', 'mail', '100')}
   let(:publicacion) {PublicacionP2P.new(precio, oferente, auto, 1)}
   let(:oferta) {Oferta.new(precio, oferente, publicacion)}
+  let(:repo_ofertas) {Persistence::Repositories::RepositorioOfertas.new}
+  let(:repo_publicaciones) {Persistence::Repositories::RepositorioPublicaciones.new}
 
   before(:each) do
+    repo_ofertas = Persistence::Repositories::RepositorioOfertas.new
+    repo_publicaciones = Persistence::Repositories::RepositorioPublicaciones.new
     Persistence::Repositories::RepositorioAutos.new.save(auto)
     Persistence::Repositories::RepositorioUsuarios.new.save(oferente)
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion)
     Persistence::Repositories::RepositorioOfertas.new.save(oferta)
-    @oferta_rechazada = described_class.new.ejecutar(oferta)
+    @oferta_rechazada = described_class.new(repo_publicaciones, repo_ofertas).ejecutar(oferta)
     @oferta_persistida = Persistence::Repositories::RepositorioOfertas.new.find(@oferta_rechazada.id)
   end
 

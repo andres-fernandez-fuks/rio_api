@@ -58,7 +58,7 @@ module WebTemplate
       end
 
       def rechazar_oferta(oferta)
-        RechazarOferta.new.ejecutar(oferta)
+        RechazarOferta.new(repo_publicaciones, repo_ofertas).ejecutar(oferta)
       end
 
       private

@@ -86,7 +86,7 @@ describe AceptarOferta do
 
   context 'Dado que rechacé la oferta inicial de fiubak' do
     before(:each) do
-      RechazarOferta.new.ejecutar(oferta_fiubak)
+      RechazarOferta.new(repo_publicaciones, repo_ofertas).ejecutar(oferta_fiubak)
     end
 
     it 'Cuando acepto una nueva oferta p2p no se crea una nueva publicacion de fiubak' do

@@ -1,11 +1,14 @@
-require_relative 'comando'
+class RechazarOferta
+  def initialize(repo_publicaciones, repo_ofertas)
+    @repo_publicaciones = repo_publicaciones
+    @repo_ofertas = repo_ofertas
+  end
 
-class RechazarOferta < Comando
   def ejecutar(oferta)
     publicacion = oferta.publicacion
     publicacion.activar
     oferta.rechazar
-    guardar_publicacion(publicacion)
-    guardar_oferta(oferta)
+    @repo_publicaciones.save(publicacion)
+    @repo_ofertas.save(oferta)
   end
 end

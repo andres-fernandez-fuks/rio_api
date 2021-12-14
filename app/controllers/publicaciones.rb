@@ -33,7 +33,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
 
   post :create, :map => '/publicaciones' do
     begin
-      usuario = repo_usuario.buscar_por_id_telegram(params_publicacion[:id_telegram])
+      usuario = repo_usuarios.buscar_por_id_telegram(params_publicacion[:id_telegram])
       unless usuario
         status 401
         Logger.log('info', "Usuario con id: #{params_publicacion[:id_telegram]} no fue encontrado")
@@ -62,7 +62,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       return
     end
 
-    usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
+    usuario = repo_usuarios.buscar_por_id_telegram(id_telegram)
     unless usuario
       status 404
       Logger.log('info', "Usuario con id: #{id_telegram} no fue encontrado")

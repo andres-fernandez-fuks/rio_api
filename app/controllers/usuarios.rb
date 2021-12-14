@@ -6,7 +6,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/usuarios' do
     begin
       usuario = Usuario.new(params_usuario[:nombre], params_usuario[:mail], params_usuario[:id_telegram])
-      nuevo_usuario = RegistrarUsuario.new.ejecutar(usuario)
+      nuevo_usuario = RegistrarUsuario.new(repo_usuarios).ejecutar(usuario)
       status 201
       usuario_a_json nuevo_usuario
     rescue MailDeUsuarioEnUsoError
@@ -24,7 +24,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       return
     end
 
-    usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
+    usuario = repo_usuarios.buscar_por_id_telegram(id_telegram)
     if usuario
       status 200
       usuario_a_json usuario

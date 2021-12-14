@@ -1,9 +1,11 @@
-require_relative 'comando'
+class RegistrarUsuario
+  def initialize(repo_usuarios)
+    @repo_usuarios = repo_usuarios
+  end
 
-class RegistrarUsuario < Comando
   def ejecutar(usuario)
-    raise MailDeUsuarioEnUsoError if Persistence::Repositories::RepositorioUsuarios.new.buscar_por_mail(usuario.mail)
+    raise MailDeUsuarioEnUsoError if @repo_usuarios.buscar_por_mail(usuario.mail)
 
-    guardar_usuario(usuario)
+    @repo_usuarios.save(usuario)
   end
 end

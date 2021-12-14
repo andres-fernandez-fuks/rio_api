@@ -28,7 +28,7 @@ module WebTemplate
       if ENV['ENABLE_RESET'] == 'true'
         repo_ofertas.delete_all
         repo_publicaciones.delete_all
-        repo_usuario.delete_all
+        repo_usuarios.delete_all
         repo_autos.delete_all
 
         status 200

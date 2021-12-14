@@ -14,7 +14,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     case mensaje.downcase
     when EstadoAceptada.new.id.downcase
       begin
-        oferta_aceptada = AceptarOferta.new(repo_publicaciones, repo_ofertas, repo_usuario).ejecutar(oferta)
+        oferta_aceptada = AceptarOferta.new(repo_publicaciones, repo_ofertas, repo_usuarios).ejecutar(oferta)
         id_publicacion_fiubak = oferta_aceptada.id_publicacion_fiubak
         status 200
         oferta_a_json(oferta, incluir_contacto: true, id_publicacion_fiubak: id_publicacion_fiubak)
@@ -54,7 +54,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     end
 
     begin
-      usuario = repo_usuario.buscar_por_id_telegram(id_telegram)
+      usuario = repo_usuarios.buscar_por_id_telegram(id_telegram)
     rescue ObjectNotFound
       Logger.log('info', "Usuario con id: #{id_telegram} de la publicacion con id: #{id_publicacion} no fue encontrado")
       status 401

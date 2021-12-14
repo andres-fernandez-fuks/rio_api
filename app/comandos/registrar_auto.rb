@@ -1,11 +1,14 @@
-require_relative 'comando'
+class RegistrarAuto
+  def initialize(repo_de_publicaciones, repo_autos)
+    @repo_de_publicaciones = repo_de_publicaciones
+    @repo_autos = repo_autos
+  end
 
-class RegistrarAuto < Comando
   def ejecutar(publicacion)
     raise PatenteYaRegistradaError if patente_registrada?(publicacion.patente_de_auto)
 
-    guardar_auto(publicacion.auto)
-    guardar_publicacion(publicacion)
+    @repo_autos.save(publicacion.auto)
+    @repo_de_publicaciones.save(publicacion)
   end
 
   def patente_registrada?(patente)
@@ -16,6 +19,6 @@ class RegistrarAuto < Comando
   end
 
   def publicaciones_con_patente(patente, estado)
-    repo_de_publicaciones.buscar_por_patente_y_estado(patente, estado)
+    @repo_de_publicaciones.buscar_por_patente_y_estado(patente, estado)
   end
 end

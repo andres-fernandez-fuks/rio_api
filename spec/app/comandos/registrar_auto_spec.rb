@@ -10,6 +10,9 @@ describe RegistrarAuto do
   let(:usuario) {Usuario.new('fulanito', 'fulanito@gmail.com', '123')}
   let(:publicacion_1) {PublicacionP2P.new(10000, usuario, auto_1)}
   let(:publicacion_2) {PublicacionP2P.new(10000, usuario, auto_1)}
+  let(:repo_publicaciones) {Persistence::Repositories::RepositorioPublicaciones.new}
+  let(:repo_autos) {Persistence::Repositories::RepositorioAutos.new}
+
   before(:each) do
     Persistence::Repositories::RepositorioPublicaciones.new.delete_all
     Persistence::Repositories::RepositorioUsuarios.new.delete_all
@@ -19,21 +22,21 @@ describe RegistrarAuto do
   end
 
   it 'Lo guarda correctamente' do
-    RegistrarAuto.new.ejecutar(publicacion_1)
+    RegistrarAuto.new(repo_publicaciones, repo_autos).ejecutar(publicacion_1)
     expect(Persistence::Repositories::RepositorioPublicaciones.new.all.length).to eq 1
   end
 
   it 'No lo guarda si ya hay otra publicación activa con un auto de la misma patente' do
-    RegistrarAuto.new.ejecutar(publicacion_1)
-    expect{RegistrarAuto.new.ejecutar(publicacion_1)}.to raise_error(PatenteYaRegistradaError)
+    RegistrarAuto.new(repo_publicaciones, repo_autos).ejecutar(publicacion_1)
+    expect{RegistrarAuto.new(repo_publicaciones, repo_autos).ejecutar(publicacion_1)}.to raise_error(PatenteYaRegistradaError)
     expect(Persistence::Repositories::RepositorioUsuarios.new.all.length).to eq 1
   end
 
   it 'Lo guarda si ya hay otra publicación NO activa con un auto de la misma patente' do
-    publicacion_guardada = RegistrarAuto.new.ejecutar(publicacion_1)
+    publicacion_guardada = RegistrarAuto.new(repo_publicaciones, repo_autos).ejecutar(publicacion_1)
     publicacion_guardada.vendida
     Persistence::Repositories::RepositorioPublicaciones.new.save(publicacion_guardada)
-    RegistrarAuto.new.ejecutar(publicacion_2)
+    RegistrarAuto.new(repo_publicaciones, repo_autos).ejecutar(publicacion_2)
     expect(Persistence::Repositories::RepositorioPublicaciones.new.all.length).to eq 2
   end
 end

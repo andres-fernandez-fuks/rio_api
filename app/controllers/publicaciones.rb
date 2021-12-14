@@ -41,7 +41,7 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       end
       auto = parsear_auto(params_publicacion)
       publicacion = parsear_publicacion(params_publicacion[:precio], usuario, auto)
-      RegistrarAuto.new.ejecutar(publicacion)
+      RegistrarAuto.new(repo_publicaciones, repo_autos).ejecutar(publicacion)
 
       status 201
       publicacion_a_json publicacion

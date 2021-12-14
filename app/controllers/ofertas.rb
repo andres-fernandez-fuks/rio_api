@@ -1,4 +1,5 @@
 require_relative '../logger/logger'
+require_relative '../comandos/aceptar_oferta'
 
 WebTemplate::App.controllers :ofertas, :provides => [:json] do
   patch :create, :map => '/ofertas/:id_oferta' do # rubocop:disable Metrics/BlockLength
@@ -13,7 +14,7 @@ WebTemplate::App.controllers :ofertas, :provides => [:json] do
     case mensaje.downcase
     when EstadoAceptada.new.id.downcase
       begin
-        oferta_aceptada = aceptar_oferta(oferta)
+        oferta_aceptada = AceptarOferta.new(repo_publicaciones, repo_ofertas, repo_usuario).ejecutar(oferta)
         id_publicacion_fiubak = oferta_aceptada.id_publicacion_fiubak
         status 200
         oferta_a_json(oferta, incluir_contacto: true, id_publicacion_fiubak: id_publicacion_fiubak)

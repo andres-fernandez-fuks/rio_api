@@ -5,7 +5,13 @@ require_relative '../models/oferta_aceptada'
 FACTOR_INCREMENTO_DE_PRECIO = 1.3
 
 # rubocop: disable Metrics/AbcSize
-class AceptarOferta < Comando
+class AceptarOferta
+  def initialize(repo_publicaciones, repo_ofertas, repo_clientes)
+    @repo_publicaciones = repo_publicaciones
+    @repo_ofertas = repo_ofertas
+    @repo_clientes = repo_clientes
+  end
+
   def ejecutar(oferta)
     publicacion = oferta.publicacion
     raise PublicacionVendidaError unless publicacion.estado != EstadoVendido.new
@@ -26,8 +32,16 @@ class AceptarOferta < Comando
   private
 
   def guardar_cambios(oferta, publicacion)
-    guardar_publicacion(publicacion)
-    guardar_oferta(oferta)
+    @repo_publicaciones.save(publicacion)
+    @repo_ofertas.save(oferta)
+  end
+
+  def usuario_fiubak
+    @repo_clientes.buscar_usuario_fiubak
+  end
+
+  def guardar_publicacion(publicacion)
+    @repo_publicaciones.save(publicacion)
   end
 end
 # rubocop: enable Metrics/AbcSize

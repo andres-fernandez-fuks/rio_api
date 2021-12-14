@@ -1,4 +1,3 @@
-require_relative 'comando'
 require_relative '../models/errors/errores'
 require_relative '../models/oferta_aceptada'
 

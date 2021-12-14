@@ -54,7 +54,7 @@ module WebTemplate
       end
 
       def realizar_oferta(monto, oferente, publicacion)
-        RealizarOferta.new.ejecutar(monto, oferente, publicacion)
+        RealizarOferta.new(repo_ofertas).ejecutar(monto, oferente, publicacion)
       end
 
       def rechazar_oferta(oferta)

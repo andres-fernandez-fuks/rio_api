@@ -20,14 +20,14 @@ describe RealizarOferta do
 
   context 'Realizar una oferta por una publicación p2p activa' do
     it 'crea la oferta correctamente' do
-      realizar_oferta = described_class.new.ejecutar(monto, oferente, publicacion)
+      realizar_oferta = described_class.new(repo_ofertas).ejecutar(monto, oferente, publicacion)
       expect(realizar_oferta.monto).to eq monto
       expect(realizar_oferta.oferente).to eq oferente
       expect(realizar_oferta.publicacion.id).to eq publicacion.id
     end
 
     it 'agrega la oferta a la publicación' do
-      realizar_oferta = described_class.new.ejecutar(monto, oferente, publicacion)
+      realizar_oferta = described_class.new(repo_ofertas).ejecutar(monto, oferente, publicacion)
       ofertas_de_publicacion = repo_ofertas.buscar_por_publicacion(publicacion.id)
       expect(ofertas_de_publicacion.length).to eq 1
       expect(ofertas_de_publicacion[0].id).to eq realizar_oferta.id
@@ -35,13 +35,13 @@ describe RealizarOferta do
     end
 
     it 'no modifica el estado de la publicación' do
-      realizar_oferta = described_class.new.ejecutar(monto, oferente, publicacion)
+      realizar_oferta = described_class.new(repo_ofertas).ejecutar(monto, oferente, publicacion)
       expect(publicacion.estado).to eq realizar_oferta.publicacion.estado
     end
 
     it 'se envia una notificacion de la oferta' do
       expect_any_instance_of(NotificadorDeOferta).to receive(:notificar)
-      described_class.new.ejecutar(monto, oferente, publicacion)
+      described_class.new(repo_ofertas).ejecutar(monto, oferente, publicacion)
     end
   end
 
@@ -52,12 +52,12 @@ describe RealizarOferta do
     end
 
     it 'lanza un error al crear la oferta' do
-      expect{described_class.new.ejecutar(monto, oferente, publicacion)}.to raise_error(PublicacionVendidaError)
+      expect{described_class.new(repo_ofertas).ejecutar(monto, oferente, publicacion)}.to raise_error(PublicacionVendidaError)
     end
 
     it 'no agrega la oferta a la publicación' do
       begin
-        described_class.new.ejecutar(monto, oferente, publicacion)
+        described_class.new(repo_ofertas).ejecutar(monto, oferente, publicacion)
       rescue PublicacionVendidaError
         ofertas_de_publicacion = repo_ofertas.buscar_por_publicacion(publicacion.id)
         expect(ofertas_de_publicacion.length).to eq 0
@@ -66,7 +66,7 @@ describe RealizarOferta do
 
     it 'no modifica el estado de la publicación' do
       begin
-        described_class.new.ejecutar(monto, oferente, publicacion)
+        described_class.new(repo_ofertas).ejecutar(monto, oferente, publicacion)
       rescue PublicacionVendidaError
         expect(publicacion.estado).to eq EstadoVendido.new
       end

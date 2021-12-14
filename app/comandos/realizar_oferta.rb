@@ -1,12 +1,13 @@
-require_relative 'comando'
+class RealizarOferta
+  def initialize(repo_ofertas)
+    @repo_ofertas = repo_ofertas
+  end
 
-class RealizarOferta < Comando
   def ejecutar(monto, oferente, publicacion)
     raise PublicacionVendidaError if publicacion.estado == EstadoVendido.new
 
     oferta = Oferta.new(monto, oferente, publicacion)
-    # guardar_publicacion(publicacion)
-    guardar_oferta(oferta)
+    @repo_ofertas.save(oferta)
     NotificadorDeOferta.new(oferta).notificar
     oferta
   end

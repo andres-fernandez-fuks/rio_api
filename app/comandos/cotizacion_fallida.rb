@@ -1,14 +1,12 @@
-require_relative './comando'
-
-class CotizacionFallida < Comando
-  def initialize(publicacion)
-    super()
+class CotizacionFallida
+  def initialize(publicacion, repo_publicaciones)
     @publicacion = publicacion
+    @repo_publicaciones = repo_publicaciones
   end
 
   def ejecutar
     @publicacion.cancelar
-    repo_de_publicaciones.save(@publicacion)
+    @repo_publicaciones.save(@publicacion)
   end
 
   def exitosa?

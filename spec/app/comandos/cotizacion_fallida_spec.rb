@@ -15,7 +15,7 @@ describe CotizacionFallida do
       auto = Auto.new("AAA000", "Peugeot", "505", 1994, 1)
       @publicacion = PublicacionP2P.new(100_000, vendedor, auto, 1)
       guardar_publicacion(auto, @publicacion)
-      @cotizacion_fallida = CotizacionFallida.new(@publicacion)
+      @cotizacion_fallida = CotizacionFallida.new(@publicacion, Persistence::Repositories::RepositorioPublicaciones.new)
     end
 
     it 'Cuando ejecuto la cotizacion entonces la publicacion esta en estado cancelado' do

@@ -15,7 +15,7 @@ class Cotizador
   }.freeze
 
   def cotizar(publicacion, informe)
-    return CotizacionFallida.new(publicacion) if es_fallida?(publicacion.auto, informe)
+    return CotizacionFallida.new(publicacion, Persistence::Repositories::RepositorioPublicaciones.new) if es_fallida?(publicacion.auto, informe)
 
     precio = precio_base(publicacion.auto) - porcentaje_a_descontar(informe) * precio_base(publicacion.auto)
     CotizacionExitosa.new(publicacion, precio, Persistence::Repositories::RepositorioOfertas.new, Persistence::Repositories::RepositorioPublicaciones.new,

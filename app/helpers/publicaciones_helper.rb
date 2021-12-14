@@ -1,5 +1,4 @@
 # Helper methods defined here can be accessed in any controller or view in the application
-require_relative '../comandos/comando'
 require_relative '../comandos/reservar_publicacion'
 module WebTemplate
   class App

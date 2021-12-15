@@ -34,11 +34,6 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
   post :create, :map => '/publicaciones' do
     begin
       usuario = repo_usuarios.buscar_por_id_telegram(params_publicacion[:id_telegram])
-      unless usuario
-        status 401
-        Logger.log('info', "Usuario con id: #{params_publicacion[:id_telegram]} no fue encontrado")
-        return
-      end
       auto = parsear_auto(params_publicacion)
       publicacion = parsear_publicacion(params_publicacion[:precio], usuario, auto)
       RegistrarAuto.new(repo_publicaciones, repo_autos).ejecutar(publicacion)
@@ -61,16 +56,15 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
       Logger.log('info', 'No se ha enviado el header con ID de telegram')
       return
     end
-
-    usuario = repo_usuarios.buscar_por_id_telegram(id_telegram)
-    unless usuario
+    begin
+      usuario = repo_usuarios.buscar_por_id_telegram(id_telegram)
+      publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
+      status 200
+      listar_mis_publicaciones(publicaciones_de_usuario)
+    rescue ObjectNotFound
       status 404
       Logger.log('info', "Usuario con id: #{id_telegram} no fue encontrado")
-      return
     end
-    publicaciones_de_usuario = repo_publicaciones.buscar_por_usuario(usuario.id)
-    status 200
-    listar_mis_publicaciones(publicaciones_de_usuario)
   end
 
   get :show, :map => '/publicaciones' do

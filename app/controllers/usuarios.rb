@@ -25,13 +25,13 @@ WebTemplate::App.controllers :usuarios, :provides => [:json] do
     end
 
     usuario = repo_usuarios.buscar_por_id_telegram(id_telegram)
-    if usuario
-      status 200
-      usuario_a_json usuario
-    else
+    if usuario.nil?
       status 404
       Logger.log('info', "El usuario con id de telegram: #{id_telegram} no fue encontrado")
       error_usuario_no_encontrado
+    else
+      status 200
+      usuario_a_json usuario
     end
   end
 end
